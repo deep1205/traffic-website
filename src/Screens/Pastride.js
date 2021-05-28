@@ -5,9 +5,7 @@ const Pastride = () => {
     return (
       <>
         <Header location="pastride" />
-        <div id="googlemaphomepagekiposition" className="main-wrapper">
-          <Map  />
-        </div>
+        <Map/>
       </>
     );
 }

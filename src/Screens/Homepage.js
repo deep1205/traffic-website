@@ -5,9 +5,9 @@ const Homepage = () => {
     return (
       <>
         <Header location="home" />
-        <div id="googlemaphomepagekiposition" className="main-wrapper">
+        
           <Map />
-        </div>
+        
       </>
     );
 }

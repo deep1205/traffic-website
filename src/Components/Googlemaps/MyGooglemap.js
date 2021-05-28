@@ -129,6 +129,7 @@ const HomePageSideMap = () => {
 
   return (
     <main>
+    
       <Wrapper>
         <input
           placeholder="Search the Location                        🍳"
