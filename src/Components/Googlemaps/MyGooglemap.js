@@ -1,19 +1,21 @@
-import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useEffect } from "react";
 import "../../Css/Custom.css"
 import styled from "styled-components";
 import HospitalList from "../HospitalList";
 const Wrapper = styled.div`
+
+  display: none;
   position: relative;
   align-items: center;
   justify-content: center;
   width: 40%;
+
   padding: 20px 0;
   text-align: center;
   color: "blue";
 `;
 
-var service, map, infoWindow, markers;
+var  map, infoWindow, markers;
 const HomePageSideMap = () => {
   useEffect(() => {
     renderMap();
@@ -29,9 +31,9 @@ const HomePageSideMap = () => {
     map = new window.google.maps.Map(document.getElementById("map"), {
       center: { lat: 25.27794, lng: 83.00244 },
       zoom: 15,
-      mapTypeControl: false,
+     
       zoomControlOptions: {
-        position: window.google.maps.ControlPosition.RIGHT_CENTER,
+        position: window.google.maps.ControlPosition.RIGHT_BOTTOM,
       },
     });
 
@@ -138,7 +140,8 @@ const HomePageSideMap = () => {
         />
       </Wrapper>
       <HospitalList map={map} />
-      <div className="indexMaphomepage" id="map"></div>
+    
+      <div style={{marginTop:"20px"}} className="indexMaphomepage" id="map"></div>
     </main>
   );
 };

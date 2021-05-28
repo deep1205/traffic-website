@@ -5,10 +5,9 @@ import {
   DropdownMenu,
   DropdownItem,
 } from "reactstrap";
-import { useSelector } from "react-redux";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../Css/Hospitallist.css"
-import PhoneIcon from "@material-ui/icons/Phone";
 
 const HospitalList = (props) => {
   const [dropdownOpen, setOpen] = useState(false);
@@ -22,38 +21,40 @@ const hospitals=[
     },
     {
         ride:'test ride 2'
-    }
+    },
+    
+    
 ]
 
-  const setHospitalCenter = (place) => {
-    var content =
-      '<div id="iw-container">' +
-      '<div class="iw-title">' +
-      place.name +
-      "</div>" +
-      '<div class="iw-content">' +
-      '<div class="iw-subTitle">near</div>' +
-      "<p >" +
-      place.distance +
-      " KM  away " +
-      "</div>" +
-      "</div>";
-    var bounds = new window.google.maps.LatLngBounds();
-    var pos = new window.google.maps.LatLng(
-      place.coordinates[0],
-      place.coordinates[1]
-    );
-    props.map.setZoom(14);
-    props.map.panTo({ lat: place.coordinates[0], lng: place.coordinates[1] });
-    props.infoWindow.setPosition({
-      lat: place.coordinates[0],
-      lng: place.coordinates[1],
-    });
-    props.infoWindow.setContent(content);
-    props.infoWindow.open(props.map);
-    bounds.extend(pos);
-    // props.map.fitBounds(bounds)
-  };
+  // const setHospitalCenter = (place) => {
+  //   var content =
+  //     '<div id="iw-container">' +
+  //     '<div class="iw-title">' +
+  //     place.name +
+  //     "</div>" +
+  //     '<div class="iw-content">' +
+  //     '<div class="iw-subTitle">near</div>' +
+  //     "<p >" +
+  //     place.distance +
+  //     " KM  away " +
+  //     "</div>" +
+  //     "</div>";
+  //   var bounds = new window.google.maps.LatLngBounds();
+  //   var pos = new window.google.maps.LatLng(
+  //     place.coordinates[0],
+  //     place.coordinates[1]
+  //   );
+  //   props.map.setZoom(14);
+  //   props.map.panTo({ lat: place.coordinates[0], lng: place.coordinates[1] });
+  //   props.infoWindow.setPosition({
+  //     lat: place.coordinates[0],
+  //     lng: place.coordinates[1],
+  //   });
+  //   props.infoWindow.setContent(content);
+  //   props.infoWindow.open(props.map);
+  //   bounds.extend(pos);
+  //   // props.map.fitBounds(bounds)
+  // };
   const [hospital, setHospital] = useState({
     ride: ""
   });
@@ -69,28 +70,29 @@ const hospitals=[
         <DropdownToggle
           caret
           style={{
-            backgroundColor: "white",
-            color: "black",
-            marginTop: "10px",
-            marginBottom: "15px",
-            marginLeft: "5px",
+            position:"absolute",
+            top:"34px",
+            background:'purple',
+            marginLeft:'91vw',
+            transform:"rotate(90deg)",
+            
           }}
         >
           {hospital.ride}
         </DropdownToggle>
         <DropdownMenu className="dropdown-menu" positionFixed={true}>
           <div>
-            <div style={{ textAlign: "center", color: "#FF024E" }}>
-              <p>
+            <div style={{ textAlign: "center", color: "blue"}}>
+              <h5>
                 Hospitals List
                 <span
                   className="dropdown-span"
                   style={{ marginLeft: "10px", color: "FF024E" }}
                   onClick={() => setOpen(!dropdownOpen)}
                 >
-                  X
+                  &times;
                 </span>
-              </p>
+              </h5>
               <hr />
             </div>
             {hospitals.map((val, id) => {
@@ -120,8 +122,9 @@ const hospitals=[
       </ButtonDropdown>
       {hospital.ride !== "" ? (
         <div className="card">
+        <h4 style={{textAlign:"center",margin:'3px 0'}}>Ride details</h4>
           <div className="card-body">
-            <h5>Name:{hospital.ride}</h5>
+            <p>Name:{hospital.ride}</p>
           </div>
         </div>
       ) : null}
