@@ -73,36 +73,38 @@ const Login = () => {
           <div className="form">
             <div className="login">
               <div className="login-header">
-                <h2 className="myformheadertext">Login</h2>
+                <h2 className="myformheadertext">Sign in</h2>
                 <p className="myformheadertext">Welcome to Priority Pulse</p>
                 <p>Your Pulse,Our Priority</p>
               </div>
             </div>
             <form className="login-form" method="PUT">
+              {/* <input
+                // name="hemail"
+                // type="text"
+                // placeholder="Email"
+                // autoComplete="on"
+                // onChange={handleInputs}
+              /> */}
               <input
-                name="hemail"
+                name="uniqid"
                 type="text"
-                placeholder="Email"
-                autoComplete="on"
-                onChange={handleInputs}
-              />
-              <input
-                name="hpassword"
-                type="password"
-                placeholder="password"
+                placeholder="Unique ID"
                 onChange={handleInputs}
               />
               <Button name="signin" variant="contained" onClick={handleSubmit}>
-                Login
+                Get Otp
               </Button>
-              <p className="message">
+              {/* <p className="message">
                 Not registered?{" "}
                 <NavLink to="/signup">Create an account.</NavLink>
-              </p>
+              </p> */}
             </form>
           </div>
         </div>
       </div>
+      <br/>
+      <br/>
       <Slideshow tutorialSteps={tutorialSteps} />
 
       <Whyusnew />

@@ -10,7 +10,7 @@ function WhyUsnew() {
     <div style={{ backgroundColor: "#ebf5fc", paddingTop: "30px" }}>
       <div className="whyus_head">Why Choose Us</div>
       <div className="whyusnew">
-        <div className="card">
+        <div className="cardwhychooseus">
           <div className="box">
             <div className="content">
               <img src=" " alt="location" />
@@ -19,7 +19,7 @@ function WhyUsnew() {
             </div>
           </div>
         </div>
-        <div className="card">
+        <div className="cardwhychooseus">
           <div className="box">
             <div className="content">
               <img src="" alt="traffic" />
@@ -28,7 +28,7 @@ function WhyUsnew() {
             </div>
           </div>
         </div>
-        <div className="card">
+        <div className="cardwhychooseus">
           <div className="box">
             <div className="content">
               <img src=" " alt="pre-med" />
@@ -37,7 +37,7 @@ function WhyUsnew() {
             </div>
           </div>
         </div>
-        <div className="card">
+        <div className="cardwhychooseus">
           <div className="box">
             <div className="content">
               <img src=" " alt="call" />

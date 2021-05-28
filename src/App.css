@@ -47,7 +47,9 @@ nav {
   width: 60vw;
   min-width: 350px;
   display: flex;
-  margin: 40px 15px;
+  margin: 40px 10px 40px 495px;
+  color:white !important;
+
   /* height: 50px; */
   font-size: 0;
 }
@@ -60,7 +62,7 @@ nav {
   display: none;
 }
 
-nav a {
+nav a{
   font-size: 20px;
   color: white;
   display: block;
