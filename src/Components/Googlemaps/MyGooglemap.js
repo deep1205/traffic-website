@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import "../../Css/Custom.css"
 import styled from "styled-components";
+import HospitalList from "../HospitalList";
 const Wrapper = styled.div`
   position: relative;
   align-items: center;
@@ -129,14 +130,14 @@ const HomePageSideMap = () => {
 
   return (
     <main>
-    
       <Wrapper>
         <input
-          placeholder="Search the Location                        🍳"
+          placeholder="Search the Location              🍳"
           className="input"
           id="mapsearch"
         />
       </Wrapper>
+      <HospitalList map={map} />
       <div className="indexMaphomepage" id="map"></div>
     </main>
   );

@@ -1,5 +1,5 @@
 import React from "react";
-import "../Css/WhyChooseus.css";
+import "../Css/Whychooseus.css"
 // import location from "../images/maplocation.png"
 // import traffic from "../images/maplocation.png";
 // import premed from "../images/maplocation.png";
