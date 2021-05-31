@@ -7,7 +7,17 @@
 	position: absolute;
 	width: 20vw;
 	left:40%;
-	top: 510px;
+	top: 440px;
+}
+
+#mytogglebutton{
+	     position: absolute;
+            left:90vw;
+            top:20px;
+            background: purple;
+            margin-left: 10px;
+            margin-top: 19px;
+			transform:rotate(90deg);
 }
  @media  (max-width:860px){
 	.card {
@@ -17,12 +27,24 @@
     z-index: 2;
      height:"auto";
 	position: absolute;
-	width: 50vw;
-	left:40%;
-	top: 510px;
+	width: 70vw;
+	left:20%;
+	top:380px;
+}
+#mytogglebutton{
+	     position: absolute;
+            left:70vw;
+            top:24px;
+            background: purple;
+            margin-left: 10px;
+            margin-top: 19px;
+			transform:"rotate(90deg)"
+			
 }
 	 
  }
+
+ 
  
   
 .card-body {

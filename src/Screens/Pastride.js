@@ -1,6 +1,6 @@
 import React from 'react'
-import Header from "../Components/Header.js";
-import Map from "../Components/Googlemaps/MyGooglemap";
+import Header from "../Components/Headers/Header"
+import Map from "../Components/Googlemaps/PastrideGoogleMap"
 const Pastride = () => {
     return (
       <>

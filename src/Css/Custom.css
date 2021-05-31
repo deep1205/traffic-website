@@ -6,6 +6,18 @@
   
 }
 
+#searchbar{
+  display: none;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  width: 40%;
+
+  padding: 20px 0;
+  text-align: center;
+  color: "blue";
+}
+
 /* .dropdowntoggle{
             color: white;
             margin-bottom: 5px;
@@ -24,11 +36,18 @@
     
   }
 
-  .SearchBar {
-    height: 30px !important;
-    padding: 0px 0;
-    margin: 20px 10px  -4px 50px !important;
-  }
+ #searchbar{
+   display: none;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  width: 40%;
+top:80px;
+left:40px;
+  padding: 20px 0;
+  text-align: center;
+  color: "blue";
+ }
   .input {
   font-size: 0.99em;
   width: 270px;

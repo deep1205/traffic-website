@@ -1,14 +1,17 @@
-import React from "react";
-
+import React, { useState } from "react";
+import { useHistory, NavLink } from "react-router-dom";
 import Whyusnew from "../Components/Whyusnew";
-import Header from "../Components/Header.js";
+import Header from "../Components/Headers/Headerlogin"
 import Button from "@material-ui/core/Button";
-import "../Css/Login.css";
+import { toast } from "react-toastify";
+import axios from "axios";
+import "../Css/Login.css"
 import Slideshow from "../Components/Slideshow";
 import i2 from "../images/i2.jpg";
 import i3 from "../images/i3.jpg";
 import i5 from "../images/i5.jpg";
 import "react-toastify/dist/ReactToastify.css";
+const delay = require("delay");
 const tutorialSteps = [
   {
     label: "image",
@@ -26,8 +29,41 @@ const tutorialSteps = [
 ];
 
 const Login = () => {
-  
-  
+  const history = useHistory();
+  const [user, setUser] = useState({
+    email: "",
+    password: "",
+  });
+  let name, value;
+  const handleInputs = (e) => {
+    name = e.target.name;
+    value = e.target.value;
+
+    setUser({ ...user, [name]: value });
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newUser = {
+      email: user.hemail,
+      password: user.hpassword,
+    };
+    axios
+      .put("https://server.prioritypulse.co.in/auth/policesignin", newUser)
+
+      .then(async (res) => {
+        localStorage.setItem("token", res["data"]["token"]);
+        toast.success("Login Sucessfully");
+        await delay(5000);
+        console.log("Login SuccessFully");
+        console.log(res);
+        history.push("/home");
+      })
+      .catch((err) => {
+        console.log(err.error);
+        toast.error("Invalid Credentials");
+        console.log(`Invalid Details`);
+      });
+  };
 
   return (
     <>
@@ -37,21 +73,29 @@ const Login = () => {
           <div className="form">
             <div className="login">
               <div className="login-header">
-                <h2 className="myformheadertext">Sign in</h2>
+                <h4 style={{ marginTop: "20px" }} className="myformheadertext">
+                  Signin
+                </h4>
                 <p className="myformheadertext">Welcome to Priority Pulse</p>
-                <p style={{marginTop:"-14px"}}>Your Pulse,Our Priority</p>
+                <p style={{ marginTop: "-20px" }}>Your Pulse,Our Priority</p>
               </div>
             </div>
-            <form className="login-form">
-             
+            <form className="login-form" method="PUT">
               <input
-                name="uniqid"
+                name="hemail"
                 type="text"
-                placeholder="Unique ID"
-                
+                placeholder="Email"
+                autoComplete="on"
+                onChange={handleInputs}
               />
-              <Button name="signin" size="small" variant="contained">
-                Get Otp
+              <input
+                name="hpassword"
+                type="password"
+                placeholder="password"
+                onChange={handleInputs}
+              />
+              <Button name="signin" variant="contained" onClick={handleSubmit}>
+                Sign in
               </Button>
               {/* <p className="message">
                 Not registered?{" "}
@@ -61,8 +105,6 @@ const Login = () => {
           </div>
         </div>
       </div>
-      <br/>
-      <br/>
       <Slideshow tutorialSteps={tutorialSteps} />
 
       <Whyusnew />

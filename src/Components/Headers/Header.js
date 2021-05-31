@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import "../App.css";
-import logo from "../images/logo.png";
+import "../../App.css"
+import logo from "../../images/logo.png";
 import MenuIcon from "@material-ui/icons/Menu";
 import ClearIcon from "@material-ui/icons/Clear";
 import { ToastContainer } from "react-toastify";
@@ -43,19 +43,23 @@ function Header({ location }) {
           )}
         </div>
         <nav className={classna}>
-          <NavLink  to="/home">Home</NavLink>
-        
+          <NavLink to="/home">Home</NavLink>
+
           <NavLink to="/pastride">PastRide</NavLink>
-        
-          <NavLink to="/login">Login</NavLink>
+
+          <a
+            onClick={() => {
+              localStorage.removeItem("token");
+              window.location.reload();
+            }}
+            style={{ cursor: "pointer" }}
+          >
+            Logout
+          </a>
           {/* <NavLink to="/signup">Signup</NavLink> */}
           {location === "home" && <div className="animation start-home" />}
-          {location === "pastride" && (
-            <div className="animation start-user" />
-          )}
-          {location === "login" && (
-            <div className="animation start-hospital" />
-          )}
+          {location === "pastride" && <div className="animation start-user" />}
+          {location === "login" && <div className="animation start-hospital" />}
           {/* {location === "profile" && (
             <div className="animation start-aboutus" />
           )} */}

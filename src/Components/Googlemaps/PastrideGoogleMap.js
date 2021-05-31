@@ -1,10 +1,9 @@
 import React, { useEffect } from "react";
-import "../../Css/Custom.css"
+import "../../Css/Custom.css";
 import styled from "styled-components";
-import HospitalList from "../Rides/HospitalList"
+import HospitalList from "../Rides/Hospitalllistpastrides"
 
-
-var  map, infoWindow, markers;
+var map, infoWindow, markers;
 const HomePageSideMap = () => {
   useEffect(() => {
     renderMap();
@@ -20,7 +19,7 @@ const HomePageSideMap = () => {
     map = new window.google.maps.Map(document.getElementById("map"), {
       center: { lat: 25.27794, lng: 83.00244 },
       zoom: 15,
-     
+
       zoomControlOptions: {
         position: window.google.maps.ControlPosition.LEFT_BOTTOM,
       },
@@ -129,8 +128,12 @@ const HomePageSideMap = () => {
         />
       </div>
       <HospitalList map={map} />
-    
-      <div style={{marginTop:"20px"}} className="indexMaphomepage" id="map"></div>
+
+      <div
+        style={{ marginTop: "20px" }}
+        className="indexMaphomepage"
+        id="map"
+      ></div>
     </main>
   );
 };
