@@ -8,6 +8,7 @@ import {
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../Css/Hospitallist.css"
+import Map from '../Googlemaps/MyGooglemap'
 
 const HospitalList = (props) => {
   const [dropdownOpen, setOpen] = useState(false);
@@ -27,6 +28,7 @@ const HospitalList = (props) => {
             caseprior: data.casePrior,
             pcase: data.pcase,
             rideid: data.RideId,
+            _id:data.pickedBy
           };
         });
         setdata(arr);
@@ -38,6 +40,7 @@ const HospitalList = (props) => {
     pcase: "",
     rideid: "",
     caseprior: "",
+    _id:""
   });
 
   return (
@@ -48,10 +51,7 @@ const HospitalList = (props) => {
         toggle={toggle}
         style={{ zIndex: 10 }}
       >
-        <DropdownToggle
-          caret
-          id="mytogglebutton"
-        >
+        <DropdownToggle caret id="mytogglebutton">
           {hospital.name}
         </DropdownToggle>
         <DropdownMenu className="dropdown-menu" positionFixed={true}>
@@ -82,6 +82,7 @@ const HospitalList = (props) => {
                           pcase: val.pcase,
                           rideid: val.rideid,
                           caseprior: val.caseprior,
+                          _id: val._id,
                         });
                       }}
                     >
@@ -99,6 +100,7 @@ const HospitalList = (props) => {
           </div>
         </DropdownMenu>
       </ButtonDropdown>
+      <Map _id={hospital._id} />
       {hospital.name !== "" ? (
         <div className="card" style={{ margin: "-30px 0" }}>
           <h4 style={{ textAlign: "center", margin: "3px 0" }}>Ride details</h4>

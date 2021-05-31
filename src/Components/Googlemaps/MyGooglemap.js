@@ -3,40 +3,41 @@ import "../../Css/Custom.css"
 import styled from "styled-components";
 import io from 'socket.io-client'
 
-var  map, infoWindow, markers,usersocket,driversocket;
+var  map, infoWindow, markers,usersocket,driversocket,driverWindow;
 
-const HomePageSideMap = () => {
+const HomePageSideMap = (props) => {
   const userendpoi="https://server.prioritypulse.co.in/usertrack"
   const driverendpoi="https://server.prioritypulse.co.in/drivertrack"
 
-  const [userLocation, setUserLocation] = useState([]);
+  const[userLocation,setUserLocation]=useState([])
   const [driverLocation,setDriverLocation]=useState([])
+
   usersocket=io(userendpoi)
   driversocket=io(driverendpoi)
 
-  useEffect(()=>{
-    usersocket.emit('join',{roomid:'Sai_Harish'})
-    usersocket.on('message',(res)=>{
-      console.log('user',res)
-    })
-    usersocket.emit('sendUserLocation',{coordinates:[userLocation]})
-    usersocket.on('userlocation',({coordinates})=>{
-      console.log('user',coordinates)
-    })
-  },[userLocation])
+ useEffect(() => {
+   usersocket.emit("join", { roomid: "Sai_Harish" });
+   usersocket.on("message", (res) => {
+     console.log("user", res);
+   });
+   // usersocket.emit("sendUserLocation", { coordinates: [userLocation] });
+   usersocket.on("userlocation", ({ coordinates }) => {
+     console.log("user", coordinates);
+     setUserLocation(coordinates);
+   });
+ }, []);
 
-
-  useEffect(()=>{
-    var options={maximumAge:3000,timeout:5000,enableHighAccuracy:true}
-    var watchID=navigator.geolocation.watchPosition(onSuccess,onError,options)
-  },[])
-  function onSuccess(pos){
-    setUserLocation([pos.coords.latitude,pos.coords.longitude])
-  }
-  function onError(error){
-    alert('code: '+error.code+'\n'+
-          'message'+error.message+'\n');
-  }
+   useEffect(() => {
+     console.log(props._id)
+     driversocket.emit("join", { roomid: props._id });
+     driversocket.on("message", (res) => {
+       console.log("driver", res);
+     });
+     driversocket.on("driverlocation", ({ coordinates }) => {
+       console.log("driver", coordinates);
+       setDriverLocation(coordinates);
+     });
+   }, [props._id]);
 
   useEffect(() => {
     renderMap();
@@ -48,15 +49,27 @@ const HomePageSideMap = () => {
     );
     window.initMap = initMap;
   };
-  useEffect(()=>{
-    if(map){
-infoWindow = new window.google.maps.InfoWindow();
-infoWindow.setPosition({ lat: userLocation[0], lng: userLocation[1] });
-infoWindow.setContent("You are here");
-infoWindow.open(map);
-map.setCenter({ lat: userLocation[0], lng: userLocation[1] });
-    }
-  },[userLocation])
+ useEffect(() => {
+   if (map && userLocation.length > 0) {
+     infoWindow = new window.google.maps.InfoWindow();
+     infoWindow.setPosition({ lat: userLocation[0], lng: userLocation[1] });
+     infoWindow.setContent("You are here");
+     infoWindow.open(map);
+     map.setCenter({ lat: userLocation[0], lng: userLocation[1] });
+   }
+ }, [userLocation]);
+
+ useEffect(() => {
+   if (map && driverLocation.length > 0) {
+     driverWindow = new window.google.maps.InfoWindow();
+     driverWindow.setPosition({
+       lat: driverLocation[0],
+       lng: driverLocation[1],
+     });
+     driverWindow.setContent("Driver is here");
+     driverWindow.open(map);
+   }
+ }, [driverLocation]);
   var initMap = () => {
     map = new window.google.maps.Map(document.getElementById("map"), {
       center: { lat: 25.27794, lng: 83.00244 },
