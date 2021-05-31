@@ -51,7 +51,6 @@ const HomePageSideMap = (props) => {
   };
  useEffect(() => {
    if (map && userLocation.length > 0) {
-     infoWindow = new window.google.maps.InfoWindow();
      infoWindow.setPosition({ lat: userLocation[0], lng: userLocation[1] });
      infoWindow.setContent("You are here");
      infoWindow.open(map);
@@ -61,7 +60,6 @@ const HomePageSideMap = (props) => {
 
  useEffect(() => {
    if (map && driverLocation.length > 0) {
-     driverWindow = new window.google.maps.InfoWindow();
      driverWindow.setPosition({
        lat: driverLocation[0],
        lng: driverLocation[1],
@@ -80,6 +78,7 @@ const HomePageSideMap = (props) => {
     });
 
     infoWindow = new window.google.maps.InfoWindow();
+    driverWindow = new window.google.maps.InfoWindow();
     
     // markers = new window.google.maps.Marker({
     //   map,
