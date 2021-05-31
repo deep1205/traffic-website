@@ -58,7 +58,7 @@ const HospitalList = (props) => {
           <div>
             <div style={{ textAlign: "center", color: "blue" }}>
               <h5>
-                Present Rides
+                Past Rides
                 <span
                   className="dropdown-span"
                   style={{ marginLeft: "70px", color: "red" }}
