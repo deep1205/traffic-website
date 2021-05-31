@@ -1,11 +1,43 @@
-import React, { useEffect } from "react";
+import React, {useState,useEffect } from "react";
 import "../../Css/Custom.css"
 import styled from "styled-components";
-import HospitalList from "../Rides/HospitalList"
+import io from 'socket.io-client'
 
+var  map, infoWindow, markers,usersocket,driversocket;
 
-var  map, infoWindow, markers;
 const HomePageSideMap = () => {
+  const userendpoi="https://server.prioritypulse.co.in/usertrack"
+  const driverendpoi="https://server.prioritypulse.co.in/drivertrack"
+
+  const [userLocation, setUserLocation] = useState([]);
+  const [driverLocation,setDriverLocation]=useState([])
+  usersocket=io(userendpoi)
+  driversocket=io(driverendpoi)
+
+  useEffect(()=>{
+    usersocket.emit('join',{roomid:'Sai_Harish'})
+    usersocket.on('message',(res)=>{
+      console.log('user',res)
+    })
+    usersocket.emit('sendUserLocation',{coordinates:[userLocation]})
+    usersocket.on('userlocation',({coordinates})=>{
+      console.log('user',coordinates)
+    })
+  },[userLocation])
+
+
+  useEffect(()=>{
+    var options={maximumAge:3000,timeout:5000,enableHighAccuracy:true}
+    var watchID=navigator.geolocation.watchPosition(onSuccess,onError,options)
+  },[])
+  function onSuccess(pos){
+    setUserLocation([pos.coords.latitude,pos.coords.longitude])
+  }
+  function onError(error){
+    alert('code: '+error.code+'\n'+
+          'message'+error.message+'\n');
+  }
+
   useEffect(() => {
     renderMap();
   }, []);
@@ -16,23 +48,31 @@ const HomePageSideMap = () => {
     );
     window.initMap = initMap;
   };
+  useEffect(()=>{
+    if(map){
+infoWindow = new window.google.maps.InfoWindow();
+infoWindow.setPosition({ lat: userLocation[0], lng: userLocation[1] });
+infoWindow.setContent("You are here");
+infoWindow.open(map);
+map.setCenter({ lat: userLocation[0], lng: userLocation[1] });
+    }
+  },[userLocation])
   var initMap = () => {
     map = new window.google.maps.Map(document.getElementById("map"), {
       center: { lat: 25.27794, lng: 83.00244 },
       zoom: 15,
-     
       zoomControlOptions: {
         position: window.google.maps.ControlPosition.LEFT_BOTTOM,
       },
     });
 
     infoWindow = new window.google.maps.InfoWindow();
-
-    markers = new window.google.maps.Marker({
-      map,
-      draggable: true,
-      position: { lat: 25.27794, lng: 83.00244 },
-    });
+    
+    // markers = new window.google.maps.Marker({
+    //   map,
+    //   draggable: true,
+    //   position: { lat: 25.27794, lng: 83.00244 },
+    // });
     //search bar start
     const input = document.getElementById("mapsearch");
     const searchBox = new window.google.maps.places.SearchBox(input);
@@ -128,7 +168,7 @@ const HomePageSideMap = () => {
           id="mapsearch"
         />
       </div>
-      <HospitalList map={map} />
+      
     
       <div style={{marginTop:"20px"}} className="indexMaphomepage" id="map"></div>
     </main>
