@@ -83,18 +83,14 @@ const HomePageSideMap = (props) => {
       },
     });
 
-    // infoWindow = new window.google.maps.InfoWindow();
-    // driverWindow = new window.google.maps.InfoWindow();
     usermarker=new window.google.maps.Marker()
     drivermarker=new window.google.maps.Marker({
-      icon:drivericon
+     icon:{
+         url:drivericon,
+         scaledSize:new window.google.maps.Size(50,50)
+       },
     })
-    // markers = new window.google.maps.Marker({
-    //   map,
-    //   draggable: true,
-    //   position: { lat: 25.27794, lng: 83.00244 },
-    // });
-    //search bar start
+  
     const input = document.getElementById("mapsearch");
     const searchBox = new window.google.maps.places.SearchBox(input);
     // Bias the SearchBox results towards current map's viewport.
