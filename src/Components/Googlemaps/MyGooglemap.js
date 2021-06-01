@@ -4,6 +4,7 @@ import styled from "styled-components";
 import io from 'socket.io-client'
 
 var  map, infoWindow, markers,usersocket,driversocket,driverWindow;
+var usermarker,drivermarker;
 
 const HomePageSideMap = (props) => {
   const userendpoi="https://server.prioritypulse.co.in/usertrack"
@@ -51,21 +52,29 @@ const HomePageSideMap = (props) => {
   };
  useEffect(() => {
    if (map && userLocation.length > 0) {
-     infoWindow.setPosition({ lat: userLocation[0], lng: userLocation[1] });
-     infoWindow.setContent("You are here");
-     infoWindow.open(map);
-     map.setCenter({ lat: userLocation[0], lng: userLocation[1] });
+    //  infoWindow.setPosition({ lat: userLocation[0], lng: userLocation[1] });
+    //  infoWindow.setContent("You are here");
+    //  infoWindow.open(map);
+    //  map.setCenter({ lat: userLocation[0], lng: userLocation[1] });
+    usermarker = new window.google.maps.Marker({
+      position: { lat: userLocation[0], lng: userLocation[1] },
+    });
+    usermarker.setMap(map);
    }
  }, [userLocation]);
 
  useEffect(() => {
    if (map && driverLocation.length > 0) {
-     driverWindow.setPosition({
-       lat: driverLocation[0],
-       lng: driverLocation[1],
-     });
-     driverWindow.setContent("Driver is here");
-     driverWindow.open(map);
+    //  driverWindow.setPosition({
+    //    lat: driverLocation[0],
+    //    lng: driverLocation[1],
+    //  });
+    //  driverWindow.setContent("Driver is here");
+    //  driverWindow.open(map);
+    drivermarker = new window.google.maps.Marker({
+      position: { lat: driverLocation[0], lng: driverLocation[1] },
+    });
+    drivermarker.setMap(map);
    }
  }, [driverLocation]);
   var initMap = () => {
