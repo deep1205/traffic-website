@@ -57,9 +57,7 @@ const HomePageSideMap = (props) => {
     //  infoWindow.setContent("You are here");
     //  infoWindow.open(map);
     //  map.setCenter({ lat: userLocation[0], lng: userLocation[1] });
-    usermarker = new window.google.maps.Marker({
-      position: { lat: userLocation[0], lng: userLocation[1] },
-    });
+    usermarker.setPosition({lat:userLocation[0],lng:userLocation[1]})
     usermarker.setMap(map);
    }
  }, [userLocation]);
@@ -72,10 +70,7 @@ const HomePageSideMap = (props) => {
     //  });
     //  driverWindow.setContent("Driver is here");
     //  driverWindow.open(map);
-    drivermarker = new window.google.maps.Marker({
-      position: { lat: driverLocation[0], lng: driverLocation[1] },
-      icon: drivericon,
-    });
+    drivermarker.setPosition({lat:driverLocation[0],lng:driverLocation[1]})
     drivermarker.setMap(map);
    }
  }, [driverLocation]);
@@ -90,7 +85,10 @@ const HomePageSideMap = (props) => {
 
     infoWindow = new window.google.maps.InfoWindow();
     driverWindow = new window.google.maps.InfoWindow();
-    
+    usermarker=new window.google.maps.Marker()
+    drivermarker=new window.google.maps.Marker({
+      icon:drivericon
+    })
     // markers = new window.google.maps.Marker({
     //   map,
     //   draggable: true,
