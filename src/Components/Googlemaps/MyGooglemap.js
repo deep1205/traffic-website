@@ -163,13 +163,13 @@ const HomePageSideMap = (props) => {
             lat: position.coords.latitude,
             lng: position.coords.longitude,
           };
-          infoWindow.setPosition(pos);
+          // infoWindow.setPosition(pos);
 
-          infoWindow.setContent("Location found.");
-          infoWindow.open(map);
-          markers.setPosition(pos);
+          // infoWindow.setContent("Location found.");
+          // infoWindow.open(map);
+          // markers.setPosition(pos);
           map.setCenter(pos);
-          map.setZoom(16);
+          // map.setZoom(16);
         },
         () => {
           handleLocationError(true, infoWindow, map.getCenter());
