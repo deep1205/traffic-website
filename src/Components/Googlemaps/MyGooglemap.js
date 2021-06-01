@@ -83,8 +83,8 @@ const HomePageSideMap = (props) => {
       },
     });
 
-    infoWindow = new window.google.maps.InfoWindow();
-    driverWindow = new window.google.maps.InfoWindow();
+    // infoWindow = new window.google.maps.InfoWindow();
+    // driverWindow = new window.google.maps.InfoWindow();
     usermarker=new window.google.maps.Marker()
     drivermarker=new window.google.maps.Marker({
       icon:drivericon
