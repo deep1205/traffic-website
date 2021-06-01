@@ -2,6 +2,7 @@ import React, {useState,useEffect } from "react";
 import "../../Css/Custom.css"
 import styled from "styled-components";
 import io from 'socket.io-client'
+import drivericon from '../../images/drivericon.png'
 
 var  map, infoWindow, markers,usersocket,driversocket,driverWindow;
 var usermarker,drivermarker;
@@ -73,6 +74,7 @@ const HomePageSideMap = (props) => {
     //  driverWindow.open(map);
     drivermarker = new window.google.maps.Marker({
       position: { lat: driverLocation[0], lng: driverLocation[1] },
+      icon: drivericon,
     });
     drivermarker.setMap(map);
    }
