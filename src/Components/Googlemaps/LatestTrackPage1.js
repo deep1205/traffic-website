@@ -9,61 +9,68 @@ import {
 import drivericon from "../../images/drivericon.png";
 import finalpositionicon from "../../images/destinationicon.png";
 import patienticon from "../../images/patient.png";
+import decodePolyline from "decode-google-map-polyline";
 class Map extends React.Component {
+  constructor(props) {
+    super(props);
+  }
   state = {
     progress: [],
   };
 
-  path = [
-    {
-      lat: 25.26519,
-      lng: 82.9837746,
-    },
-    {
-      lat: 25.268996,
-      lng: 82.9855383,
-    },
-    {
-      lat: 25.27056,
-      lng: 82.9895543,
-    },
-    {
-      lat: 25.27056,
-      lng: 82.9895543,
-    },
-    {
-      lat: 25.27287,
-      lng: 82.990993,
-    },
-    {
-      lat: 25.27287,
-      lng: 82.990993,
-    },
-    {
-      lat: 25.2742864,
-      lng: 82.9918521,
-    },
-    {
-      lat: 25.2752409,
-      lng: 82.9948656,
-    },
-    {
-      lat: 25.2756506,
-      lng: 82.9972258,
-    },
-    {
-      lat: 25.2757064,
-      lng: 82.9987807,
-    },
-    {
-      lat: 25.2757896,
-      lng: 82.9994722,
-    },
-    {
-      lat: 25.276434,
-      lng: 82.9974544,
-    },
-  ];
+  pathCoordinates = decodePolyline(
+    "}|dyCwjnyN[?gACiCK?aBGwBCcACoAAw@AuAIe@CwAEwAMqEy@?{ACyAAi@AeBIyAK{AQeC_@eBYAAk@My@UcBe@AAq@SaA_@o@YwCaBqBkAOIyB_Bi@e@MMWWaBeBwC}CYY]i@cA}A{@aBKS{A_DAEU_@o@oBUu@Ma@K_@AGCKm@gCa@kBMQWmAOiAEg@I_AKaB?MIeC?IGaBAkA@Y@oA@WHkA@SBk@?M?K?IAKMGmBaAcAi@q@@YQ@UaCwAA??@A?A?A??@A?A?AAA?A?AAA??AA??AA?ACAC?E?E?A?A@??A@A?A@??A@??A@?@A@?@?@AX{Ad@}BLuALiABm@DgA?KBqBJ?fALVCT_BF["
+  );
+  // path = [
+  //   {
+  //     lat: 25.26519,
+  //     lng: 82.9837746,
+  //   },
+  //   {
+  //     lat: 25.268996,
+  //     lng: 82.9855383,
+  //   },
+  //   {
+  //     lat: 25.27056,
+  //     lng: 82.9895543,
+  //   },
+  //   {
+  //     lat: 25.27056,
+  //     lng: 82.9895543,
+  //   },
+  //   {
+  //     lat: 25.27287,
+  //     lng: 82.990993,
+  //   },
+  //   {
+  //     lat: 25.27287,
+  //     lng: 82.990993,
+  //   },
+  //   {
+  //     lat: 25.2742864,
+  //     lng: 82.9918521,
+  //   },
+  //   {
+  //     lat: 25.2752409,
+  //     lng: 82.9948656,
+  //   },
+  //   {
+  //     lat: 25.2756506,
+  //     lng: 82.9972258,
+  //   },
+  //   {
+  //     lat: 25.2757064,
+  //     lng: 82.9987807,
+  //   },
+  //   {
+  //     lat: 25.2757896,
+  //     lng: 82.9994722,
+  //   },
+  //   {
+  //     lat: 25.276434,
+  //     lng: 82.9974544,
+  //   },
+  // ];
 
   velocity = 45;
   initialDate = new Date();
@@ -126,7 +133,7 @@ class Map extends React.Component {
   };
 
   componentWillMount = () => {
-    this.path = this.path.map((coordinates, i, array) => {
+    this.path = this.pathCoordinates.map((coordinates, i, array) => {
       if (i === 0) {
         return { ...coordinates, distance: 0 }; // it begins here!
       }
@@ -189,59 +196,11 @@ class Map extends React.Component {
           <>
             <Polyline
               path={this.state.progress}
-              options={{ strokeColor: "green ", zIndex: 999 }}
+              options={{ strokeColor: "green ", zIndex: "99" }}
             />
+
             <Polyline
-              path={[
-                {
-                  lat: 25.26519,
-                  lng: 82.9837746,
-                },
-                {
-                  lat: 25.268996,
-                  lng: 82.9855383,
-                },
-                {
-                  lat: 25.27056,
-                  lng: 82.9895543,
-                },
-                {
-                  lat: 25.27056,
-                  lng: 82.9895543,
-                },
-                {
-                  lat: 25.27287,
-                  lng: 82.990993,
-                },
-                {
-                  lat: 25.27287,
-                  lng: 82.990993,
-                },
-                {
-                  lat: 25.2742864,
-                  lng: 82.9918521,
-                },
-                {
-                  lat: 25.2752409,
-                  lng: 82.9948656,
-                },
-                {
-                  lat: 25.2756506,
-                  lng: 82.9972258,
-                },
-                {
-                  lat: 25.2757064,
-                  lng: 82.9987807,
-                },
-                {
-                  lat: 25.2757896,
-                  lng: 82.9994722,
-                },
-                {
-                  lat: 25.276434,
-                  lng: 82.9974544,
-                },
-              ]}
+              path={this.pathCoordinates}
               options={{ strokeColor: "red " }}
             />
 
@@ -252,18 +211,12 @@ class Map extends React.Component {
             />
             <Marker
               /*----initial position--- morvi hostel*/
-              position={{
-                lat: 25.26519,
-                lng: 82.9837746,
-              }}
+              position={this.pathCoordinates[0]}
               icon={patient_marker}
             />
             <Marker
               /*----final position--- sunderlal hospital*/
-              position={{
-                lat: 25.276434,
-                lng: 82.9974544,
-              }}
+              position={this.pathCoordinates[this.pathCoordinates.length - 1]}
               icon={destinationicon}
             />
           </>
