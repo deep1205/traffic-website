@@ -1,46 +1,18 @@
-import React, {useState,useEffect } from "react";
-import "../../Css/Custom.css"
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import io from 'socket.io-client'
-import drivericon from '../../images/drivericon.png'
+import io from "socket.io-client";
+import "../../Css/Custom.css"
+import "decode-google-map-polyline";
+import drivericon from "../../images/drivericon.png";
+import decodePolyline from "decode-google-map-polyline";
+import usericon from "../../images/patient.png";
+import hospitalicon from "../../images/destinationicon.png";
+var map, infoWindow, markers;
 
-var  map, infoWindow, markers,usersocket,driversocket,driverWindow;
-var usermarker,drivermarker;
-
-const HomePageSideMap = (props) => {
-  const userendpoi="https://server.prioritypulse.co.in/usertrack"
-  const driverendpoi="https://server.prioritypulse.co.in/drivertrack"
-
-  const[userLocation,setUserLocation]=useState([])
-  const [driverLocation,setDriverLocation]=useState([])
-
-  usersocket=io(userendpoi)
-  driversocket=io(driverendpoi)
-
- useEffect(() => {
-   usersocket.emit("join", { roomid: "Sai_Harish" });
-   usersocket.on("message", (res) => {
-     console.log("user", res);
-   });
-   // usersocket.emit("sendUserLocation", { coordinates: [userLocation] });
-   usersocket.on("userlocation", ({ coordinates }) => {
-     console.log("user", coordinates);
-     setUserLocation(coordinates);
-   });
- }, []);
-
-   useEffect(() => {
-     console.log(props._id)
-     driversocket.emit("join", { roomid: props._id });
-     driversocket.on("message", (res) => {
-       console.log("driver", res);
-     });
-     driversocket.on("driverlocation", ({ coordinates }) => {
-       console.log("driver", coordinates);
-       setDriverLocation(coordinates);
-     });
-   }, [props._id]);
-
+const HomePageSideMap = () => {
+  /*--------polyline ----------*/
+  const polyline =
+    "czeeB}erqNGGe@g@OMa@a@a@@y@o@IEg@]y@c@OEUGAAu@w@KDi@VGFGDY[d@e@r@ALU|AQv@M^CDEBC@E?C?C?CASGa@SeAe@SMUOc@Y[SKEo@[y@]iAm@o@a@i@W?DEPAJCHANEN?@OAi@Gi@G@KC?KCGCIAIGECOI_@OGCEAEAE?E?K@iBGg@Bs@?aA?c@A[Aa@Ci@IOA}@GSAoFIy@Ac@GuAe@uB|FKZoApDaBlEg@zAe@lAe@tA_BpEqAzDy@~Bi@zAi@zAiAfDUn@iAfDKVGPiAdDIRGRk@`Bk@fBENCNERERCREVCTCRAPAT?R?T?T@V@P?@@NBXBVBTBRDTFVFTHRFTHTTb@FNJPx@rAf@r@`ApAdAtAhChDLRNTLPFHDFv@rALRDJP^L^Rj@Lj@BPDNFh@D^BPBNDHj@NtALdANtA`@~CHj@Fb@NlAjAhIFd@F|@Br@?VAN?B?H?f@AXARCVCTV^X@";
   useEffect(() => {
     renderMap();
   }, []);
@@ -51,79 +23,94 @@ const HomePageSideMap = (props) => {
     );
     window.initMap = initMap;
   };
- useEffect(() => {
-   if (map && userLocation.length > 0) {
-    //  infoWindow.setPosition({ lat: userLocation[0], lng: userLocation[1] });
-    //  infoWindow.setContent("You are here");
-    //  infoWindow.open(map);
-    //  map.setCenter({ lat: userLocation[0], lng: userLocation[1] });
-    usermarker.setPosition({lat:userLocation[0],lng:userLocation[1]})
-    usermarker.setMap(map);
-   }
- }, [userLocation]);
 
- useEffect(() => {
-   if (map && driverLocation.length > 0) {
-    //  driverWindow.setPosition({
-    //    lat: driverLocation[0],
-    //    lng: driverLocation[1],
-    //  });
-    //  driverWindow.setContent("Driver is here");
-    //  driverWindow.open(map);
-    drivermarker.setPosition({lat:driverLocation[0],lng:driverLocation[1]})
-    drivermarker.setMap(map);
-   }
- }, [driverLocation]);
   var initMap = () => {
     map = new window.google.maps.Map(document.getElementById("map"), {
-      center: { lat: 25.27794, lng: 83.00244 },
+      center: { lat: 22.9734229, lng: 78.6568942 },
       zoom: 15,
       zoomControlOptions: {
         position: window.google.maps.ControlPosition.LEFT_BOTTOM,
       },
     });
-
-    usermarker=new window.google.maps.Marker()
-    drivermarker=new window.google.maps.Marker({
-     icon:{
-         url:drivericon,
-         scaledSize:new window.google.maps.Size(50,50)
-       },
-    })
-  
-    const input = document.getElementById("mapsearch");
-    const searchBox = new window.google.maps.places.SearchBox(input);
-    // Bias the SearchBox results towards current map's viewport.
-    map.addListener("bounds_changed", () => {
-      searchBox.setBounds(map.getBounds());
+    const pcoords1 = decodePolyline(polyline);
+    new window.google.maps.Polyline({
+      map,
+      path: pcoords1,
+      geodesic: true,
+      strokeColor: "red",
+      strokeOpacity: 1.0,
+      strokeWeight: 3,
     });
-    // Listen for the event fired when the user selects a prediction and retrieve
-    // more details for that place.
-    searchBox.addListener("places_changed", () => {
-      const places = searchBox.getPlaces();
 
-      if (places.length === 0) {
-        return;
+    new window.google.maps.Marker({
+      position: pcoords1[pcoords1.length - 1],
+      map,
+      icon: {
+        url: usericon,
+        scaledSize: new window.google.maps.Size(50, 50),
+      },
+    });
+    new window.google.maps.Marker({
+      map,
+      position: pcoords1[0],
+      icon: {
+        url: hospitalicon,
+        scaledSize: new window.google.maps.Size(50, 50),
+      },
+    });
+
+    let driverMarker = new window.google.maps.Marker({
+      map,
+      icon: {
+        url: drivericon,
+        scaledSize: new window.google.maps.Size(30, 30),
+      },
+    });
+
+    var i = 0;
+    var len = pcoords1.length;
+    var interval = window.setInterval(function () {
+      i += 1;
+      if (i === len) {
+        clearInterval(interval);
       }
-      // For each place, get the icon, name and location.
-      const bounds = new window.google.maps.LatLngBounds();
-      places.forEach((place) => {
-        if (!place.geometry) {
-          console.log("Returned place contains no geometry");
-          return;
-        }
-        if (place.geometry.viewport) {
-          bounds.union(place.geometry.viewport);
-        } else {
-          bounds.extend(place.geometry.location);
-        }
-        markers.setPosition(place.geometry.location);
-        map.panTo(place.geometry.location);
-        map.setZoom(15);
-      });
-      map.fitBounds(bounds);
-    });
-    //searchbox end
+      driverMarker.setPosition(pcoords1[i]);
+      map.panTo(pcoords1[i]);
+    }, 1000);
+
+    //   const input = document.getElementById("mapsearch");
+    //   const searchBox = new window.google.maps.places.SearchBox(input);
+    //   // Bias the SearchBox results towards current map's viewport.
+    //   map.addListener("bounds_changed", () => {
+    //     searchBox.setBounds(map.getBounds());
+    //   });
+    //   // Listen for the event fired when the user selects a prediction and retrieve
+    //   // more details for that place.
+    //   searchBox.addListener("places_changed", () => {
+    //     const places = searchBox.getPlaces();
+
+    //     if (places.length === 0) {
+    //       return;
+    //     }
+    //     // For each place, get the icon, name and location.
+    //     const bounds = new window.google.maps.LatLngBounds();
+    //     places.forEach((place) => {
+    //       if (!place.geometry) {
+    //         console.log("Returned place contains no geometry");
+    //         return;
+    //       }
+    //       if (place.geometry.viewport) {
+    //         bounds.union(place.geometry.viewport);
+    //       } else {
+    //         bounds.extend(place.geometry.location);
+    //       }
+    //       markers.setPosition(place.geometry.location);
+    //       map.panTo(place.geometry.location);
+    //       map.setZoom(15);
+    //     });
+    //     map.fitBounds(bounds);
+    //   });
+    //   //searchbox end
 
     const geocode = new window.google.maps.event.addListener(
       markers,
@@ -157,13 +144,13 @@ const HomePageSideMap = (props) => {
             lat: position.coords.latitude,
             lng: position.coords.longitude,
           };
-          // infoWindow.setPosition(pos);
+          infoWindow.setPosition(pos);
 
-          // infoWindow.setContent("Location found.");
-          // infoWindow.open(map);
-          // markers.setPosition(pos);
+          infoWindow.setContent("Location found.");
+          infoWindow.open(map);
+          markers.setPosition(pos);
           map.setCenter(pos);
-          // map.setZoom(16);
+          map.setZoom(16);
         },
         () => {
           handleLocationError(true, infoWindow, map.getCenter());
@@ -174,20 +161,23 @@ const HomePageSideMap = (props) => {
       handleLocationError(false, infoWindow, map.getCenter());
     }
   };
-  //geolocation end
+  // geolocation end
 
   return (
     <main>
-      <div id="searchbar">
+      <div id="searchbartrackpage">
         <input
           placeholder="Search the Location              🍳"
           className="input"
           id="mapsearch"
         />
       </div>
-      
-    
-      <div style={{marginTop:"20px"}} className="indexMaphomepage" id="map"></div>
+
+      <div
+        style={{ marginTop: "20px" }}
+        className="indexMaptrackpage"
+        id="map"
+      ></div>
     </main>
   );
 };

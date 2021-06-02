@@ -1,12 +1,11 @@
-.indexMaphomepage {
+.indexMaptrackpage {
   position: relative;
   height: 400px !important;
   width: 100vw !important;
   margin: -40px 0 30px 0;
-  
 }
 
-#searchbar{
+#searchbartrackpage{
   display: none;
   position: relative;
   align-items: center;
@@ -29,14 +28,14 @@
             
 } */
 @media (max-width: 860px) {
-  .indexMaphomepage {
+  .indexMaptrackpage {
     position: relative !important;
     margin: 30px 0 30px 0 !important;
     width: 100vw !important;
     
   }
 
- #searchbar{
+ #searchbartrackpage{
    display: none;
   position: relative;
   align-items: center;
