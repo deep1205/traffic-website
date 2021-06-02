@@ -188,8 +188,8 @@ class Map extends React.Component {
         streetviewControl={false}
         defaultZoom={14}
         defaultCenter={{
-          lat: 16.74674,
-          lng: 81.69071,
+          lat: 16.7468342,
+          lng: 81.6912885,
         }}
       >
         {this.state.progress && (
@@ -211,12 +211,12 @@ class Map extends React.Component {
             />
             <Marker
               /*----initial position--- morvi hostel*/
-              position={this.pathCoordinates[0]}
+              position={this.pathCoordinates[this.pathCoordinates.length - 1]}
               icon={patient_marker}
             />
             <Marker
               /*----final position--- sunderlal hospital*/
-              position={this.pathCoordinates[this.pathCoordinates.length - 1]}
+              position={this.pathCoordinates[0]}
               icon={destinationicon}
             />
           </>
