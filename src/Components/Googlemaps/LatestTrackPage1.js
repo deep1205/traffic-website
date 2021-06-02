@@ -188,8 +188,8 @@ class Map extends React.Component {
         streetviewControl={false}
         defaultZoom={14}
         defaultCenter={{
-          lat: 25.2752409,
-          lng: 82.9948656,
+          lat: 16.74674,
+          lng: 81.69071,
         }}
       >
         {this.state.progress && (
