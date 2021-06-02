@@ -50,7 +50,7 @@ const HospitalList = (props) => {
     {
       name: "Sudeep kumar",
       driverno: "9182687397",
-      rideid: "yqygf7endsxrk6zbeh9q",
+      rideid: "2",
       pcase: "Heart Attack",
     },
   ];
@@ -186,7 +186,7 @@ const HospitalList = (props) => {
                     class="shadow"
                   >
                     <h6 style={{ padding: "10px" }}>
-                      Rideid : {hospital.rideid}{" "}
+                      Case Priority : {hospital.rideid}{" "}
                     </h6>
                   </div>
                 </Col>
@@ -201,7 +201,7 @@ const HospitalList = (props) => {
                     class="shadow"
                   >
                     <h6 style={{ padding: "10px" }}>
-                      Driver No.: {hospital.driverno}
+                      Guardian No.: {hospital.driverno}
                     </h6>
                   </div>
                 </Col>
