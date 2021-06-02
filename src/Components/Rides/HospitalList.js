@@ -4,12 +4,15 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
+  Container,
+  Row,
+  Col,
 } from "reactstrap";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../Css/Hospitallist.css"
 import Map from '../Googlemaps/MyGooglemap'
-
+import LatestTrackPage1 from "../../Components/Googlemaps/LatestTrackPage1"
 const HospitalList = (props) => {
   const [dropdownOpen, setOpen] = useState(false);
   const [rides, setdata] = useState([]);
@@ -100,19 +103,94 @@ const HospitalList = (props) => {
           </div>
         </DropdownMenu>
       </ButtonDropdown>
-      <Map _id={hospital._id} />
+      <LatestTrackPage1 />
       {hospital.name !== "" ? (
-        <div className="card" style={{ margin: "-30px 0" }}>
-          <h4 style={{ textAlign: "center", margin: "3px 0" }}>Ride details</h4>
+        <div className="card">
           <div className="card-body">
-            <p>
-              Name:{hospital.name} <br />
-              Case:{hospital.pcase}
-              <br />
-              RideId:{hospital.rideid}
-              <br />
-              Case Priority:{hospital.caseprior}
-            </p>
+            <Container>
+              <Row>
+                <Col sm={{ size: "auto", offset: -10 }}>
+                  <div
+                    style={{
+                      borderRadius: "20px",
+                      color: "black",
+                      marginBottom: "10px",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    <h4>Hospital Details: </h4>
+                  </div>
+                </Col>
+              </Row>
+              <Row>
+                <Col sm={{ size: "auto", offset: -10 }}>
+                  <div
+                    style={{
+                      borderRadius: "20px",
+                      width: "250px",
+                      background: "white",
+                      color: "black",
+                    }}
+                    class="shadow"
+                  >
+                    <h6 style={{ padding: "10px" }}>Name : {hospital.name} </h6>
+                  </div>
+                </Col>
+                <Col sm={{ size: "auto", offset: 5 }}>
+                  <div
+                    style={{
+                      borderRadius: "20px",
+                      width: "250px",
+                      background: "white",
+                      color: "black",
+                    }}
+                    class="shadow"
+                  >
+                    <h6 style={{ padding: "10px" }}>
+                      Case : {hospital.pcase}{" "}
+                    </h6>
+                  </div>
+                </Col>
+              </Row>
+              <Row>
+                <Col sm={{ size: "auto", offset: -10 }}>
+                  <div
+                    style={{
+                      borderRadius: "20px",
+                      width: "250px",
+                      background: "white",
+                      color: "black",
+                    }}
+                    class="shadow"
+                  >
+                    <h6 style={{ padding: "10px" }}>
+                      Rideid : {hospital.rideid}{" "}
+                    </h6>
+                  </div>
+                </Col>
+                <Col sm={{ size: "auto", offset: 5 }}>
+                  <div
+                    style={{
+                      borderRadius: "20px",
+                      width: "250px",
+                      background: "white",
+                      color: "black",
+                    }}
+                    class="shadow"
+                  >
+                    <h6 style={{ padding: "10px" }}>
+                      Case Priority.: {hospital.caseprior}
+                    </h6>
+                  </div>
+                </Col>
+              </Row>
+            </Container>
+
+            {/* <h5>Name:{hospital.name}</h5>
+          <h5>City:{hospital.city}</h5>
+          <h5>District:{hospital.district}</h5>
+          <h5>Hospital Numbers:{hospital.mobile}
+          </h5> */}
           </div>
         </div>
       ) : null}
