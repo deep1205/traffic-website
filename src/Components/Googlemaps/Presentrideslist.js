@@ -78,11 +78,12 @@ const HospitalList = (props) => {
         <DropdownToggle
           style={{
             
-          
-            top: "49px",
+          background:"black",
+          color:"white",
+            top: "57px",
             position: "absolute",
             zIndex: "34",
-            left: "8px",
+            left: "10px",
             padding: "4px",
             outline: "none",
             boxShadow:"none"

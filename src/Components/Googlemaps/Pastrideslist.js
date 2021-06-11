@@ -75,11 +75,11 @@ const Pastrides = (props) => {
           style={{
             backgroundColor: "black",
             color: "white",
-            borderRadius: "10px",
-            top: "49px",
+            
+            top: "57px",
             position: "absolute",
             zIndex: "34",
-            left: "8px",
+            left: "10px",
             padding: "4px",
             outline: "none",
           }}
