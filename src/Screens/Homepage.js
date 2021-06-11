@@ -1,6 +1,6 @@
 import React from 'react'
 import Header from "../Components/Headers/Header"
-import ActiveridesList from "../Components/Rides/HospitalList"
+import ActiveridesList from "../Components/Googlemaps/Presentrideslist"
 
 const Homepage = () => {
     return (

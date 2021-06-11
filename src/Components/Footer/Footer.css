@@ -1,0 +1,167 @@
+.footer{
+  background-image: linear-gradient(to right, #a116ef, #390999);
+  width: 100vw;
+  height: 265px;
+  padding-top: 20px;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer_logos{
+  position: absolute;
+  right: 40px;
+  top:20px;
+  
+}
+
+.footer_logos img{
+  width: 40px;
+  margin: 20px;
+  margin-bottom: 20px !important;
+  padding: 0 10px;
+}
+
+.footer_logo{
+  
+  padding: 20px 50px;
+}
+
+.footer_dialog{
+  display: flex;
+}
+
+.footer_foottextcontainer{
+  position: absolute;
+  right: 20px;
+  bottom: 10px;
+  padding-right: 50px;
+  
+}
+
+.footer_foottext{
+  display: flex;
+  padding: 10px;
+ 
+}
+.footer_foottext div{
+  color: white;
+  
+  
+
+}
+
+
+.footer_foottext img{
+  width: 30px;
+  margin: 0 20px;
+}
+
+
+@media screen and (max-width: 860px){
+    .footer{
+    height: fit-content;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  .footer_logos{
+    position: relative;
+    margin-bottom: 30px;
+  }
+  .footer_logo{
+    width: 60vw;
+    min-width: 300px;
+    padding: 0;
+    margin: 0 auto;
+  }
+  .footer_dialog{
+    flex-direction: column;
+  }
+  .footer_foottextcontainer{
+    position: relative;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (max-width:2300px)
+{  .footer_logo{
+  width:32rem;
+  
+}
+  .footer_logos{
+    right:108px;
+  }
+  .footer_logos img{
+    width:44px;
+  }
+  .footer_foottext div{
+    font-size: 1.5rem;
+  }
+}
+@media screen and (max-width:1700px)
+{   .footer_logo{
+  width:30rem;
+  
+}
+  .footer_logos{
+    right:68px;
+  }
+  .footer_logos img{
+    width:43px;
+  }
+  .footer_foottext div{
+    font-size: 1.3rem;
+  }
+}
+@media screen and (max-width:1400px)
+{  
+    .footer_logo{
+  width:24rem;
+  
+}
+  .footer_logos{
+    right:58px;
+  }
+  .footer_logos img{
+    width:40px;
+  }
+  .footer_foottext div{
+    font-size: 1.2rem;
+  }
+}
+@media screen and (max-width:869px)
+{  
+  .footer_logo{
+  width:23rem;
+  
+}
+  .footer_logos{
+    right:18px;
+  }
+  .footer_logos img{
+    width:3rem;
+  }
+  .footer_foottext div{
+    font-size: 1.2rem;
+  }
+}
+
+@media screen and (max-width:569px)
+{  
+   .footer_logo{
+  width:20rem;
+  
+}
+  .footer_logos{
+    right:18px;
+  }
+  .footer_logos img{
+    width:2rem;
+  }
+  .footer_foottext div{
+    font-size: 0.9rem;
+  }
+}
+

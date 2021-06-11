@@ -1,20 +1,20 @@
 .indexMaptrackpage {
-  position: relative;
-  height: 400px !important;
-  width: 100vw !important;
-  margin: -40px 0 30px 0;
+ 
+  height: 500px;
+  width: 100vw ;
+  margin: 40px 0 40px 0;
 }
 
 #searchbartrackpage{
   display: none;
-  position: relative;
+  /* position: relative;
   align-items: center;
   justify-content: center;
   width: 40%;
 
   padding: 20px 0;
   text-align: center;
-  color: "blue";
+  color: "blue"; */
 }
 
 /* .dropdowntoggle{
@@ -34,7 +34,8 @@
     width: 100vw !important;
     
   }
-
+}
+/* 
  #searchbartrackpage{
    display: none;
   position: relative;
@@ -94,4 +95,4 @@ left:40px;
 }
 .myLocationBtn:focus {
   outline: none;
-}
+} */

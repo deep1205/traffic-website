@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
-import Whyusnew from "../Components/Whyusnew";
+import { useHistory, NavLink } from "react-router-dom";
+import Whyusnew from "../Components/Whyusnew"
 import Header from "../Components/Headers/Headerlogin"
 import Button from "@material-ui/core/Button";
 import { toast } from "react-toastify";
 import axios from "axios";
-import "../Css/Login.css"
-import Slideshow from "../Components/Slideshow";
+import "../Css/Login.css";
+import Slideshow from "../Components/Slideshow"
 import i2 from "../images/i2.jpg";
 import i3 from "../images/i3.jpg";
 import i5 from "../images/i5.jpg";
@@ -53,7 +53,7 @@ const Login = () => {
       .then(async (res) => {
         localStorage.setItem("token", res["data"]["token"]);
         toast.success("Login Sucessfully");
-        await delay(5000);
+        await delay(1000);
         console.log("Login SuccessFully");
         console.log(res);
         history.push("/home");
@@ -68,16 +68,18 @@ const Login = () => {
   return (
     <>
       <Header location="login" />
-      <div id="loginkiposition">
-        <div className="login-page">
+      <div class=" fadeInDown">
+        <div className="login-page" style={{ position: "relative" }}>
           <div className="form">
             <div className="login">
               <div className="login-header">
-                <h4 style={{ marginTop: "20px" }} className="myformheadertext">
-                  Signin
-                </h4>
-                <p className="myformheadertext">Welcome to Priority Pulse</p>
-                <p style={{ marginTop: "-20px" }}>Your Pulse,Our Priority</p>
+                <h1 style={{ margin: "-10px" }} id="myformheadertextl">
+                  Sign in
+                </h1>
+                <div style={{ marginTop: "28px" }} id="myformheadertext1l">
+                  <p>Welcome to Priority Pulse</p>
+                  <p style={{ marginTop: "-14px" }}>Your Pulse,Our Priority</p>
+                </div>
               </div>
             </div>
             <form className="login-form" method="PUT">
@@ -97,17 +99,19 @@ const Login = () => {
               <Button name="signin" variant="contained" onClick={handleSubmit}>
                 Sign in
               </Button>
-              {/* <p className="message">
+              {/* <p className="message" id="myformheadertext1l">
                 Not registered?{" "}
                 <NavLink to="/signup">Create an account.</NavLink>
               </p> */}
             </form>
           </div>
         </div>
-      </div>
-      <Slideshow tutorialSteps={tutorialSteps} />
 
-      <Whyusnew />
+        <Slideshow tutorialSteps={tutorialSteps} />
+      </div>
+      <div style={{ position: "relative", marginTop: "100px" }}>
+        <Whyusnew />
+      </div>
     </>
   );
 };

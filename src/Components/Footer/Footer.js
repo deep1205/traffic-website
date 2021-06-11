@@ -1,12 +1,12 @@
 import React from "react";
-import "../Css/Footer.css";
-import fb from "../images/fb.png";
-import linkin from "../images/linkedin.png";
-import insta from "../images/insta.png";
-import logo from "../images/logo.png";
-import call from "../images/phone.png";
-import address from "../images/location.png";
-import mail from "../images/mail.png";
+import "./Footer.css"
+import fb from "../../images/fb@2x.png";
+import linkin from "../../images/linked_in@2x.png";
+import insta from "../../images/insta@2x.png";
+import logo from "../../images/PP_logo_yellow.png";
+import call from "../../images/ID115-1157139_contact-icon-png.png";
+import address from "../../images/Address_icon2x.png";
+import mail from "../../images/ID213-2133056_icon-mail-png-ro.png";
 
 function Footer() {
   return (

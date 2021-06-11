@@ -3,7 +3,7 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import Homepage from "./Screens/Homepage";
 import Login from "./Screens/Login.js";
 import Pastride from "./Screens/Pastride.js";
-import Footer from "./Components/Footer";
+import Footer from "./Components/Footer/Footer"
 
 import { GuardProvider, GuardedRoute } from "react-router-guards";
 

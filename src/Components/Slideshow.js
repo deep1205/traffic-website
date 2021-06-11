@@ -10,6 +10,12 @@ const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 500,
     flexGrow: 1,
+    [theme.breakpoints.up(1400)]: {
+      maxWidth: 499,
+    },
+    [theme.breakpoints.up(1600)]: {
+      maxWidth: 650,
+    },
   },
   header: {
     display: "flex",

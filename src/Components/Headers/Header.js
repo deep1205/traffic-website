@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../../App.css"
+import "../../Css/Header.css"
 import logo from "../../images/logo.png";
 import MenuIcon from "@material-ui/icons/Menu";
 import ClearIcon from "@material-ui/icons/Clear";
@@ -47,7 +47,7 @@ function Header({ location }) {
 
           <NavLink to="/pastride">PastRide</NavLink>
 
-          <a
+          <NavLink to="/login"
             onClick={() => {
               localStorage.removeItem("token");
               window.location.reload();
@@ -55,7 +55,7 @@ function Header({ location }) {
             style={{ cursor: "pointer" }}
           >
             Logout
-          </a>
+          </NavLink>
           {/* <NavLink to="/signup">Signup</NavLink> */}
           {location === "home" && <div className="animation start-home" />}
           {location === "pastride" && <div className="animation start-user" />}
