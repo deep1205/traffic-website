@@ -10,6 +10,7 @@ import {
   Row,
   Col,
 } from "reactstrap";
+import Icon from "supercons";
 
 import ListIcon from "@material-ui/icons/List";
 import axios from "axios";
@@ -77,19 +78,18 @@ const HospitalList = (props) => {
       >
         <DropdownToggle
           style={{
-            
-          background:"black",
-          color:"white",
+            background: "black",
+            color: "white",
             top: "57px",
             position: "absolute",
             zIndex: "34",
             left: "10px",
             padding: "4px",
             outline: "none",
-            boxShadow:"none"
           }}
         >
-          <ListIcon fontSize="large"  color="red"/>
+          <Icon glyph="list" size={38} />
+          {/* <ListIcon fontSize="large" color="red" /> */}
         </DropdownToggle>
         <DropdownMenu className="dropdown-menu" positionFixed={true}>
           <div>
@@ -101,7 +101,7 @@ const HospitalList = (props) => {
                   style={{ marginLeft: "39px", color: "black" }}
                   onClick={() => setOpen(!dropdownOpen)}
                 >
-                  <HighlightOffSharpIcon />
+                  <Icon glyph="view-close-small" size={28} />
                 </span>
               </h4>
               <hr />
@@ -148,18 +148,23 @@ const HospitalList = (props) => {
           </div>
         </DropdownMenu>
       </ButtonDropdown>
-      <Map _id={hospital._id} rideid={hospital.rideid} polyline={hospital.polyline} />
+      <Map
+        _id={hospital._id}
+        rideid={hospital.rideid}
+        polyline={hospital.polyline}
+      />
       {hospital.name !== "" && cardOpen ? (
         <div className="card">
           <div className="hospital-details">
-            <h1 className="hospital-title">
+            <h1 className="hospital-title" style={{ fontSize: "2rem" }}>
               Ride details :
               <span
                 className="cardCross"
                 style={{ position: "absolute", right: "40px", color: "white" }}
                 onClick={() => setCardOpen(false)}
               >
-                <HighlightOffSharpIcon fontSize="medium" />
+                <Icon glyph="view-close-small" size={38} />
+                {/* <HighlightOffSharpIcon fontSize="medium" /> */}
               </span>
             </h1>
           </div>
@@ -170,42 +175,42 @@ const HospitalList = (props) => {
               <Row xs="2" className="row"> */}
                 <Col md={{ size: "auto", offset: 0 }}>
                   <div className="shadow">
-                    <h6 className="hospital-detail" style={{ padding: "12px" }}>
+                    <h6 className="hospital-detail" style={{ padding: "10px" }}>
                       Name: {hospital.name}
                     </h6>
                   </div>
                 </Col>{" "}
                 <Col md={{ size: "auto", offset: 0 }}>
                   <div className="shadow">
-                    <h6 className="hospital-detail" style={{ padding: "12px" }}>
+                    <h6 className="hospital-detail" style={{ padding: "10px" }}>
                       Age: {hospital.age}
                     </h6>
                   </div>
                 </Col>{" "}
                 <Col md={{ size: "auto", offset: 0 }}>
                   <div className="shadow">
-                    <h6 className="hospital-detail" style={{ padding: "12px" }}>
+                    <h6 className="hospital-detail" style={{ padding: "10px" }}>
                       Case: {hospital.pcase}
                     </h6>
                   </div>
                 </Col>
                 <Col md={{ size: "auto", offset: 0 }}>
                   <div className="shadow">
-                    <h6 className="hospital-detail" style={{ padding: "12px" }}>
+                    <h6 className="hospital-detail" style={{ padding: "10px" }}>
                       Case priority: {hospital.casePrior}
                     </h6>
                   </div>
                 </Col>
                 <Col md={{ size: "auto", offset: 0 }}>
                   <div className="shadow">
-                    <h6 className="hospital-detail" style={{ padding: "12px" }}>
+                    <h6 className="hospital-detail" style={{ padding: "10px" }}>
                       Guardian No: {hospital.guardianNo}
                     </h6>
                   </div>
                 </Col>
                 <Col md={{ size: "auto", offset: 0 }}>
                   <div className="shadow">
-                    <h6 className="hospital-detail" style={{ padding: "12px" }}>
+                    <h6 className="hospital-detail" style={{ padding: "10px" }}>
                       Patient No : {hospital.patientNo}
                     </h6>
                   </div>
@@ -214,15 +219,21 @@ const HospitalList = (props) => {
                 {/* <Row xs="2" className="row"> */}
                 <Col md={{ size: "auto", offset: 0 }}>
                   <div className="shadow">
-                    <h6 className="hospital-detail" style={{ padding: "12px" }}>
-                      Hospital: {hospital.hospital}
+                    <h6 className="hospital-detail" style={{ padding: "10px" }}>
+                      <span style={{ fontSize: "15px" }}>
+                        {" "}
+                        Id:{hospital.hospital}
+                      </span>
                     </h6>
                   </div>
                 </Col>
                 <Col md={{ size: "auto", offset: 0 }}>
                   <div className="shadow">
-                    <h6 className="hospital-detail" style={{ padding: "12px" }}>
-                      Ride id: {hospital.rideid}
+                    <h6
+                      className="hospital-detail"
+                      style={{ padding: "10px", fontSize: "15px" }}
+                    >
+                      RideId: {hospital.rideid}
                     </h6>
                   </div>
                 </Col>

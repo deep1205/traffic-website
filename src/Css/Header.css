@@ -8,6 +8,7 @@
   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
   
   
+  
 }
 
 .navbar_logo{
@@ -154,13 +155,14 @@ nav .start-collaborate,a:nth-child(5):hover~.animation{
 }
 
 
-@media screen and (max-width: 860px){
+@media screen and (max-width: 1062px){
   .menu-toggle{
-    display: block;
+    display:block;
     width: 40px;
     height: 40px;
     margin: 40px 20px;
-    float: right;
+    float: right ;
+    
     cursor: pointer;
     text-align: center;
     font-size: 30px;

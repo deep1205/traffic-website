@@ -43,7 +43,9 @@ function Header({ location }) {
           )}
         </div>
         <nav className={classna}>
+        
           <NavLink to="/home">Home</NavLink>
+          
 
           <NavLink to="/pastride">PastRide</NavLink>
 

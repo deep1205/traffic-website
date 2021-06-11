@@ -8,7 +8,18 @@
 	padding:20px;
 	margin:0 130px;
 	top: 530px;
+	animation: fadeIn ease-in-out 2s  1  forwards;
+
 	
+	
+}
+@keyframes fadeIn {
+	0%{
+		opacity:0;
+	}
+	100%{
+		opacity: 0.8;
+	}
 	
 }
 .hospital-details{
@@ -50,11 +61,14 @@ hr {
 
 @media screen and (max-width: 2000px) {
     .card {
-      top: 530px;
+      top: 500px;
 	  
-	  margin:0 140px;
-	  width:85vw;
+	  margin:0 170px;
+	  width:1500px;
     }
+	.card-body{
+		margin:0 120px;
+	}
 	.shadow {
 		box-shadow: 0 8px 6px -6px black;
 		background-color: rgb(248, 244, 244);
@@ -74,39 +88,71 @@ hr {
 
   @media screen and (max-width: 1800px) {
     .card {
-      top: 550px;
+      top: 530px;
 	  
 	  margin:0 140px;
 	  width:85vw;
     }
+	.card-body{
+		margin:0 10px 0 90px;
+	}
+	
 }
 @media screen and (max-width: 1600px) {
     .card {
-      top: 600px;
+      top: 560px;
 	  
-	  margin:0 110px;
-	  width:85vw;
+	  margin:0 150px;
+	  width:79vw;
     }
+	.card-body{
+		margin:0 -40px;
+	}
+	
 }
   @media screen and (max-width: 1490px) {
     .card {
-      top: 540px;
+      top: 510px;
 	  margin:0 110px;
+	  width:84vw;
     }
+	.card-body{
+		margin:0 150px;
+	}
 	.shadow {
 		box-shadow: 0 8px 6px -6px black;
 		background-color: rgb(248, 244, 244);
 		color:black;
 		border-radius: 25px;
-		width: 240px;
+		width: 300px;
+	}
+}
+@media screen and (max-width: 1365px) {
+     .card {
+      top: 510px;
+	  margin:0 90px;
+	  width:87vw;
+    }
+	.card-body{
+		margin:0 110px;
+	}
+	.shadow {
+		box-shadow: 0 8px 6px -6px black;
+		background-color: rgb(248, 244, 244);
+		color:black;
+		border-radius: 25px;
+		width: 300px;
 	}
 }
 @media screen and (max-width: 1240px) {
     .card {
-      top: 520px;
+      top: 540px;
 	  margin:0 120px;
-	  width:76vw;
+	  width:81vw;
     }
+	.card-body{
+		margin:0 30px;
+	}
 	.shadow {
 		box-shadow: 0 8px 6px -6px black;
 		background-color: rgb(248, 244, 244);
@@ -119,6 +165,7 @@ hr {
     .card {
       top: 530px;
 	  margin:0 100px;
+	  
     }
 	.shadow {
 		box-shadow: 0 8px 6px -6px black;
@@ -137,9 +184,9 @@ hr {
   }
    @media screen and (max-width: 1075px) {
     .card {
-      top: 530px;
+      top: 510px;
 	  margin:0 130px;
-	  width:74vw;
+	  width:80vw;
     }
 	.shadow {
 		box-shadow: 0 8px 6px -6px black;
@@ -160,10 +207,13 @@ hr {
 
     @media screen and (max-width: 1020px) {
     .card {
-      top: 360px;
+      top: 300px;
 	  margin:0 250px;
 	  width:50vw;
     }
+	.card-body{
+		margin: 0 -20px;
+	}
 	.shadow {
 		box-shadow: 0 8px 6px -6px black;
 		background-color: rgb(248, 244, 244);
@@ -181,7 +231,7 @@ hr {
   }
     @media screen and (max-width: 895px) {
     .card {
-      top: 400px;
+      top: 340px;
 	  width:60vw;
 	  margin: 0 160px;
     }
@@ -205,7 +255,7 @@ hr {
   }
   @media screen and (max-width: 860px) {
     .card {
-      top: 330px;
+      top: 310px;
     }
 	.shadow {
 		box-shadow: 0 8px 6px -6px black;
@@ -289,6 +339,9 @@ hr {
         
         
 	}
+	.card-body{
+		margin: 0 -40px;
+	}
 	.cardCross{
 		cursor: pointer;
 	}
@@ -300,7 +353,7 @@ hr {
 	  margin:0 30px;
     }
 	.card-body{
-		margin:0 0px;
+		margin:0 -50px;
 	}
 	.shadow {
 		box-shadow: 0 8px 6px -6px black;
