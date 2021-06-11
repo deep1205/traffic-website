@@ -96,3 +96,85 @@ left:40px;
 .myLocationBtn:focus {
   outline: none;
 } */
+@media screen and (max-width:2000px) {
+  .indexMaptrackpage {
+ 
+  height: 500px;
+
+}
+  
+}
+@media screen and (max-width:2000px) {
+  .indexMaptrackpage {
+ 
+  height: 500px;
+
+}
+  
+}@media screen and (max-width:1800px) {
+  .indexMaptrackpage {
+ 
+  height: 540px;
+
+}
+  
+}@media screen and (max-width:1600px) {
+  .indexMaptrackpage {
+ 
+  height: 580px;
+
+}
+  
+}@media screen and (max-width:1400px) {
+  .indexMaptrackpage {
+ 
+  height: 600px;
+
+}
+  
+}@media screen and (max-width:1200px) {
+  .indexMaptrackpage {
+ 
+  height: 630px;
+
+}
+  
+}@media screen and (max-width:1000px) {
+  .indexMaptrackpage {
+ 
+  height: 650px;
+
+}
+  
+}@media screen and (max-width:800px) {
+  .indexMaptrackpage {
+ 
+  height: 680px;
+
+}
+  
+}@media screen and (max-width:600px) {
+  .indexMaptrackpage {
+ 
+  height: 700px;
+
+}
+  
+}@media screen and (max-width:476px) {
+  .indexMaptrackpage {
+   width:100vw;
+  height: 730px;
+
+}
+
+  
+}
+@media screen and (max-width:200px) {
+  .indexMaptrackpage {
+ 
+  height: 750px;
+
+}
+
+  
+}

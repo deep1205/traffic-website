@@ -77,18 +77,18 @@ const HospitalList = (props) => {
       >
         <DropdownToggle
           style={{
-            backgroundColor: "black",
-            color: "white",
-            borderRadius: "10px",
+            
+          
             top: "49px",
             position: "absolute",
             zIndex: "34",
             left: "8px",
             padding: "4px",
             outline: "none",
+            boxShadow:"none"
           }}
         >
-          <ListIcon fontSize="large" />
+          <ListIcon fontSize="large"  color="red"/>
         </DropdownToggle>
         <DropdownMenu className="dropdown-menu" positionFixed={true}>
           <div>

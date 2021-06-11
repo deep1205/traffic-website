@@ -111,7 +111,6 @@ const HomePageSideMap = (props) => {
       center: { lat: 26.2258858,lng: 78.2173995 },
       zoom: 15,
       mapTypeControl:false,
-     
       zoomControl: true,
 
       zoomControlOptions: {
