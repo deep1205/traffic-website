@@ -46,23 +46,8 @@ hr {
 
 
 
-@media screen and (max-width:2000px)
-{
-	.card{
-		margin:0 180px;
-		width:88vw;
-		top:480px;
-		
-	}
-	.shadow {
-		box-shadow: 0 8px 6px -6px black;
-		background-color: rgb(248, 244, 244);
-		color:black;
-		border-radius: 25px;
-		width: 290px;
-	}
-}
-@media screen and (max-width: 1600px) {
+
+@media screen and (max-width: 2000px) {
     .card {
       top: 500px;
 	  margin:0 140px;
