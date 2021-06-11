@@ -45,14 +45,23 @@ function Header({ location }) {
           )}
         </div>
         <nav className={classna}>
-          {/* <NavLink to="/home">Home</NavLink>
+          <NavLink style={{ visibility: "hidden" }} to="/home">
+            Home
+          </NavLink>
+          <NavLink style={{ visibility: "hidden" }} to="/home">
+            Home
+          </NavLink>
 
-          <NavLink to="/pastride">PastRide</NavLink> */}
+          <NavLink style={{ visibility: "hidden" }} to="/pastride">
+            PastRide
+          </NavLink>
 
-          <NavLink to="/login">Login</NavLink>
+          <NavLink style={{marginLeft:"10px"}} to="/login">Login</NavLink>
 
-          {/* <NavLink to="/signup">Signup</NavLink> */}
-          {location === "login" && <div className="animation start-home" />}
+          <NavLink style={{ visibility: "hidden" }} to="/login">
+            Login
+          </NavLink>
+          {location === "login" && <div className="animation start-hospital" />}
           {/* {location === "pastride" && <div className="animation start-user" />}
           {location === "login" && <div className="animation start-hospital" />} */}
           {/* {location === "profile" && (
