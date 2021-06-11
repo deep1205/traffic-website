@@ -16,7 +16,9 @@ var map,
   usermarker;
 
 const HomePageSideMap = (props) => {
-  // console.log(props.polyline);
+  
+  // console.log(props.rideid);
+  // console.log(props._id);
   const userendpoi = "https://server.prioritypulse.co.in/usertrack";
   const driverendpoi = "https://server.prioritypulse.co.in/drivertrack";
 
@@ -26,7 +28,8 @@ const HomePageSideMap = (props) => {
   driversocket = io(driverendpoi);
 
   useEffect(() => {
-    usersocket.emit("join", { roomid: "Sai_Harish" });
+    if(props.rideid!=="")
+    {usersocket.emit("join", { roomid:props.rideid });
     usersocket.on("message", (res) => {
       console.log("user", res);
     });
@@ -34,10 +37,11 @@ const HomePageSideMap = (props) => {
     usersocket.on("userlocation", (coordinates) => {
       console.log("user", coordinates);
     });
-  }, [userLocation]);
+  }}, [userLocation]);
 
   useEffect(() => {
-    driversocket.emit("join", { roomid: props._id });
+    if(props._id!=="")
+   { driversocket.emit("join", { roomid: props._id });
     driversocket.on("message", (res) => {
       console.log("driver", res);
     });
@@ -45,7 +49,8 @@ const HomePageSideMap = (props) => {
       console.log("driver", coordinates);
       setDriverLocation(coordinates);
     });
-  }, [props._id]);
+  }
+}, [props._id]);
 
   useEffect(() => {
     var options = {
@@ -105,6 +110,9 @@ const HomePageSideMap = (props) => {
     map = new window.google.maps.Map(document.getElementById("map"), {
       center: { lat: 22.9734229, lng: 78.6568942 },
       zoom: 14,
+      mapTypeControl:false,
+     
+      zoomControl: true,
 
       zoomControlOptions: {
         position: window.google.maps.ControlPosition.LEFT_BOTTOM,

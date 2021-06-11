@@ -1,6 +1,6 @@
 .footer{
   background-image: linear-gradient(to right, #a116ef, #390999);
-  width: 100vw;
+
   height: 265px;
   padding-top: 20px;
   position: relative;
@@ -87,16 +87,18 @@
 
 @media screen and (max-width:2300px)
 {  .footer_logo{
-  width:32rem;
+  width:34rem;
   
 }
   .footer_logos{
-    right:108px;
+    right:98px;
+    top:8px;
   }
   .footer_logos img{
-    width:44px;
+    width:64px;
   }
   .footer_foottext div{
+    
     font-size: 1.5rem;
   }
 }
@@ -109,7 +111,7 @@
     right:68px;
   }
   .footer_logos img{
-    width:43px;
+    width:63px;
   }
   .footer_foottext div{
     font-size: 1.3rem;
@@ -118,14 +120,14 @@
 @media screen and (max-width:1400px)
 {  
     .footer_logo{
-  width:24rem;
+  width:29rem;
   
 }
   .footer_logos{
     right:58px;
   }
   .footer_logos img{
-    width:40px;
+    width:58px;
   }
   .footer_foottext div{
     font-size: 1.2rem;
@@ -138,10 +140,10 @@
   
 }
   .footer_logos{
-    right:18px;
+    right:28px;
   }
   .footer_logos img{
-    width:3rem;
+    width:59px;
   }
   .footer_foottext div{
     font-size: 1.2rem;
@@ -151,17 +153,17 @@
 @media screen and (max-width:569px)
 {  
    .footer_logo{
-  width:20rem;
+  width:18rem;
   
 }
   .footer_logos{
     right:18px;
   }
   .footer_logos img{
-    width:2rem;
+    width:59px;
   }
   .footer_foottext div{
-    font-size: 0.9rem;
+    font-size: 1rem;
   }
 }
 

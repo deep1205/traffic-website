@@ -1,20 +1,24 @@
 .card {
     background-image: linear-gradient(to right, #C504B6, #4B038E);
-    opacity: 1;
-    border-radius: 20px;
+    opacity: 0.89;
+    border-radius: 30px;
     z-index: 2;
     margin-bottom: 40px;
 	position: absolute;
-	width: 99vw;
-	margin-left:0.6rem ;
-	top: 550px;
+	padding:20px;
+	margin:0 130px;
+	top: 530px;
+	
 }
 .hospital-details{
 	display: flex;
+	color:white;
+	margin-left: 20px;
 }
 .card-body {
-    color: white;
+    color: black;
     text-align: center;
+	
 }
 .dropdown-span {
     cursor: pointer;
@@ -30,8 +34,8 @@ hr {
 .shadow {
 	box-shadow: 0 8px 6px -6px black;
 	background-color: rgb(248, 244, 244);
-	color: #C504B6;
-	border-radius: 5px;
+	color:black;
+	border-radius: 25px;
 	font-size: 5px;
 	width: 230px;
 }
@@ -39,75 +43,87 @@ hr {
 	cursor: pointer;
 }
 
-/* Info Window Css
-#iw-container {
-	width:160px;
-}
 
-#iw-container .iw-title {
-	font-family: 'Open Sans Condensed', sans-serif;
-	font-size: 16px;
-	font-weight: 200;
-	padding: 5px;
-	background-color: #48b5e9;
-	color: white;
-	margin: 0;
-	border-radius: 2px 2px 0 0;
-	text-align: center;
-}
-#iw-container .iw-content {
-	font-size: 12px;
-	line-height: 15px;
-	font-weight: 400;
-	margin-right: 1px;
-	padding: 5px 5px 5px 5px;
-	max-height: 160px;
-	overflow-y: auto;
-	overflow-x: hidden;
-	text-align: center;
-}
-.iw-content img {
-	float: right;
-	margin: 0 5px 5px 10px;	
-}
-.iw-subTitle {
-	text-align: center;
-	font-size: 16px;
-	font-weight: 700;
-	padding: 5px 0;
-} */
 
-@media screen and (max-width: 1300px) {
+
+@media screen and (max-width:2000px)
+{
+	.card{
+		margin:0 180px;
+		width:88vw;
+		top:480px;
+		
+	}
+	.shadow {
+		box-shadow: 0 8px 6px -6px black;
+		background-color: rgb(248, 244, 244);
+		color:black;
+		border-radius: 25px;
+		width: 290px;
+	}
+}
+@media screen and (max-width: 1600px) {
     .card {
-      top: 510px;
+      top: 500px;
+	  margin:0 140px;
+	  width:85vw;
     }
 	.shadow {
 		box-shadow: 0 8px 6px -6px black;
 		background-color: rgb(248, 244, 244);
-		color: #C504B6;
-		border-radius: 5px;
-		width: 200px;
+		color:black;
+		border-radius: 25px;
+		width: 240px;
 	}
 	.hospital-title{
 		font-size: 20px;
+		color:white;
 	}
 	.cardCross{
 		cursor: pointer;
 	}  
   }
-  @media screen and (max-width: 960px) {
+  @media screen and (max-width: 1450px) {
     .card {
-      top: 620px;
+      top: 500px;
+	  margin:0 140px;
     }
 	.shadow {
 		box-shadow: 0 8px 6px -6px black;
 		background-color: rgb(248, 244, 244);
-		color: #C504B6;
-		border-radius: 5px;
+		color:black;
+		border-radius: 25px;
+		width: 240px;
+	}
+}
+@media screen and (max-width: 1240px) {
+    .card {
+      top: 440px;
+	  margin:0 140px;
+    }
+	.shadow {
+		box-shadow: 0 8px 6px -6px black;
+		background-color: rgb(248, 244, 244);
+		color:black;
+		border-radius: 25px;
+		width: 190px;
+	}
+}
+  @media screen and (max-width: 960px) {
+    .card {
+      top: 430px;
+	  margin:0 80px;
+    }
+	.shadow {
+		box-shadow: 0 8px 6px -6px black;
+		background-color: rgb(248, 244, 244);
+		color: black;
+		border-radius: 25px;
 		width: 180px;
 	}
 	.hospital-title{
 		font-size: 20px;
+		color:white;
 	}
 	.cardCross{
 		cursor: pointer;
@@ -115,17 +131,18 @@ hr {
   }
     @media screen and (max-width: 860px) {
     .card {
-      top: 450px;
+      top: 380px;
     }
 	.shadow {
 		box-shadow: 0 8px 6px -6px black;
 		background-color: rgb(248, 244, 244);
-		color: #C504B6;
-		border-radius: 5px;
+		color:black;
+		border-radius: 25px;
 		width: 180px;
 	}
 	.hospital-title{
 		font-size: 20px;
+		color:white;
 	}
 	.cardCross{
 		cursor: pointer;
@@ -133,17 +150,18 @@ hr {
   }
   @media screen and (max-width: 770px) {
     .card {
-      top: 380px;
+      top: 260px;
     }
 	.shadow {
 		box-shadow: 0 8px 6px -6px black;
 		background-color: rgb(248, 244, 244);
-		color: #C504B6;
-		border-radius: 5px;
-		width: 150px;
+		color:black;
+		border-radius: 25px;
+		width: 220px;
 	}
 	.hospital-title{
 		font-size: 20px;
+		color:white;
 	}
 	.cardCross{
 		cursor: pointer;
@@ -151,19 +169,23 @@ hr {
   }
 
 @media screen and (max-width: 550px) {
-    
+   
 	.shadow {
 		box-shadow: 0 8px 6px -6px black;
 		background-color: rgb(248, 244, 244);
-		color: #C504B6;
-		border-radius: 5px;
-		width: 150px;
+		color:black;
+		border-radius: 25px;
+		width: 200px;
 	}
 	.hospital-title{
 		font-size: 20px;
+		color:white;
+	     font-size: 1.1rem;
 	}
 	.card {
-		top: 490px;
+		top: 200px;
+		margin:0 10px;
+		width:98vw;
         
         
 	}

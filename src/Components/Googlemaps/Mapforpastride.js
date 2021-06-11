@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import io from "socket.io-client";
-import "../../Css/Map.css"
+import "../../Css/Map.css";
 import drivericon from "../../images/drivericon.png";
 
 const decodePolyline = require("decode-google-map-polyline");
@@ -16,7 +16,8 @@ var map,
   usermarker;
 
 const HomePageSideMap = (props) => {
-  // console.log(props.polyline);
+  // console.log(props.rideid);
+  // console.log(props._id);
   const userendpoi = "https://server.prioritypulse.co.in/usertrack";
   const driverendpoi = "https://server.prioritypulse.co.in/drivertrack";
 
@@ -26,29 +27,37 @@ const HomePageSideMap = (props) => {
   driversocket = io(driverendpoi);
 
   useEffect(() => {
-    usersocket.emit("join", { roomid: "Sai_Harish" });
-    usersocket.on("message", (res) => {
-      console.log("user", res);
-    });
-    usersocket.emit("sendUserLocation", { coordinates: userLocation });
-    usersocket.on("userlocation", (coordinates) => {
-      console.log("user", coordinates);
-    });
+    if (0) {
+      usersocket.emit("join", { roomid: props.rideid });
+      usersocket.on("message", (res) => {
+        console.log("user", res);
+      });
+      usersocket.emit("sendUserLocation", { coordinates: userLocation });
+      usersocket.on("userlocation", (coordinates) => {
+        console.log("user", coordinates);
+      });
+    }
   }, [userLocation]);
 
   useEffect(() => {
-    driversocket.emit("join", { roomid: props._id });
-    driversocket.on("message", (res) => {
-      console.log("driver", res);
-    });
-    driversocket.on("driverlocation", (coordinates) => {
-      console.log("driver", coordinates);
-      setDriverLocation(coordinates);
-    });
+    if (0) {
+      driversocket.emit("join", { roomid: props._id });
+      driversocket.on("message", (res) => {
+        console.log("driver", res);
+      });
+      driversocket.on("driverlocation", (coordinates) => {
+        console.log("driver", coordinates);
+        setDriverLocation(coordinates);
+      });
+    }
   }, [props._id]);
 
   useEffect(() => {
-    var options = { maximumAge: 3000, timeout: 50000, enableHighAccuracy: true };
+    var options = {
+      maximumAge: 3000,
+      timeout: 50000,
+      enableHighAccuracy: true,
+    };
     var watchID = navigator.geolocation.watchPosition(
       onSuccess,
       onError,
@@ -99,8 +108,12 @@ const HomePageSideMap = (props) => {
   }, [driverLocation]);
   var initMap = () => {
     map = new window.google.maps.Map(document.getElementById("map"), {
-      center: { lat: 22.9734229,lng: 78.6568942},
+      center: { lat: 22.9734229, lng: 78.6568942 },
       zoom: 14,
+      mapTypeControl: false,
+
+      zoomControl: true,
+
       zoomControlOptions: {
         position: window.google.maps.ControlPosition.LEFT_BOTTOM,
       },
@@ -147,8 +160,7 @@ const HomePageSideMap = (props) => {
     // more details for that place.
     searchBox.addListener("places_changed", () => {
       const places = searchBox.getPlaces();
-      
-       
+
       if (places.length === 0) {
         return;
       }
@@ -164,7 +176,7 @@ const HomePageSideMap = (props) => {
         } else {
           bounds.extend(place.geometry.location);
         }
-        
+
         markers.setPosition(place.geometry.location);
         map.panTo(place.geometry.location);
         map.setZoom(15);
@@ -206,7 +218,7 @@ const HomePageSideMap = (props) => {
             lng: position.coords.longitude,
           };
           infoWindow.setPosition(pos);
-           
+
           infoWindow.setContent("Location found.");
           infoWindow.open(map);
           markers.setPosition(pos);
@@ -234,11 +246,7 @@ const HomePageSideMap = (props) => {
         />
       </div>
 
-      <div
-        style={{ marginTop: "20px" }}
-        className="indexMaptrackpage"
-        id="map"
-      ></div>
+      <div className="indexMaptrackpage" id="map"></div>
     </main>
   );
 };

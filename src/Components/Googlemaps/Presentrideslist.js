@@ -10,12 +10,14 @@ import {
   Row,
   Col,
 } from "reactstrap";
+
+import ListIcon from "@material-ui/icons/List";
 import axios from "axios";
 import HighlightOffSharpIcon from "@material-ui/icons/HighlightOffSharp";
 import decodePolyline from "decode-google-map-polyline";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Ridesdetail.css"
-import LatestTrackPage1 from "./MyGooglemap";
+import Map from "./MyGooglemap";
 
 const HospitalList = (props) => {
  
@@ -33,13 +35,17 @@ const HospitalList = (props) => {
         console.log(data);
         const arr = data.map((data) => {
           return {
-            
             name: data.name,
-            driverno: data.mobileNo,
+            age: data.age,
             pcase: data.pcase,
+            casePrior: data.casePrior,
+            guardianNo: data.guardianNo,
+            patientNo:data.patientNo,
             rideid: data.RideId,
-            _id:data._id,
-            polyline:data.patientPolyline,
+            _id: data._id,
+            hospital:data.hospital,
+            ispicked:data.isPicked,
+            polyline: data.patientPolyline,
           };
         });
         setdata(arr);
@@ -49,11 +55,16 @@ const HospitalList = (props) => {
   
   const [hospital, setHospital] = useState({
     name: "",
+    age:"",
     pcase: "",
+    casePrior:"",
     rideid: "",
-    driverno: "",
+    guardianNo: "",
+    patientNo:"",
     _id: "",
     polyline: "",
+    ispicked:"",
+    hospital:"",
   });
 
   return (
@@ -65,30 +76,33 @@ const HospitalList = (props) => {
         style={{ zIndex: 10 }}
       >
         <DropdownToggle
-          caret
           style={{
-            backgroundColor: "orangered",
+            backgroundColor: "black",
             color: "white",
-            top:"30px",
-            position:"absolute",
-            zIndex:"34"
+            borderRadius: "10px",
+            top: "49px",
+            position: "absolute",
+            zIndex: "34",
+            left: "8px",
+            padding: "4px",
+            outline: "none",
           }}
         >
-          {null}
+          <ListIcon fontSize="large" />
         </DropdownToggle>
         <DropdownMenu className="dropdown-menu" positionFixed={true}>
           <div>
-            <div style={{ textAlign: "center", color: "#FF024E" }}>
-              <p>
-                Active Rides List
+            <div style={{ textAlign: "center", color: "blue" }}>
+              <h4>
+                Active Rides
                 <span
                   className="dropdown-span"
-                  style={{ marginLeft: "10px", color: "FF024E" }}
+                  style={{ marginLeft: "39px", color: "black" }}
                   onClick={() => setOpen(!dropdownOpen)}
                 >
-                  X
+                  <HighlightOffSharpIcon />
                 </span>
-              </p>
+              </h4>
               <hr />
             </div>
             {rides.map((val, id) => {
@@ -100,18 +114,29 @@ const HospitalList = (props) => {
                         setCardOpen(true);
                         setHospital({
                           name: val.name,
+                          age: val.age,
                           pcase: val.pcase,
                           rideid: val.rideid,
-                          driverno: val.driverno,
+                          casePrior: val.casePrior,
+                          guardianNo: val.guardianNo,
+                          patientNo: val.patientNo,
                           _id: val._id,
                           polyline: val.polyline,
+                          ispicked: val.ispicked,
+                          hospital: val.hospital,
                         });
                       }}
                     >
-                      <div style={{ diplay: "flex", flexDirection: "row" }}>
+                      <div
+                        style={{
+                          diplay: "flex",
+                          color: "black",
+                          flexDirection: "row",
+                        }}
+                      >
                         <h6>{val.name}</h6>
                         <h6>{val.pcase}</h6>
-                        <h6>{val.driverno}</h6>
+                        <h6>{val.guardianNo}</h6>
                       </div>
                     </DropdownItem>
                   </div>
@@ -122,56 +147,81 @@ const HospitalList = (props) => {
           </div>
         </DropdownMenu>
       </ButtonDropdown>
-      <LatestTrackPage1 />
+      <Map _id={hospital._id} rideid={hospital.rideid} polyline={hospital.polyline} />
       {hospital.name !== "" && cardOpen ? (
         <div className="card">
+          <div className="hospital-details">
+            <h1 className="hospital-title">
+              Ride details :
+              <span
+                className="cardCross"
+                style={{ position: "absolute", right: "40px", color: "white" }}
+                onClick={() => setCardOpen(false)}
+              >
+                <HighlightOffSharpIcon fontSize="medium" />
+              </span>
+            </h1>
+          </div>
           <div className="card-body">
             <Container>
-              <Row>
-                <Col sm={{ size: "auto", offset: "auto" }}>
-                  <div className="hospital-details">
-                    <h4 className="hospital-title">
-                      Hospital Details:{" "}
-                      <span
-                        className="cardCross"
-                        style={{ position: "absolute", right: "40px" }}
-                        onClick={() => setCardOpen(false)}
-                      >
-                        <HighlightOffSharpIcon fontSize="large"/>
-                      </span>{" "}
-                    </h4>
-                  </div>
-                </Col>
-              </Row>
-              <Row xs="2" className="row">
-                <Col sm={{ size: "auto", offset: 2 }}>
+              <Row style={{ margin: "0 50px" }}>
+                {/* </Row>
+              <Row xs="2" className="row"> */}
+                <Col md={{ size: "auto", offset: 0 }}>
                   <div className="shadow">
-                    <h6 className="hospital-detail" style={{ padding: "10px" }}>
-                      {" "}
-                      {hospital.name}{" "}
+                    <h6 className="hospital-detail" style={{ padding: "12px" }}>
+                      Name: {hospital.name}
+                    </h6>
+                  </div>
+                </Col>{" "}
+                <Col md={{ size: "auto", offset: 0 }}>
+                  <div className="shadow">
+                    <h6 className="hospital-detail" style={{ padding: "12px" }}>
+                      Age: {hospital.age}
+                    </h6>
+                  </div>
+                </Col>{" "}
+                <Col md={{ size: "auto", offset: 0 }}>
+                  <div className="shadow">
+                    <h6 className="hospital-detail" style={{ padding: "12px" }}>
+                      Case: {hospital.pcase}
                     </h6>
                   </div>
                 </Col>
-                <Col sm={{ size: "auto", offset: 2 }}>
+                <Col md={{ size: "auto", offset: 0 }}>
                   <div className="shadow">
-                    <h6 className="hospital-detail" style={{ padding: "10px" }}>
-                      City : {hospital.driverno}{" "}
+                    <h6 className="hospital-detail" style={{ padding: "12px" }}>
+                      Case priority: {hospital.casePrior}
                     </h6>
                   </div>
                 </Col>
-              </Row>
-              <Row xs="2" className="row">
-                <Col sm={{ size: "auto", offset: 2 }}>
+                <Col md={{ size: "auto", offset: 0 }}>
                   <div className="shadow">
-                    <h6 className="hospital-detail" style={{ padding: "10px" }}>
-                      District : {hospital.age}{" "}
+                    <h6 className="hospital-detail" style={{ padding: "12px" }}>
+                      Guardian No: {hospital.guardianNo}
                     </h6>
                   </div>
                 </Col>
-                <Col sm={{ size: "auto", offset: 2 }}>
+                <Col md={{ size: "auto", offset: 0 }}>
                   <div className="shadow">
-                    <h6 className="hospital-detail" style={{ padding: "10px" }}>
-                      Phone: {hospital._id}
+                    <h6 className="hospital-detail" style={{ padding: "12px" }}>
+                      Patient No : {hospital.patientNo}
+                    </h6>
+                  </div>
+                </Col>
+                {/* </Row> */}
+                {/* <Row xs="2" className="row"> */}
+                <Col md={{ size: "auto", offset: 0 }}>
+                  <div className="shadow">
+                    <h6 className="hospital-detail" style={{ padding: "12px" }}>
+                      Hospital: {hospital.hospital}
+                    </h6>
+                  </div>
+                </Col>
+                <Col md={{ size: "auto", offset: 0 }}>
+                  <div className="shadow">
+                    <h6 className="hospital-detail" style={{ padding: "12px" }}>
+                      Ride id: {hospital.rideid}
                     </h6>
                   </div>
                 </Col>

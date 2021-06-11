@@ -2,10 +2,12 @@
 .navbar{
   background-image: linear-gradient(to right, #a116ef, #390999);
   position: relative;
-  padding: 5px;
+  padding: 3px;
   z-index: 999;
   border-radius: 0 0 30px 30px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  
+  
 }
 
 .navbar_logo{
@@ -20,7 +22,9 @@
 }
 
 nav{
-  float: right;
+
+ 
+  margin-left:auto !important;
   position: relative;
   max-width: 520px;
   width: 60vw;
@@ -51,11 +55,14 @@ nav a{
   margin: 25px;
   font-family:'Montserrat';
 }
+nav a:hover{
+  color:white;
+}
 
 nav .animation{
   position: absolute;
   height: 5px;
-  bottom: 10px;
+  bottom: 18px;
   z-index: 0;
   background: gold;
   border-radius: 8px;
@@ -205,6 +212,7 @@ nav .start-collaborate,a:nth-child(5):hover~.animation{
 
 
 @media  screen and (max-width:4000px) {
+ 
   nav a{
     font-size: 1.42rem;
   }
