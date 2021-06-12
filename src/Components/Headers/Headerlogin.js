@@ -66,7 +66,9 @@ function Header({ location }) {
             Home
           </NavLink>
 
-          <NavLink to="/login">Login</NavLink>
+          <NavLink style={{ visibility: "hidden" }}  to="/pastride">
+            Pastride
+          </NavLink>
 
           <NavLink
             to="/login"
@@ -75,14 +77,14 @@ function Header({ location }) {
               localStorage.removeItem("token");
               window.location.reload();
             }}
-            style={{ cursor: "pointer", visibility: "hidden" }}
-          ></NavLink>
+            style={{ cursor: "pointer" }}
+          >
+            Login
+          </NavLink>
           {/* <NavLink to="/signup">Signup</NavLink> */}
           {location === "home" && <div className="animation start-home" />}
-          {location === "login" && <div className="animation start-user" />}
-          {location === "logine" && (
-            <div className="animation start-hospital" />
-          )}
+          {location === "pastride" && <div className="animation start-user" />}
+          {location === "login" && <div className="animation start-hospital" />}
           {/* {location === "profile" && (
             <div className="animation start-aboutus" />
           )} */}
