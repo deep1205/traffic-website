@@ -24,24 +24,30 @@ const HomePageSideMap = (props) => {
 
   const [userLocation, setUserLocation] = useState([]);
   const [driverLocation, setDriverLocation] = useState([]);
+  
+
   usersocket = io(userendpoi);
   driversocket = io(driverendpoi);
 
   useEffect(() => {
-    if(props.rideid!=="")
-    {usersocket.emit("join", { roomid:props.rideid });
+    
+     usersocket.emit("join", { roomid:props.rideid });
     usersocket.on("message", (res) => {
       console.log("user", res);
     });
     usersocket.emit("sendUserLocation", { coordinates: userLocation });
     usersocket.on("userlocation", (coordinates) => {
       console.log("user", coordinates);
+      if(map)
+      {
+        map.setCenter({ lat: userLocation[0], lng: userLocation[1] });
+      }
     });
-  }}, [userLocation]);
+  }, [userLocation]);
 
   useEffect(() => {
-    if(props._id!=="")
-   { driversocket.emit("join", { roomid: props._id });
+    
+    driversocket.emit("join", { roomid: props._id });
     driversocket.on("message", (res) => {
       console.log("driver", res);
     });
@@ -49,13 +55,13 @@ const HomePageSideMap = (props) => {
       console.log("driver", coordinates);
       setDriverLocation(coordinates);
     });
-  }
+  
 }, [props._id]);
 
   useEffect(() => {
     var options = {
       maximumAge: 3000,
-      timeout: 50000,
+      timeout: 5000,
       enableHighAccuracy: true,
     };
     var watchID = navigator.geolocation.watchPosition(
@@ -90,6 +96,8 @@ const HomePageSideMap = (props) => {
       // map.setCenter({ lat: userLocation[0], lng: userLocation[1] });
       usermarker.setPosition({ lat: userLocation[0], lng: userLocation[1] });
       usermarker.setMap(map);
+      
+     
     }
   }, [userLocation]);
 
@@ -107,15 +115,18 @@ const HomePageSideMap = (props) => {
     }
   }, [driverLocation]);
   var initMap = () => {
+  ;
     map = new window.google.maps.Map(document.getElementById("map"), {
+      
       center: { lat: 26.2258858,lng: 78.2173995 },
-      zoom: 15,
+      zoom: 12,
       mapTypeControl:false,
       zoomControl: true,
-
+  
       zoomControlOptions: {
         position: window.google.maps.ControlPosition.LEFT_BOTTOM,
       },
+      
     });
 
     // infoWindow = new window.google.maps.InfoWindow();
@@ -221,6 +232,7 @@ const HomePageSideMap = (props) => {
           infoWindow.setContent("Location found.");
           infoWindow.open(map);
           markers.setPosition(pos);
+          map.panTo(pos);
           map.setCenter(pos);
           map.setZoom(16);
         },

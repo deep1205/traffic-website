@@ -30,6 +30,8 @@ function Header({ location }) {
         draggable
         margin-top="-50px"
         zIndex="9999999"
+        hideProgressBar
+        autoClose={1000}
       />
       <div className="navbar">
         <img className="navbar_logo" src={logo} alt="logo" />
@@ -64,9 +66,7 @@ function Header({ location }) {
             Home
           </NavLink>
 
-          <NavLink  to="/login">
-            Login
-          </NavLink>
+          <NavLink to="/login">Login</NavLink>
 
           <NavLink
             to="/login"
@@ -75,14 +75,14 @@ function Header({ location }) {
               localStorage.removeItem("token");
               window.location.reload();
             }}
-            style={{ cursor: "pointer",visibility:"hidden" }}
-          >
-          
-          </NavLink>
+            style={{ cursor: "pointer", visibility: "hidden" }}
+          ></NavLink>
           {/* <NavLink to="/signup">Signup</NavLink> */}
           {location === "home" && <div className="animation start-home" />}
           {location === "login" && <div className="animation start-user" />}
-          {location === "logine" && <div className="animation start-hospital" />}
+          {location === "logine" && (
+            <div className="animation start-hospital" />
+          )}
           {/* {location === "profile" && (
             <div className="animation start-aboutus" />
           )} */}

@@ -18,6 +18,8 @@ function Header({ location }) {
         draggable
         margin-top="-50px"
         zIndex="9999999"
+        hideProgressBar
+        autoClose={1000}
       />
       <div className="navbar">
         <img className="navbar_logo" src={logo} alt="logo" />
