@@ -50,12 +50,12 @@ function Header({ location }) {
         </div>
 
         <nav className={classna}>
-          <NavLink to="/home">Home</NavLink>
+          <a href="/home">Home</a>
 
-          <NavLink to="/pastride">PastRide</NavLink>
+          <a href="/pastride">PastRide</a>
 
-          <NavLink
-            to="/login"
+          <a
+            href="/login"
             onClick={() => {
               localStorage.removeItem("token");
               window.location.reload();
@@ -63,7 +63,7 @@ function Header({ location }) {
             style={{ cursor: "pointer" }}
           >
             Logout
-          </NavLink>
+          </a>
           {/* <NavLink to="/signup">Signup</NavLink> */}
           {location === "home" && <div className="animation start-home" />}
           {location === "pastride" && <div className="animation start-user" />}

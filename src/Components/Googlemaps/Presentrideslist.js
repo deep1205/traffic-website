@@ -135,6 +135,7 @@ const HospitalList = (props) => {
                           flexDirection: "row",
                         }}
                       >
+                      
                         <h6>{val.name}</h6>
                         <h6>{val.pcase}</h6>
                         <h6>{val.guardianNo}</h6>

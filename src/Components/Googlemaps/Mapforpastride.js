@@ -16,6 +16,40 @@ var map,
   usermarker;
 
 const HomePageSideMap = (props) => {
+  /*----------------------------current user location -------------------*/
+  const myLocation = () => {
+    const handleLocationError = (browserHasGeolocation, infoWindow, pos) => {
+      infoWindow.setPosition(pos);
+      infoWindow.setContent(
+        browserHasGeolocation
+          ? "Error: The Geolocation service failed."
+          : "Error: Your browser doesn't support geolocation."
+      );
+      infoWindow.open(map);
+    };
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          };
+          map.setCenter(pos);
+          map.panTo(pos);
+        },
+        () => {
+          handleLocationError(true, infoWindow, map.getCenter());
+        }
+      );
+    } else {
+      // Browser doesn't support Geolocation
+      handleLocationError(false, infoWindow, map.getCenter());
+    }
+  };
+
+  /*----------------------------current user location -------------------*/
+ 
   // console.log(props.rideid);
   // console.log(props._id);
   // const userendpoi = "https://server.prioritypulse.co.in/usertrack";
@@ -108,8 +142,8 @@ const HomePageSideMap = (props) => {
   // }, [driverLocation]);
   var initMap = () => {
     map = new window.google.maps.Map(document.getElementById("map"), {
-      center: { lat: 26.2258858, lng: 78.2173995 },
-      zoom: 14,
+      // center: { lat: 26.2258858, lng: 78.2173995 },
+      zoom: 12,
       mapTypeControl: false,
 
       zoomControl: true,
@@ -128,7 +162,7 @@ const HomePageSideMap = (props) => {
     drivermarker = new window.google.maps.Marker({
       icon: drivericon,
     });
-
+    myLocation();
     if (props.polyline !== undefined) {
       poly = decodePolyline(props.polyline)[1];
 
@@ -200,40 +234,7 @@ const HomePageSideMap = (props) => {
   };
 
   //geolocation start
-  const myLocation = (e) => {
-    const handleLocationError = (browserHasGeolocation, infoWindow, pos) => {
-      infoWindow.setPosition(pos);
-      infoWindow.setContent(
-        browserHasGeolocation
-          ? "Error: The Geolocation service failed."
-          : "Error: Your browser doesn't support geolocation."
-      );
-      infoWindow.open(map);
-    };
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const pos = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-          };
-          infoWindow.setPosition(pos);
-
-          infoWindow.setContent("Location found.");
-          infoWindow.open(map);
-          markers.setPosition(pos);
-          map.setCenter(pos);
-          map.setZoom(13);
-        },
-        () => {
-          handleLocationError(true, infoWindow, map.getCenter());
-        }
-      );
-    } else {
-      // Browser doesn't support Geolocation
-      handleLocationError(false, infoWindow, map.getCenter());
-    }
-  };
+  
   //geolocation end
 
   return (
