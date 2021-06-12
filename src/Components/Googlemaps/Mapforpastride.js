@@ -18,58 +18,58 @@ var map,
 const HomePageSideMap = (props) => {
   // console.log(props.rideid);
   // console.log(props._id);
-  const userendpoi = "https://server.prioritypulse.co.in/usertrack";
-  const driverendpoi = "https://server.prioritypulse.co.in/drivertrack";
+  // const userendpoi = "https://server.prioritypulse.co.in/usertrack";
+  // const driverendpoi = "https://server.prioritypulse.co.in/drivertrack";
 
-  const [userLocation, setUserLocation] = useState([]);
-  const [driverLocation, setDriverLocation] = useState([]);
-  usersocket = io(userendpoi);
-  driversocket = io(driverendpoi);
+  // const [userLocation, setUserLocation] = useState([]);
+  // const [driverLocation, setDriverLocation] = useState([]);
+  // usersocket = io(userendpoi);
+  // driversocket = io(driverendpoi);
 
-  useEffect(() => {
-    if (0) {
-      usersocket.emit("join", { roomid: props.rideid });
-      usersocket.on("message", (res) => {
-        console.log("user", res);
-      });
-      usersocket.emit("sendUserLocation", { coordinates: userLocation });
-      usersocket.on("userlocation", (coordinates) => {
-        console.log("user", coordinates);
-      });
-    }
-  }, [userLocation]);
+  // useEffect(() => {
+  //   if (0) {
+  //     usersocket.emit("join", { roomid: props.rideid });
+  //     usersocket.on("message", (res) => {
+  //       console.log("user", res);
+  //     });
+  //     usersocket.emit("sendUserLocation", { coordinates: userLocation });
+  //     usersocket.on("userlocation", (coordinates) => {
+  //       console.log("user", coordinates);
+  //     });
+  //   }
+  // }, [userLocation]);
 
-  useEffect(() => {
-    if (0) {
-      driversocket.emit("join", { roomid: props._id });
-      driversocket.on("message", (res) => {
-        console.log("driver", res);
-      });
-      driversocket.on("driverlocation", (coordinates) => {
-        console.log("driver", coordinates);
-        setDriverLocation(coordinates);
-      });
-    }
-  }, [props._id]);
+  // useEffect(() => {
+  //   if (0) {
+  //     driversocket.emit("join", { roomid: props._id });
+  //     driversocket.on("message", (res) => {
+  //       console.log("driver", res);
+  //     });
+  //     driversocket.on("driverlocation", (coordinates) => {
+  //       console.log("driver", coordinates);
+  //       setDriverLocation(coordinates);
+  //     });
+  //   }
+  // }, [props._id]);
 
-  useEffect(() => {
-    var options = {
-      maximumAge: 3000,
-      timeout: 50000,
-      enableHighAccuracy: true,
-    };
-    var watchID = navigator.geolocation.watchPosition(
-      onSuccess,
-      onError,
-      options
-    );
-  }, []);
-  function onSuccess(pos) {
-    setUserLocation([pos.coords.latitude, pos.coords.longitude]);
-  }
-  function onError(error) {
-    alert("code: " + error.code + "\n" + "message" + error.message + "\n");
-  }
+  // useEffect(() => {
+  //   var options = {
+  //     maximumAge: 3000,
+  //     timeout: 50000,
+  //     enableHighAccuracy: true,
+  //   };
+  //   var watchID = navigator.geolocation.watchPosition(
+  //     onSuccess,
+  //     onError,
+  //     options
+  //   );
+  // }, []);
+  // function onSuccess(pos) {
+  //   setUserLocation([pos.coords.latitude, pos.coords.longitude]);
+  // }
+  // function onError(error) {
+  //   alert("code: " + error.code + "\n" + "message" + error.message + "\n");
+  // }
 
   useEffect(() => {
     renderMap();
@@ -81,31 +81,31 @@ const HomePageSideMap = (props) => {
     );
     window.initMap = initMap;
   };
-  useEffect(() => {
-    if (map && userLocation.length > 0) {
-      // infoWindow = new window.google.maps.InfoWindow();
-      // infoWindow.setPosition({ lat: userLocation[0], lng: userLocation[1] });
-      // infoWindow.setContent("You are here");
-      // infoWindow.open(map);
-      // map.setCenter({ lat: userLocation[0], lng: userLocation[1] });
-      usermarker.setPosition({ lat: userLocation[0], lng: userLocation[1] });
-      usermarker.setMap(map);
-    }
-  }, [userLocation]);
+  // useEffect(() => {
+  //   if (map && userLocation.length > 0) {
+  //     // infoWindow = new window.google.maps.InfoWindow();
+  //     // infoWindow.setPosition({ lat: userLocation[0], lng: userLocation[1] });
+  //     // infoWindow.setContent("You are here");
+  //     // infoWindow.open(map);
+  //     // map.setCenter({ lat: userLocation[0], lng: userLocation[1] });
+  //     usermarker.setPosition({ lat: userLocation[0], lng: userLocation[1] });
+  //     usermarker.setMap(map);
+  //   }
+  // }, [userLocation]);
 
-  useEffect(() => {
-    if (map && driverLocation.length > 0) {
-      // driverWindow=new window.google.maps.InfoWindow()
-      // driverWindow.setPosition({lat:driverLocation[0],lng:driverLocation[1]})
-      // driverWindow.setContent('Driver is here')
-      // driverWindow.open(map)
-      drivermarker.setPosition({
-        lat: driverLocation[0],
-        lng: driverLocation[1],
-      });
-      drivermarker.setMap(map);
-    }
-  }, [driverLocation]);
+  // useEffect(() => {
+  //   if (map && driverLocation.length > 0) {
+  //     // driverWindow=new window.google.maps.InfoWindow()
+  //     // driverWindow.setPosition({lat:driverLocation[0],lng:driverLocation[1]})
+  //     // driverWindow.setContent('Driver is here')
+  //     // driverWindow.open(map)
+  //     drivermarker.setPosition({
+  //       lat: driverLocation[0],
+  //       lng: driverLocation[1],
+  //     });
+  //     drivermarker.setMap(map);
+  //   }
+  // }, [driverLocation]);
   var initMap = () => {
     map = new window.google.maps.Map(document.getElementById("map"), {
       center: { lat: 26.2258858, lng: 78.2173995 },
@@ -223,7 +223,7 @@ const HomePageSideMap = (props) => {
           infoWindow.open(map);
           markers.setPosition(pos);
           map.setCenter(pos);
-          map.setZoom(16);
+          map.setZoom(13);
         },
         () => {
           handleLocationError(true, infoWindow, map.getCenter());
