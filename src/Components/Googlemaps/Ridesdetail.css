@@ -112,7 +112,7 @@ hr {
 }
   @media screen and (max-width: 1490px) {
     .carddetails {
-      top: 510px;
+      top: 490px;
 	  margin:0 110px;
 	  width:84vw;
     }
@@ -146,7 +146,7 @@ hr {
 }
 @media screen and (max-width: 1240px) {
     .carddetails {
-      top: 540px;
+      top: 500px;
 	  margin:0 120px;
 	  width:81vw;
     }
