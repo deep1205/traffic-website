@@ -156,6 +156,9 @@ nav .start-collaborate,a:nth-child(5):hover~.animation{
 
 
 @media screen and (max-width: 1062px){
+  .myiconposition{
+    margin-left: 19vw;
+  }
   .menu-toggle{
     display:block;
     width: 40px;
@@ -260,8 +263,14 @@ nav .start-collaborate,a:nth-child(5):hover~.animation{
     font-size: 1.1rem;
   }
     .navbar_logo{
-    width:11rem;
+    width:10rem;
     line-height: 1rem;
   }
   
+}
+
+@media screen and (max-width: 577px){
+  .myiconposition{
+    margin-left: 7vw;
+  }
 }

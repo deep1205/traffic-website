@@ -36,20 +36,26 @@ function Header({ location }) {
             }
           }}
         >
-          {!icons ? (
-            <MenuIcon style={{ fontSize: "30px", color: "white" }} />
-          ) : (
-            <ClearIcon style={{ fontSize: "30px", color: "white" }} />
-          )}
-        </div>
-        <nav className={classna}>
-        
-          <NavLink to="/home">Home</NavLink>
           
+            {!icons ? (
+              <div className="myiconposition">
+              <MenuIcon style={{ fontSize: "30px", color: "white" }} />
+              </div>
+            ) : (
+               
+              <ClearIcon style={{ fontSize: "30px", color: "white" }} />
+             
+            )}
+
+        </div>
+
+        <nav className={classna}>
+          <NavLink to="/home">Home</NavLink>
 
           <NavLink to="/pastride">PastRide</NavLink>
 
-          <NavLink to="/login"
+          <NavLink
+            to="/login"
             onClick={() => {
               localStorage.removeItem("token");
               window.location.reload();

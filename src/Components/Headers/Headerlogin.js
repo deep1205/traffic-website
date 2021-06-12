@@ -39,7 +39,9 @@ function Header({ location }) {
           }}
         >
           {!icons ? (
+              <div className="myiconposition">
             <MenuIcon style={{ fontSize: "30px", color: "white" }} />
+            </div>
           ) : (
             <ClearIcon style={{ fontSize: "30px", color: "white" }} />
           )}
