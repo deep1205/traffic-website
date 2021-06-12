@@ -45,6 +45,7 @@ function Header({ location }) {
                
               <ClearIcon style={{ fontSize: "30px", color: "white" }} />
              
+              
             )}
 
         </div>
