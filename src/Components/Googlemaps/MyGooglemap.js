@@ -143,12 +143,14 @@ const HomePageSideMap = (props) => {
   var initMap = () => {
     map = new window.google.maps.Map(document.getElementById("map"), {
       // center: { lat: 26.2258858, lng: 78.2173995 },
-      zoom: 12,
+      zoom: 13,
+      streetViewControl: true,
       mapTypeControl: false,
+      zoomControlOptions: true,
       zoomControl: true,
 
       zoomControlOptions: {
-        position: window.google.maps.ControlPosition.LEFT_BOTTOM,
+        position: window.google.maps.ControlPosition.RIGHT_BOTTOM,
       },
     });
     /*---------------------------icons used in map ----------------*/
@@ -227,9 +229,9 @@ const HomePageSideMap = (props) => {
           bounds.extend(place.geometry.location);
         }
 
-        markers.setPosition(place.geometry.location);
-        map.panTo(place.geometry.location);
-        map.setZoom(15);
+        // markers.setPosition(place.geometry.location);
+        // map.panTo(place.geometry.location);
+        // map.setZoom(15);
       });
       map.fitBounds(bounds);
     });
