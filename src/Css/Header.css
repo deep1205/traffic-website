@@ -172,8 +172,8 @@ nav .start-collaborate,a:nth-child(5):hover~.animation{
    nav.active{
     
     display: block;
-    width: 50%;
-    margin-right:167px;
+    width: 100%;
+    margin:0px 0px;
     
     align-items: center;
     text-align: center;
