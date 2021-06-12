@@ -145,7 +145,7 @@ const Pastrides = (props) => {
       </ButtonDropdown>
       <Map />
       {hospital.name !== "" && cardOpen ? (
-        <div className="card">
+        <div className="carddetails">
           <div className="hospital-details">
             <h1 className="hospital-title" style={{ fontSize: "2rem" }}>
               Ride details :

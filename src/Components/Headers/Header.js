@@ -36,18 +36,15 @@ function Header({ location }) {
             }
           }}
         >
-          
-            {!icons ? (
-              <div className="myiconposition">
+          {!icons ? (
+            <div className="myiconposition">
               <MenuIcon style={{ fontSize: "30px", color: "white" }} />
-              </div>
-            ) : (
-               
+            </div>
+          ) : (
+            <div className="mycloseiconposition">
               <ClearIcon style={{ fontSize: "30px", color: "white" }} />
-             
-              
-            )}
-
+            </div>
+          )}
         </div>
 
         <nav className={classna}>

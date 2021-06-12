@@ -1,4 +1,4 @@
-.card {
+.carddetails{
     background-image: linear-gradient(to right, #C504B6, #4B038E);
     opacity: 0.89;
     border-radius: 30px;
@@ -60,7 +60,7 @@ hr {
 
 
 @media screen and (max-width: 2000px) {
-    .card {
+    .carddetails {
       top: 500px;
 	  
 	  margin:0 170px;
@@ -87,7 +87,7 @@ hr {
 
 
   @media screen and (max-width: 1800px) {
-    .card {
+    .carddetails {
       top: 530px;
 	  
 	  margin:0 140px;
@@ -99,7 +99,7 @@ hr {
 	
 }
 @media screen and (max-width: 1600px) {
-    .card {
+    .carddetails {
       top: 560px;
 	  
 	  margin:0 150px;
@@ -111,7 +111,7 @@ hr {
 	
 }
   @media screen and (max-width: 1490px) {
-    .card {
+    .carddetails {
       top: 510px;
 	  margin:0 110px;
 	  width:84vw;
@@ -128,7 +128,7 @@ hr {
 	}
 }
 @media screen and (max-width: 1365px) {
-     .card {
+     .carddetails {
       top: 510px;
 	  margin:0 90px;
 	  width:87vw;
@@ -145,7 +145,7 @@ hr {
 	}
 }
 @media screen and (max-width: 1240px) {
-    .card {
+    .carddetails {
       top: 540px;
 	  margin:0 120px;
 	  width:81vw;
@@ -162,7 +162,7 @@ hr {
 	}
 }
   @media screen and (max-width: 1120px) {
-    .card {
+    .carddetails{
       top: 530px;
 	  margin:0 100px;
 	  
@@ -183,7 +183,7 @@ hr {
 	}
   }
    @media screen and (max-width: 1075px) {
-    .card {
+    .carddetails {
       top: 510px;
 	  margin:0 130px;
 	  width:80vw;
@@ -206,7 +206,7 @@ hr {
 
 
     @media screen and (max-width: 1020px) {
-    .card {
+    .carddetails{
       top: 300px;
 	  margin:0 250px;
 	  width:50vw;
@@ -230,7 +230,7 @@ hr {
 	}
   }
     @media screen and (max-width: 895px) {
-    .card {
+    .carddetails{
       top: 340px;
 	  width:60vw;
 	  margin: 0 160px;
@@ -254,7 +254,7 @@ hr {
 	}
   }
   @media screen and (max-width: 860px) {
-    .card {
+    .carddetails{
       top: 310px;
     }
 	.shadow {
@@ -274,7 +274,7 @@ hr {
   }
 
     @media screen and (max-width: 740px) {
-    .card {
+    .carddetails {
       top: 290px;
 	  width:490px;
 	  margin:0 100px;
@@ -297,7 +297,7 @@ hr {
 
 
      @media screen and (max-width: 615px) {
-    .card {
+    .carddetails {
       top: 290px;
 	  width:480px;
 	  margin:0 60px;
@@ -332,7 +332,7 @@ hr {
 		color:white;
 	     font-size: 1.1rem;
 	}
-	.card {
+	.carddetails {
 		top: 290px;
 		margin:0 30px;
 		width:90vw;
@@ -347,7 +347,7 @@ hr {
 	}
   }
      @media screen and (max-width: 460px) {
-    .card {
+    .carddetails {
       top: 290px;
 	  width:410px;
 	  margin:0 30px;
@@ -375,7 +375,7 @@ hr {
 
   
      @media screen and (max-width: 400px) {
-    .card {
+    .carddetails {
       top: 290px;
 	  width:100vw;
 	  margin:0 0px;

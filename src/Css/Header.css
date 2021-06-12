@@ -169,6 +169,17 @@ nav .start-collaborate,a:nth-child(5):hover~.animation{
     font-size: 30px;
     transition: all 1s ease;
   }
+   nav.active{
+    
+    display: block;
+    width: 50%;
+    margin-right:167px;
+    
+    align-items: center;
+    text-align: center;
+    animation: fadeInAnimation 1s;
+  }
+  
   nav{
     display: none;
   }
@@ -191,14 +202,7 @@ nav .start-collaborate,a:nth-child(5):hover~.animation{
   nav.active div{
     display: none;
   }
-  nav.active{
-    display: block;
-    width: 100%;
-    margin: 0;
-    align-items: center;
-    text-align: center;
-    animation: fadeInAnimation 1s;
-  }
+  
   nav.active a, nav.mid a{
     padding: 10px 0;
     margin: 0 auto;
@@ -272,4 +276,67 @@ nav .start-collaborate,a:nth-child(5):hover~.animation{
     position: absolute;
     right:50px;
   }
+   .mycloseiconposition{
+    
+    margin-left: auto;
+  }
 }
+/* 
+@media screen and(max-width:860px) {
+   
+  .menu-toggle{
+    display:block;
+    width: 40px;
+    height: 40px;
+    margin: 40px 20px;
+    float: right ;
+    cursor: pointer;
+    text-align: center;
+    font-size: 30px;
+    transition: all 1s ease;
+  }
+   nav.active{
+    
+    display: block;
+    width: 80%;
+    margin-right:117px;
+    align-items: center;
+    text-align: center;
+    animation: fadeInAnimation 1s;
+  }
+  
+  nav{
+    display: none;
+  }
+  .navbar_logo{
+    min-width: 250px;
+    width: 70vw;
+    max-width: 300px;
+  }
+  nav.mid{
+    display: block;
+    width: 100%;
+    margin: 0;
+    align-items: center;
+    text-align: center;
+    animation: fadeOutAnimation 1s;
+  }
+  nav.mid div{
+    display: none;
+  }
+  nav.active div{
+    display: none;
+  }
+  
+  nav.active a, nav.mid a{
+    padding: 10px 0;
+    margin: 0 auto;
+  }
+  nav.active a:hover{
+    border-bottom: solid gold 5px;
+    border-radius: 5px;
+    transition: all 0.5s ease;
+  }
+  
+  
+} */
