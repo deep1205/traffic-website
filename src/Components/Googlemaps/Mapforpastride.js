@@ -27,27 +27,27 @@ const HomePageSideMap = (props) => {
 
   useEffect(() => {
     if (props.rideid !== "") {
-      usersocket.emit("join", { roomid: props.rideid });
-      usersocket.on("message", (res) => {
-        console.log("user", res);
-      });
-      usersocket.emit("sendUserLocation", { coordinates: userLocation });
-      usersocket.on("userlocation", (coordinates) => {
-        console.log("user", coordinates);
-      });
+      // usersocket.emit("join", { roomid: props.rideid });
+      // usersocket.on("message", (res) => {
+      //   console.log("user", res);
+      // });
+      // usersocket.emit("sendUserLocation", { coordinates: userLocation });
+      // usersocket.on("userlocation", (coordinates) => {
+      //   console.log("user", coordinates);
+      // });
     }
   }, [props.rideid]);
 
   useEffect(() => {
     if (props._id !== "") {
-      driversocket.emit("join", { roomid: props._id });
-      driversocket.on("message", (res) => {
-        console.log("driver", res);
-      });
-      driversocket.on("driverlocation", (coordinates) => {
-        console.log("driver", coordinates);
-        setDriverLocation(coordinates);
-      });
+      // driversocket.emit("join", { roomid: props._id });
+      // driversocket.on("message", (res) => {
+      //   console.log("driver", res);
+      // });
+      // driversocket.on("driverlocation", (coordinates) => {
+      //   console.log("driver", coordinates);
+      //   setDriverLocation(coordinates);
+      // });
     }
   }, [props._id]);
 
@@ -127,7 +127,7 @@ const HomePageSideMap = (props) => {
       // usermarker.setPosition({ lat: userLocation[0], lng: userLocation[1] });
       // usermarker.setMap(map);
     }
-  }, [props.rideid]);
+  }, [props.pickupcoordinates]);
 
   useEffect(() => {
     if (map && driverLocation.length > 0) {

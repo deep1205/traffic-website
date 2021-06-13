@@ -16,6 +16,16 @@ var map,
   usermarker;
 
 const HomePageSideMap = (props) => {
+    useEffect(() => {
+      if (map && props.pickupcoordinates.length > 0) {
+        console.log(`PickupCoordinates:[${props.pickupcoordinates}]`);
+        map.setCenter({
+          lat: props.pickupcoordinates[0],
+          lng: props.pickupcoordinates[1],
+        });
+      }
+    }, [props.pickupcoordinates]);
+  
   const userendpoi = "https://server.prioritypulse.co.in/usertrack";
   const driverendpoi = "https://server.prioritypulse.co.in/drivertrack";
 
@@ -31,13 +41,14 @@ const HomePageSideMap = (props) => {
       usersocket.on("message", (res) => {
         console.log("user", res);
       });
-      usersocket.emit("sendUserLocation", { coordinates: userLocation });
+      // usersocket.emit("sendUserLocation", { coordinates: userLocation });
       usersocket.on("userlocation", (coordinates) => {
         console.log("user", coordinates);
+        setUserLocation(coordinates);
       });
     }
   }, [props.rideid]);
-
+console.log(userLocation);
   useEffect(() => {
     if (props._id !== "") {
       driversocket.emit("join", { roomid: props._id });
@@ -51,26 +62,26 @@ const HomePageSideMap = (props) => {
     }
   }, [props._id]);
 
-  useEffect(() => {
-    var options = {
-      maximumAge: 10000,
-      timeout: 10000,
-      enableHighAccuracy: true,
-    };
-    var watchID = navigator.geolocation.watchPosition(
-      onSuccess,
-      onError,
-      options
-    );
-  }, []);
-  function onSuccess(pos) {
-    setUserLocation([pos.coords.latitude, pos.coords.longitude]);
-  }
-  function onError(error) {
-    alert("code: " + error.code + "\n" + "message" + error.message + "\n");
-  }
+  // useEffect(() => {
+  //   var options = {
+  //     maximumAge: 10000,
+  //     timeout: 10000,
+  //     enableHighAccuracy: true,
+  //   };
+  //   var watchID = navigator.geolocation.watchPosition(
+  //     onSuccess,
+  //     onError,
+  //     options
+  //   );
+  // }, []);
+  // function onSuccess(pos) {
+  //   setUserLocation([pos.coords.latitude, pos.coords.longitude]);
+  // }
+  // function onError(error) {
+  //   alert("code: " + error.code + "\n" + "message" + error.message + "\n");
+  // }
 
-  /*----------------------------current user location -------------------*/
+  /*----------------------------current user location initially when page loads -------------------*/
   const myLocation = () => {
     const handleLocationError = (browserHasGeolocation, infoWindow, pos) => {
       infoWindow.setPosition(pos);
@@ -90,6 +101,7 @@ const HomePageSideMap = (props) => {
             lng: position.coords.longitude,
           };
           map.setCenter(pos);
+          ;
         },
         () => {
           handleLocationError(true, infoWindow, map.getCenter());
@@ -101,7 +113,7 @@ const HomePageSideMap = (props) => {
     }
   };
 
-  /*----------------------------current user location -------------------*/
+  /*----------------------------current user location initially when page loads -------------------*/
   useEffect(() => {
     renderMap();
   }, []);
@@ -119,15 +131,18 @@ const HomePageSideMap = (props) => {
       // infoWindow.setContent("You are here");
       // infoWindow.open(map);
     
-      console.log(`PickupCoordinates:[${props.pickupcoordinates}]`);
       map.setCenter({
-        lat: props.pickupcoordinates[0],
-        lng: props.pickupcoordinates[1],
-      });
-      usermarker.setPosition({ lat:props.pickupcoordinates[0], lng:props.pickupcoordinates[1] });
+        lat:userLocation[0],
+        lng:userLocation[1],
+      })
+      usermarker.setPosition({
+        lat:userLocation[0],
+        lng:userLocation[1],
+      })
+      // usermarker.setPosition({ lat:props.pickupcoordinates[0], lng:props.pickupcoordinates[1] });
       usermarker.setMap(map);
     }
-  }, [props.rideid]);
+  }, [userLocation]);
 
   useEffect(() => {
     if (map && driverLocation.length > 0) {
@@ -141,7 +156,7 @@ const HomePageSideMap = (props) => {
       });
       drivermarker.setMap(map);
     }
-  }, [props._id]);
+  }, [driverLocation]);
   var initMap = () => {
     map = new window.google.maps.Map(document.getElementById("map"), {
       // center: { lat: 26.2258858, lng: 78.2173995 },
@@ -158,24 +173,29 @@ const HomePageSideMap = (props) => {
     /*---------------------------icons used in map ----------------*/
     var myusericon = {
       url: usericon, // url
-      scaledSize: new window.google.maps.Size(70, 70), // scaled size
+      scaledSize: new window.google.maps.Size(60, 60), // scaled size
       origin: new window.google.maps.Point(0, 0), // origin
       anchor: new window.google.maps.Point(0, 0), // anchor
     };
     var mydrivericon = {
       url: drivericon, // url
-      scaledSize: new window.google.maps.Size(70, 70), // scaled size
+      scaledSize: new window.google.maps.Size(60, 60), // scaled size
       origin: new window.google.maps.Point(0, 0), // origin
       anchor: new window.google.maps.Point(0, 0), // anchor
     };
 
     /*---------------------------icons used in map ----------------*/
-    usermarker = new window.google.maps.Marker({});
+    usermarker = new window.google.maps.Marker({
+      icon: myusericon,
+      animation: window.google.maps.Animation.BOUNCE,
+    
+    });
     drivermarker = new window.google.maps.Marker({
       icon: mydrivericon,
     });
     myLocation();
-
+      
+  
     // infoWindow = new window.google.maps.InfoWindow();
     // usermarker=new window.google.maps.Marker()
     // drivermarker=new window.google.maps.Marker()
