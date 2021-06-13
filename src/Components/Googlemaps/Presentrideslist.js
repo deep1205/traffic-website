@@ -127,7 +127,7 @@ const HospitalList = (props) => {
                           polyline: val.polyline,
                           ispicked: val.ispicked,
                           hospital: val.hospital,
-                          pickupcoordinates:val.pickupcoordinates
+                          pickupcoordinates: val.pickupcoordinates,
                         });
                       }}
                     >
@@ -138,7 +138,6 @@ const HospitalList = (props) => {
                           flexDirection: "row",
                         }}
                       >
-                      
                         <h6>{val.name}</h6>
                         <h6>{val.pcase}</h6>
                         <h6>{val.guardianNo}</h6>
@@ -168,7 +167,11 @@ const HospitalList = (props) => {
                 style={{ position: "absolute", right: "40px", color: "white" }}
                 onClick={() => setCardOpen(false)}
               >
-                <Icon glyph="view-close-small" size={38} />
+                
+                  
+                  <Icon glyph="view-close-small" size={38} />
+              
+
                 {/* <HighlightOffSharpIcon fontSize="medium" /> */}
               </span>
             </h1>

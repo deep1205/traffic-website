@@ -77,24 +77,24 @@ nav .start-home,a:nth-child(1):hover~.animation{
   left: 28px;
 }
 a:nth-child(2){
-  width: 100px;
+  width: 30px;
 }
 nav .start-user,a:nth-child(2):hover~.animation{
   width: 108px;
-  left: 171px;
+  left: 134px;
 }
 a:nth-child(3){
   width: 100px;
 }
 nav .start-hospital,a:nth-child(3):hover~.animation{
   width: 100px;
-  left: 323px;
+  left: 259px;
 }
 a:nth-child(4){
   width: 100px;
 }
 nav .start-aboutus,a:nth-child(4):hover~.animation{
-  width: 90px;
+  width: 30px;
   left: 425px;
 }
 a:nth-child(5){
@@ -102,7 +102,7 @@ a:nth-child(5){
 }
 nav .start-collaborate,a:nth-child(5):hover~.animation{
   width: 90px;
-  left: 530px;
+  left: 410px;
 }
 
 

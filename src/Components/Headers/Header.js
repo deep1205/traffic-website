@@ -51,6 +51,7 @@ function Header({ location }) {
 
         <nav className={classna}>
           <a href="/home">Home</a>
+          
 
           <a href="/pastride">PastRide</a>
 
