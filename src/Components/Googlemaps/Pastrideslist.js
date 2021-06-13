@@ -43,6 +43,7 @@ const Pastrides = (props) => {
             hospital: data.hospital,
             ispicked: data.isPicked,
             polyline: data.patientPolyline,
+            pickupcoordinates: data["pickUplocation"].coordinates,
           };
         });
         setdata(arr);
@@ -61,6 +62,7 @@ const Pastrides = (props) => {
     polyline: "",
     ispicked: "",
     hospital: "",
+    pickupcoordinates:[],
   });
 
   return (
@@ -120,6 +122,7 @@ const Pastrides = (props) => {
                           polyline: val.polyline,
                           ispicked: val.ispicked,
                           hospital: val.hospital,
+                          pickupcoordinates:val.pickupcoordinates,
                         });
                       }}
                     >
@@ -143,7 +146,13 @@ const Pastrides = (props) => {
           </div>
         </DropdownMenu>
       </ButtonDropdown>
-      <Map />
+      <Map 
+        _id={hospital._id}
+        rideid={hospital.rideid}
+        polyline={hospital.polyline}
+        pickupcoordinates={hospital.pickupcoordinates}
+
+      />
       {hospital.name !== "" && cardOpen ? (
         <div className="carddetails">
           <div className="hospital-details">
