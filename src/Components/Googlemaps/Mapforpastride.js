@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import io from "socket.io-client";
 import "../../Css/Map.css";
+import hospitalicon from "../../images/hospitalicon.png";
 import drivericon from "../../images/drivericon.png";
 import usericon from "../../images/usericon.png";
 const decodePolyline = require("decode-google-map-polyline");
@@ -16,6 +17,57 @@ var map,
   usermarker;
 
 const HomePageSideMap = (props) => {
+  useEffect(() => {
+    if (map && props.pickupcoordinates.length > 0) {
+      console.log(`PickupCoordinates:[${props.pickupcoordinates}]`);
+      map.setCenter({
+        lat: props.pickupcoordinates[0],
+        lng: props.pickupcoordinates[1],
+      });
+    }
+
+    if (props.polyline !== undefined && map) {
+      poly = decodePolyline(props.polyline);
+      console.log(poly);
+      const hospitallocation = [poly[0].lat, poly[0].lng];
+      const patientlocation = [
+        poly[poly.length - 1].lat,
+        poly[poly.length - 1].lng,
+      ];
+      console.log(
+        `Hospital location getting from polyline: [${hospitallocation}]`
+      );
+      console.log(
+        `Patient location getting from polyline : [${patientlocation}]`
+      );
+
+      const driverPath = new window.google.maps.Polyline({
+        path: poly,
+        geodesic: true,
+        strokeColor: "#FF0000",
+        strokeOpacity: 2.0,
+        strokeWeight: 3,
+      });
+      driverPath.setMap(map);
+        const patientmarker = new window.google.maps.Marker({
+          position: { lat: patientlocation[0], lng: patientlocation[1] },
+          icon: {
+            url: usericon,
+            scaledSize: new window.google.maps.Size(60, 60),
+          },
+        });
+        patientmarker.setMap(map);
+      const hospitalmarker = new window.google.maps.Marker({
+        position: { lat: hospitallocation[0], lng: hospitallocation[1] },
+        icon: {
+          url: hospitalicon,
+          scaledSize: new window.google.maps.Size(60, 60),
+        },
+      });
+      hospitalmarker.setMap(map);
+    }
+  }, [props.pickupcoordinates && props.polyline]);
+
   const userendpoi = "https://server.prioritypulse.co.in/usertrack";
   const driverendpoi = "https://server.prioritypulse.co.in/drivertrack";
 
@@ -25,52 +77,53 @@ const HomePageSideMap = (props) => {
   usersocket = io(userendpoi);
   driversocket = io(driverendpoi);
 
-  useEffect(() => {
-    if (props.rideid !== "") {
-      // usersocket.emit("join", { roomid: props.rideid });
-      // usersocket.on("message", (res) => {
-      //   console.log("user", res);
-      // });
-      // usersocket.emit("sendUserLocation", { coordinates: userLocation });
-      // usersocket.on("userlocation", (coordinates) => {
-      //   console.log("user", coordinates);
-      // });
-    }
-  }, [props.rideid]);
+  // useEffect(() => {
+  //   if (props.rideid !== "") {
+  //     usersocket.emit("join", { roomid: props.rideid });
+  //     usersocket.on("message", (res) => {
+  //       console.log("user", res);
+  //     });
+  //     // usersocket.emit("sendUserLocation", { coordinates: userLocation });
+  //     usersocket.on("userlocation", (coordinates) => {
+  //       console.log("user", coordinates);
+  //       setUserLocation(coordinates);
+  //     });
+  //   }
+  // }, [props.rideid]);
 
-  useEffect(() => {
-    if (props._id !== "") {
-      // driversocket.emit("join", { roomid: props._id });
-      // driversocket.on("message", (res) => {
-      //   console.log("driver", res);
-      // });
-      // driversocket.on("driverlocation", (coordinates) => {
-      //   console.log("driver", coordinates);
-      //   setDriverLocation(coordinates);
-      // });
-    }
-  }, [props._id]);
+  // useEffect(() => {
+  //   if (props._id !== "") {
+  //     driversocket.emit("join", { roomid: props._id });
+  //     driversocket.on("message", (res) => {
+  //       console.log("driver", res);
+  //     });
+  //     driversocket.on("driverlocation", (coordinates) => {
+  //       console.log("driver", coordinates);
+  //       setDriverLocation(coordinates);
+  //     });
+  //   }
+  // }, [props._id]);
 
-  useEffect(() => {
-    var options = {
-      maximumAge: 10000,
-      timeout: 10000,
-      enableHighAccuracy: true,
-    };
-    var watchID = navigator.geolocation.watchPosition(
-      onSuccess,
-      onError,
-      options
-    );
-  }, []);
-  function onSuccess(pos) {
-    setUserLocation([pos.coords.latitude, pos.coords.longitude]);
-  }
-  function onError(error) {
-    alert("code: " + error.code + "\n" + "message" + error.message + "\n");
-  }
+  // useEffect(() => {
+  //   var options = {
+  //     maximumAge: 10000,
+  //     timeout: 10000,
+  //     enableHighAccuracy: true,
+  //   };
+  //   var watchID = navigator.geolocation.watchPosition(
+  //     onSuccess,
+  //     onError,
+  //     options
+  //   );
+  // }, []);
+  // function onSuccess(pos) {
+  //   setUserLocation([pos.coords.latitude, pos.coords.longitude]);
+  // }
+  // function onError(error) {
+  //   alert("code: " + error.code + "\n" + "message" + error.message + "\n");
+  // }
 
-  /*----------------------------current user location -------------------*/
+  /*----------------------------current user location initially when page loads -------------------*/
   const myLocation = () => {
     const handleLocationError = (browserHasGeolocation, infoWindow, pos) => {
       infoWindow.setPosition(pos);
@@ -101,7 +154,7 @@ const HomePageSideMap = (props) => {
     }
   };
 
-  /*----------------------------current user location -------------------*/
+  /*----------------------------current user location initially when page loads -------------------*/
   useEffect(() => {
     renderMap();
   }, []);
@@ -118,16 +171,14 @@ const HomePageSideMap = (props) => {
       // infoWindow.setPosition({ lat: userLocation[0], lng: userLocation[1] });
       // infoWindow.setContent("You are here");
       // infoWindow.open(map);
-   
-      console.log(`PickupCoordinates:[${props.pickupcoordinates}]`);
-      map.setCenter({
-        lat: props.pickupcoordinates[0],
-        lng: props.pickupcoordinates[1],
+      usermarker.setPosition({
+        lat: userLocation[0],
+        lng: userLocation[1],
       });
-      // usermarker.setPosition({ lat: userLocation[0], lng: userLocation[1] });
-      // usermarker.setMap(map);
+      // usermarker.setPosition({ lat:props.pickupcoordinates[0], lng:props.pickupcoordinates[1] });
+      usermarker.setMap(map);
     }
-  }, [props.pickupcoordinates]);
+  }, [userLocation]);
 
   useEffect(() => {
     if (map && driverLocation.length > 0) {
@@ -141,11 +192,11 @@ const HomePageSideMap = (props) => {
       });
       drivermarker.setMap(map);
     }
-  }, [props._id]);
+  }, [driverLocation]);
   var initMap = () => {
     map = new window.google.maps.Map(document.getElementById("map"), {
       // center: { lat: 26.2258858, lng: 78.2173995 },
-      zoom: 13,
+      zoom: 14,
       streetViewControl: true,
       mapTypeControl: false,
       zoomControlOptions: true,
@@ -155,25 +206,22 @@ const HomePageSideMap = (props) => {
         position: window.google.maps.ControlPosition.RIGHT_BOTTOM,
       },
     });
-    /*---------------------------icons used in map ----------------*/
-    var myusericon = {
-      url: usericon, // url
-      scaledSize: new window.google.maps.Size(70, 70), // scaled size
-      origin: new window.google.maps.Point(0, 0), // origin
-      anchor: new window.google.maps.Point(0, 0), // anchor
-    };
-    var mydrivericon = {
-      url: drivericon, // url
-      scaledSize: new window.google.maps.Size(70, 70), // scaled size
-      origin: new window.google.maps.Point(0, 0), // origin
-      anchor: new window.google.maps.Point(0, 0), // anchor
-    };
 
-    /*---------------------------icons used in map ----------------*/
-    usermarker = new window.google.maps.Marker({});
-    drivermarker = new window.google.maps.Marker({
-      icon: mydrivericon,
+    /*--------------user and driver icon -------------*/
+    usermarker = new window.google.maps.Marker({
+      icon: {
+        url: usericon,
+        scaledSize: new window.google.maps.Size(60, 60),
+      },
     });
+    drivermarker = new window.google.maps.Marker({
+      icon: {
+        url: drivericon,
+        scaledSize: new window.google.maps.Size(60, 60),
+      },
+    });
+
+    /*--------------user and driver icon -------------*/
     myLocation();
 
     // infoWindow = new window.google.maps.InfoWindow();
@@ -181,21 +229,6 @@ const HomePageSideMap = (props) => {
     // drivermarker=new window.google.maps.Marker()
     //  infoWindow = new window.google.maps.InfoWindow();
     //  driverWindow = new window.google.maps.InfoWindow();
-
-    if (props.polyline !== undefined) {
-      poly = decodePolyline(props.polyline)[1];
-
-      console.log(poly);
-
-      const driverPath = new window.google.maps.Polyline({
-        path: poly,
-        geodesic: true,
-        strokeColor: "#FF0000",
-        strokeOpacity: 1.0,
-        strokeWeight: 2,
-      });
-      driverPath.setMap(map);
-    }
 
     // markers = new window.google.maps.Marker({
     //   map,
@@ -230,9 +263,6 @@ const HomePageSideMap = (props) => {
           bounds.extend(place.geometry.location);
         }
 
-        // markers.setPosition(place.geometry.location);
-        // map.panTo(place.geometry.location);
-        // map.setZoom(15);
       });
       map.fitBounds(bounds);
     });
@@ -251,44 +281,6 @@ const HomePageSideMap = (props) => {
       }
     );
   };
-
-  //geolocation start
-  // const myLocation = (e) => {
-  //   const handleLocationError = (browserHasGeolocation, infoWindow, pos) => {
-  //     infoWindow.setPosition(pos);
-  //     infoWindow.setContent(
-  //       browserHasGeolocation
-  //         ? "Error: The Geolocation service failed."
-  //         : "Error: Your browser doesn't support geolocation."
-  //     );
-  //     infoWindow.open(map);
-  //   };
-  //   if (navigator.geolocation) {
-  //     navigator.geolocation.getCurrentPosition(
-  //       (position) => {
-  //         const pos = {
-  //           lat: position.coords.latitude,
-  //           lng: position.coords.longitude,
-  //         };
-  //         infoWindow.setPosition(pos);
-
-  //         infoWindow.setContent("Location found.");
-  //         infoWindow.open(map);
-  //         markers.setPosition(pos);
-  //         map.panTo(pos);
-  //         map.setCenter(pos);
-  //         map.setZoom(16);
-  //       },
-  //       () => {
-  //         handleLocationError(true, infoWindow, map.getCenter());
-  //       }
-  //     );
-  //   } else {
-  //     // Browser doesn't support Geolocation
-  //     handleLocationError(false, infoWindow, map.getCenter());
-  //   }
-  // };
-  //geolocation end
 
   return (
     <main>
