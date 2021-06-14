@@ -69,32 +69,32 @@ const HomePageSideMap = (props) => {
   usersocket = io(userendpoi);
   driversocket = io(driverendpoi);
 
-  useEffect(() => {
-    if (props.rideid !== "") {
-      usersocket.emit("join", { roomid: props.rideid });
-      usersocket.on("message", (res) => {
-        console.log("user", res);
-      });
-      // usersocket.emit("sendUserLocation", { coordinates: userLocation });
-      usersocket.on("userlocation", (coordinates) => {
-        console.log("user", coordinates);
-        setUserLocation(coordinates);
-      });
-    }
-  }, [props.rideid]);
+  // useEffect(() => {
+  //   if (props.rideid !== "") {
+  //     usersocket.emit("join", { roomid: props.rideid });
+  //     usersocket.on("message", (res) => {
+  //       console.log("user", res);
+  //     });
+  //     // usersocket.emit("sendUserLocation", { coordinates: userLocation });
+  //     usersocket.on("userlocation", (coordinates) => {
+  //       console.log("user", coordinates);
+  //       setUserLocation(coordinates);
+  //     });
+  //   }
+  // }, [props.rideid]);
 
-  useEffect(() => {
-    if (props._id !== "") {
-      driversocket.emit("join", { roomid: props._id });
-      driversocket.on("message", (res) => {
-        console.log("driver", res);
-      });
-      driversocket.on("driverlocation", (coordinates) => {
-        console.log("driver", coordinates);
-        setDriverLocation(coordinates);
-      });
-    }
-  }, [props._id]);
+  // useEffect(() => {
+  //   if (props._id !== "") {
+  //     driversocket.emit("join", { roomid: props._id });
+  //     driversocket.on("message", (res) => {
+  //       console.log("driver", res);
+  //     });
+  //     driversocket.on("driverlocation", (coordinates) => {
+  //       console.log("driver", coordinates);
+  //       setDriverLocation(coordinates);
+  //     });
+  //   }
+  // }, [props._id]);
 
   // useEffect(() => {
   //   var options = {
