@@ -205,12 +205,14 @@ const Mapforpastride = (props) => {
         url: usericon,
         scaledSize: new window.google.maps.Size(60, 60),
       },
+      animation: window.google.maps.Animation.DROP,
     });
     drivermarker = new window.google.maps.Marker({
       icon: {
         url: drivericon,
         scaledSize: new window.google.maps.Size(60, 60),
       },
+      animation: window.google.maps.Animation.DROP,
     });
     driverPath = new window.google.maps.Polyline({
       geodesic: true,
@@ -225,6 +227,7 @@ const Mapforpastride = (props) => {
         url: hospitalicon,
         scaledSize: new window.google.maps.Size(60, 60),
       },
+      animation: window.google.maps.Animation.DROP,
     });
     
     /*--------------user and driver icon -------------*/
