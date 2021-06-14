@@ -349,7 +349,7 @@ hr {
      @media screen and (max-width: 460px) {
     .carddetails {
       top: 290px;
-	  width:410px;
+	  width:348px;
 	  margin:0 30px;
     }
 	.card-body{
