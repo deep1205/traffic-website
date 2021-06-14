@@ -1,7 +1,7 @@
 .indexMaptrackpage {
  
-  height: 520px;
-  width: 99vw ;
+  height: 550px;
+  width:100vw ;
   margin: 10px 0px;
 }
 
@@ -96,60 +96,55 @@ left:40px;
 .myLocationBtn:focus {
   outline: none;
 } */
-@media screen and (max-width:2000px) {
+@media screen and (max-width:2500px) {
   .indexMaptrackpage {
  
-  height: 500px;
+  height: 570px;
 
 }
   
 }
-@media screen and (max-width:2000px) {
-  .indexMaptrackpage {
- 
-  height: 500px;
 
-}
   
-}@media screen and (max-width:1800px) {
-  .indexMaptrackpage {
- 
-  height: 540px;
-
-}
-  
-}@media screen and (max-width:1600px) {
+@media screen and (max-width:1800px) {
   .indexMaptrackpage {
  
   height: 580px;
 
 }
   
+}@media screen and (max-width:1600px) {
+  .indexMaptrackpage {
+ 
+  height: 620px;
+
+}
+  
 }@media screen and (max-width:1400px) {
   .indexMaptrackpage {
  
-  height: 600px;
+  height: 620px;
 
 }
   
 }@media screen and (max-width:1200px) {
   .indexMaptrackpage {
  
-  height: 630px;
+  height: 680px;
 
 }
   
 }@media screen and (max-width:1000px) {
   .indexMaptrackpage {
  
-  height: 650px;
+  height: 690px;
 
 }
   
 }@media screen and (max-width:800px) {
   .indexMaptrackpage {
  
-  height: 680px;
+  height: 690px;
 
 }
   

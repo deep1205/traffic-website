@@ -244,7 +244,7 @@ const HospitalList = (props) => {
                       className="hospital-detail"
                       style={{ padding: "10px", fontSize: "15px" }}
                     >
-                      RideId: {hospital.rideid}
+                      Ride Id: {hospital.rideid}
                     </h6>
                   </div>
                 </Col>
