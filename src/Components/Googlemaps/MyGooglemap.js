@@ -33,11 +33,11 @@ const HomePageSideMap = (props) => {
         lng: props.pickupcoordinates[1],
       });
       usermarker.setMap(map);
-      // hospitalmarker.setPosition({
-      //   lat: props.hospitalcoordinates[0],
-      //   lng: props.hospitalcoordinates[1],
-      // });
-      // hospitalmarker.setMap(map);
+      hospitalmarker.setPosition({
+        lat: props.hospitalcoordinates[0],
+        lng: props.hospitalcoordinates[1],
+      });
+      hospitalmarker.setMap(map);
     }
 
     if (props.polyline !== undefined && map) {

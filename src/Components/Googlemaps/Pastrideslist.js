@@ -50,6 +50,7 @@ const HospitalList = (props) => {
               data["hospital"]["hospitalLocation"].coordinates,
           };
         });
+        console.log(arr)
         setdata(arr);
       });
   }, []);
