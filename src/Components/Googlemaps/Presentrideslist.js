@@ -24,7 +24,7 @@ const HospitalList = (props) => {
   const toggle = () => setOpen(!dropdownOpen);
   useEffect(() => {
     axios
-      .get("https://server.prioritypulse.co.in/police/pastRides", {
+      .get("https://server.prioritypulse.co.in/police/activeRides", {
         headers: { Authorization: localStorage.getItem("token") },
       })
       .then((res) => {
