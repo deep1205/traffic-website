@@ -78,7 +78,7 @@ const HomePageSideMap = (props) => {
         console.log("user", res);
       });
       // usersocket.emit("sendUserLocation", { coordinates: userLocation });
-      usersocket.on("userlocation", (coordinates) => {
+      usersocket.on("userlocation", ({coordinates}) => {
         console.log("user", coordinates);
         setUserLocation(coordinates);
       });
@@ -91,7 +91,7 @@ const HomePageSideMap = (props) => {
       driversocket.on("message", (res) => {
         console.log("driver", res);
       });
-      driversocket.on("driverlocation", (coordinates) => {
+      driversocket.on("driverlocation", ({coordinates}) => {
         console.log("driver", coordinates);
         setDriverLocation(coordinates);
       });
