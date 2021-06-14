@@ -14,7 +14,9 @@ var map,
   driverWindow,
   drivermarker,
   poly,
-  usermarker;
+  usermarker,
+  driverPath,
+  hospitalmarker;
 
 const HomePageSideMap = (props) => {
  
@@ -38,24 +40,19 @@ const HomePageSideMap = (props) => {
          console.log(`Hospital location getting from polyline: [${hospitallocation}]`);
               console.log(`Patient location getting from polyline : [${patientlocation}]`);
 
-         const driverPath = new window.google.maps.Polyline({
-           path: poly,
-           geodesic: true,
-           strokeColor: "#FF0000",
-           strokeOpacity:2.0,
-           strokeWeight: 3,
-         });
+        driverPath.setPath(poly)
          driverPath.setMap(map);
-         const hospitalmarker = new window.google.maps.Marker({
-           position: { lat: hospitallocation[0], lng: hospitallocation[1] },
-           icon: {
-             url: hospitalicon,
-             scaledSize: new window.google.maps.Size(60, 60),
-           },
-         });
+        hospitalmarker.setPosition({
+          lat:hospitallocation[0],
+          lng:hospitallocation[1],
+        })
          hospitalmarker.setMap(map);
        }
-       
+       else if(map){
+         driverPath.setMap(null)
+         hospitalmarker.setMap(null);
+      
+       }
 
  
     }, [props.pickupcoordinates && props.polyline]);
@@ -213,7 +210,20 @@ const HomePageSideMap = (props) => {
         scaledSize: new window.google.maps.Size(60, 60),
       },
     });
+  driverPath = new window.google.maps.Polyline({
+   geodesic: true,
+   strokeColor: "#FF0000",
+   strokeOpacity: 2.0,
+   strokeWeight: 3,
+ });
 
+  hospitalmarker = new window.google.maps.Marker({
+    // position: { lat: hospitallocation[0], lng: hospitallocation[1] },
+    icon: {
+      url: hospitalicon,
+      scaledSize: new window.google.maps.Size(60, 60),
+    },
+  });
     /*--------------user and driver icon -------------*/
     myLocation();
 
