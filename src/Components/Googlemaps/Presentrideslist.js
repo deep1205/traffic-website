@@ -35,6 +35,7 @@ const HospitalList = (props) => {
           return {
             name: data["pickedBy"].name,
             age: data.age,
+            rideobjectid:data._id,
             caseprior: data.casePrior,
             pname: data.name,
             driverno: data["pickedBy"].mobileNo,
@@ -69,6 +70,7 @@ const HospitalList = (props) => {
     polyline: "",
     pickupcoordinates: [],
     hospitalcoordinates: [],
+    rideobjectid:"",
   });
 
   return (
@@ -131,6 +133,7 @@ const HospitalList = (props) => {
                           polyline: val.polyline,
                           pickupcoordinates: val.pickupcoordinates,
                           hospitalcoordinates: val.hospitalcoordinates,
+                          rideobjectid:val.rideobjectid,
                         });
                       }}
                     >
@@ -156,7 +159,7 @@ const HospitalList = (props) => {
       </ButtonDropdown>
       <Map
         _id={hospital._id}
-        rideid={hospital.rideid}
+        rideobjectid={hospital.rideobjectid}
         polyline={hospital.polyline}
         pickupcoordinates={hospital.pickupcoordinates}
         hospitalcoordinates={hospital.hospitalcoordinates}

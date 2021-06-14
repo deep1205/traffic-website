@@ -73,7 +73,7 @@ const HomePageSideMap = (props) => {
 
   useEffect(() => {
     if (props.rideid !== "") {
-      usersocket.emit("join", { roomid: props.rideid });
+      usersocket.emit("join", { roomid: props.rideobjectid });
       usersocket.on("message", (res) => {
         console.log("user", res);
       });
@@ -83,7 +83,7 @@ const HomePageSideMap = (props) => {
         setUserLocation(coordinates);
       });
     }
-  }, [props.rideid]);
+  }, [props.rideobjectid]);
 
   useEffect(() => {
     if (props._id !== "") {
