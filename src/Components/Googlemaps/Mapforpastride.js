@@ -16,8 +16,7 @@ var map,
   poly,
   usermarker,
   driverPath,
-  hospitalmarker,
-  patientmarker;
+  hospitalmarker;
 
 const Mapforpastride = (props) => {
   useEffect(() => {
@@ -27,40 +26,37 @@ const Mapforpastride = (props) => {
         lat: props.pickupcoordinates[0],
         lng: props.pickupcoordinates[1],
       });
+
+       usermarker.setPosition({
+             lat: props.pickupcoordinates[0],
+             lng: props.pickupcoordinates[1],
+           });
+           usermarker.setMap(map);
     }
 
     if (props.polyline !== undefined && map) {
       poly = decodePolyline(props.polyline);
       console.log(poly);
       const hospitallocation = [poly[0].lat, poly[0].lng];
-      const patientlocation = [
-        poly[poly.length - 1].lat,
-        poly[poly.length - 1].lng,
-      ];
-      console.log(
-        `Hospital location getting from polyline: [${hospitallocation}]`
-      );
-      console.log(
-        `Patient location getting from polyline : [${patientlocation}]`
-      );
+      // const patientlocation = [
+      //   poly[poly.length - 1].lat,
+      //   poly[poly.length - 1].lng,
+      // ];
+    
 
       driverPath.setPath(poly);
       driverPath.setMap(map);
-      patientmarker.setPosition({
-        lat:patientlocation[0],
-        lng:patientlocation[1],
-
-      })
+      
       hospitalmarker.setPosition({
         lat: hospitallocation[0],
         lng: hospitallocation[1],
       });
-      patientmarker.setMap(map);
+      
       hospitalmarker.setMap(map);
     } else if (map) {
       driverPath.setMap(null);
       hospitalmarker.setMap(null);
-      patientmarker.setMap(null);
+      
     }
   }, [props.pickupcoordinates && props.polyline]);
 
@@ -230,13 +226,7 @@ const Mapforpastride = (props) => {
         scaledSize: new window.google.maps.Size(60, 60),
       },
     });
-     patientmarker = new window.google.maps.Marker({
-      // position: { lat: hospitallocation[0], lng: hospitallocation[1] },
-      icon: {
-        url: usericon,
-        scaledSize: new window.google.maps.Size(60, 60),
-      },
-    });
+    
     /*--------------user and driver icon -------------*/
     myLocation();
 

@@ -28,8 +28,14 @@ const HomePageSideMap = (props) => {
           lat: props.pickupcoordinates[0],
           lng: props.pickupcoordinates[1],
         });
-      }
 
+           usermarker.setPosition({
+             lat: props.pickupcoordinates[0],
+             lng: props.pickupcoordinates[1],
+           });
+           usermarker.setMap(map);
+      }
+ 
       
       
        if (props.polyline !== undefined && map) {
@@ -47,6 +53,7 @@ const HomePageSideMap = (props) => {
           lng:hospitallocation[1],
         })
          hospitalmarker.setMap(map);
+
        }
        else if(map){
          driverPath.setMap(null)
@@ -86,6 +93,7 @@ const HomePageSideMap = (props) => {
       driversocket.on("message", (res) => {
         console.log("driver", res);
       });
+      
       driversocket.on("driverlocation", (coordinates) => {
         console.log("driver", coordinates);
         setDriverLocation(coordinates);
@@ -161,6 +169,11 @@ const HomePageSideMap = (props) => {
       // infoWindow.setPosition({ lat: userLocation[0], lng: userLocation[1] });
       // infoWindow.setContent("You are here");
       // infoWindow.open(map);
+      map.setCenter({
+        lat: userLocation[0],
+        lng: userLocation[1],
+      });
+    
       usermarker.setPosition({
         lat:userLocation[0],
         lng:userLocation[1],

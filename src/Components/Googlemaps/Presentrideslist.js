@@ -43,7 +43,7 @@ const HospitalList = (props) => {
             guardianNo: data.guardianNo,
             patientNo:data.patientNo,
             rideid: data.RideId,
-            _id: data._id,
+            _id: data.pickedBy,
             hospital:data.hospital,
             ispicked:data.isPicked,
             polyline: data.patientPolyline,
@@ -230,7 +230,7 @@ const HospitalList = (props) => {
                     <h6 className="hospital-detail" style={{ padding: "10px" }}>
                       <span style={{ fontSize: "15px" }}>
                         {" "}
-                        Id:{hospital.hospital}
+                        Id:{hospital._id}
                       </span>
                     </h6>
                   </div>
