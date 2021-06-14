@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import io from "socket.io-client";
 import "../../Css/Map.css";
-import hospitalicon from "../../images/hospitalicon.png"
+import hospitalicon from "../../images/hospitalicon.png";
 import drivericon from "../../images/drivericon.png";
 import usericon from "../../images/usericon.png";
 const decodePolyline = require("decode-google-map-polyline");
@@ -15,55 +15,53 @@ var map,
   drivermarker,
   poly,
   usermarker,
-  driverPath,
-  hospitalmarker;
+  hospitalmarker,
+  driverPath;
 
 const HomePageSideMap = (props) => {
- 
-  
-    useEffect(() => {
-      if (map && props.pickupcoordinates.length > 0) {
-        console.log(`PickupCoordinates:[${props.pickupcoordinates}]`);
-        map.setCenter({
-          lat: props.pickupcoordinates[0],
-          lng: props.pickupcoordinates[1],
-        });
+  useEffect(() => {
+    if (
+      map &&
+      props.pickupcoordinates.length > 0
+    ) {
+      map.setCenter({
+        lat: props.pickupcoordinates[0],
+        lng: props.pickupcoordinates[1],
+      });
+      usermarker.setPosition({
+        lat: props.pickupcoordinates[0],
+        lng: props.pickupcoordinates[1],
+      });
+      usermarker.setMap(map);
+      // hospitalmarker.setPosition({
+      //   lat: props.hospitalcoordinates[0],
+      //   lng: props.hospitalcoordinates[1],
+      // });
+      // hospitalmarker.setMap(map);
+    }
 
-           usermarker.setPosition({
-             lat: props.pickupcoordinates[0],
-             lng: props.pickupcoordinates[1],
-           });
-           usermarker.setMap(map);
-      }
- 
-      
-      
-       if (props.polyline !== undefined && map) {
-         poly = decodePolyline(props.polyline);
-         console.log(poly);
-         const hospitallocation = [poly[0].lat,poly[0].lng];
-         const patientlocation = [poly[poly.length-1].lat,poly[poly.length-1].lng];
-         console.log(`Hospital location getting from polyline: [${hospitallocation}]`);
-              console.log(`Patient location getting from polyline : [${patientlocation}]`);
+    if (props.polyline !== undefined && map) {
+      poly = decodePolyline(props.polyline);
+      // console.log(poly);
+      // const hospitallocation = [poly[0].lat, poly[0].lng];
+      // const patientlocation = [
+      //   poly[poly.length - 1].lat,
+      //   poly[poly.length - 1].lng,
+      // ];
+      // console.log(
+      //   `Hospital location getting from polyline: [${hospitallocation}]`
+      // );
+      // console.log(
+      //   `Patient location getting from polyline : [${patientlocation}]`
+      // );
 
-        driverPath.setPath(poly)
-         driverPath.setMap(map);
-        hospitalmarker.setPosition({
-          lat:hospitallocation[0],
-          lng:hospitallocation[1],
-        })
-         hospitalmarker.setMap(map);
+      driverPath.setPath(poly);
+      driverPath.setMap(map);
+    } else if (map) {
+      driverPath.setMap(null);
+    }
+  }, [props.pickupcoordinates && props.polyline]);
 
-       }
-       else if(map){
-         driverPath.setMap(null)
-         hospitalmarker.setMap(null);
-      
-       }
-
- 
-    }, [props.pickupcoordinates && props.polyline]);
-  
   const userendpoi = "https://server.prioritypulse.co.in/usertrack";
   const driverendpoi = "https://server.prioritypulse.co.in/drivertrack";
 
@@ -93,7 +91,6 @@ const HomePageSideMap = (props) => {
       driversocket.on("message", (res) => {
         console.log("driver", res);
       });
-      
       driversocket.on("driverlocation", (coordinates) => {
         console.log("driver", coordinates);
         setDriverLocation(coordinates);
@@ -140,7 +137,6 @@ const HomePageSideMap = (props) => {
             lng: position.coords.longitude,
           };
           map.setCenter(pos);
-          ;
         },
         () => {
           handleLocationError(true, infoWindow, map.getCenter());
@@ -173,11 +169,12 @@ const HomePageSideMap = (props) => {
         lat: userLocation[0],
         lng: userLocation[1],
       });
-    
+
       usermarker.setPosition({
-        lat:userLocation[0],
-        lng:userLocation[1],
-      })
+        lat: userLocation[0],
+        lng: userLocation[1],
+      });
+
       // usermarker.setPosition({ lat:props.pickupcoordinates[0], lng:props.pickupcoordinates[1] });
       usermarker.setMap(map);
     }
@@ -225,21 +222,22 @@ const HomePageSideMap = (props) => {
       },
       animation: window.google.maps.Animation.DROP,
     });
-  driverPath = new window.google.maps.Polyline({
-   geodesic: true,
-   strokeColor: "#FF0000",
-   strokeOpacity: 2.0,
-   strokeWeight: 3,
- });
 
-  hospitalmarker = new window.google.maps.Marker({
-    // position: { lat: hospitallocation[0], lng: hospitallocation[1] },
-    icon: {
-      url: hospitalicon,
-      scaledSize: new window.google.maps.Size(60, 60),
-    },
-    animation: window.google.maps.Animation.DROP,
-  });
+    driverPath = new window.google.maps.Polyline({
+      path: poly,
+      geodesic: true,
+      strokeColor: "#FF0000",
+      strokeOpacity: 2.0,
+      strokeWeight: 3,
+    });
+
+    hospitalmarker = new window.google.maps.Marker({
+      icon: {
+        url: hospitalicon,
+        scaledSize: new window.google.maps.Size(60, 60),
+      },
+      animation: window.google.maps.Animation.DROP,
+    });
     /*--------------user and driver icon -------------*/
     myLocation();
 

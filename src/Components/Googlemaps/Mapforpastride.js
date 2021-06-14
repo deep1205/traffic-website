@@ -15,10 +15,10 @@ var map,
   drivermarker,
   poly,
   usermarker,
-  driverPath,
-  hospitalmarker;
+  hospitalmarker,
+  driverPath;
 
-const Mapforpastride = (props) => {
+const HomePageSideMap = (props) => {
   useEffect(() => {
     if (map && props.pickupcoordinates.length > 0) {
       console.log(`PickupCoordinates:[${props.pickupcoordinates}]`);
@@ -26,37 +26,37 @@ const Mapforpastride = (props) => {
         lat: props.pickupcoordinates[0],
         lng: props.pickupcoordinates[1],
       });
-
-       usermarker.setPosition({
-             lat: props.pickupcoordinates[0],
-             lng: props.pickupcoordinates[1],
-           });
-           usermarker.setMap(map);
+      usermarker.setPosition({
+        lat: props.pickupcoordinates[0],
+        lng: props.pickupcoordinates[1],
+      });
+      usermarker.setMap(map);
+      hospitalmarker.setPosition({
+        lat: props.hospitalcoordinates[0],
+        lng: props.hospitalcoordinates[1],
+      });
+      hospitalmarker.setMap(map);
     }
 
     if (props.polyline !== undefined && map) {
       poly = decodePolyline(props.polyline);
-      console.log(poly);
-      const hospitallocation = [poly[0].lat, poly[0].lng];
+      // console.log(poly);
+      // const hospitallocation = [poly[0].lat, poly[0].lng];
       // const patientlocation = [
       //   poly[poly.length - 1].lat,
       //   poly[poly.length - 1].lng,
       // ];
-    
+      // console.log(
+      //   `Hospital location getting from polyline: [${hospitallocation}]`
+      // );
+      // console.log(
+      //   `Patient location getting from polyline : [${patientlocation}]`
+      // );
 
       driverPath.setPath(poly);
       driverPath.setMap(map);
-      
-      hospitalmarker.setPosition({
-        lat: hospitallocation[0],
-        lng: hospitallocation[1],
-      });
-      
-      hospitalmarker.setMap(map);
     } else if (map) {
       driverPath.setMap(null);
-      hospitalmarker.setMap(null);
-      
     }
   }, [props.pickupcoordinates && props.polyline]);
 
@@ -163,10 +163,16 @@ const Mapforpastride = (props) => {
       // infoWindow.setPosition({ lat: userLocation[0], lng: userLocation[1] });
       // infoWindow.setContent("You are here");
       // infoWindow.open(map);
+      map.setCenter({
+        lat: userLocation[0],
+        lng: userLocation[1],
+      });
+
       usermarker.setPosition({
         lat: userLocation[0],
         lng: userLocation[1],
       });
+
       // usermarker.setPosition({ lat:props.pickupcoordinates[0], lng:props.pickupcoordinates[1] });
       usermarker.setMap(map);
     }
@@ -214,7 +220,9 @@ const Mapforpastride = (props) => {
       },
       animation: window.google.maps.Animation.DROP,
     });
+
     driverPath = new window.google.maps.Polyline({
+      path: poly,
       geodesic: true,
       strokeColor: "#FF0000",
       strokeOpacity: 2.0,
@@ -222,14 +230,12 @@ const Mapforpastride = (props) => {
     });
 
     hospitalmarker = new window.google.maps.Marker({
-      // position: { lat: hospitallocation[0], lng: hospitallocation[1] },
       icon: {
         url: hospitalicon,
         scaledSize: new window.google.maps.Size(60, 60),
       },
       animation: window.google.maps.Animation.DROP,
     });
-    
     /*--------------user and driver icon -------------*/
     myLocation();
 
@@ -356,7 +362,7 @@ function loadScript(url) {
   index.parentNode.insertBefore(script, index);
 }
 
-export default Mapforpastride;
+export default HomePageSideMap;
 
 // import React, { useState, useEffect } from "react";
 // import styled from "styled-components";

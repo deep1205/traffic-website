@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect } from "react";
 import {
   ButtonDropdown,
@@ -11,63 +9,66 @@ import {
   Col,
 } from "reactstrap";
 import Icon from "supercons";
-
 import ListIcon from "@material-ui/icons/List";
 import axios from "axios";
 import HighlightOffSharpIcon from "@material-ui/icons/HighlightOffSharp";
 import decodePolyline from "decode-google-map-polyline";
+import "./Ridesdetail.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./Ridesdetail.css"
 import Map from "./MyGooglemap";
 
 const HospitalList = (props) => {
- 
   const [dropdownOpen, setOpen] = useState(false);
-  const [cardOpen,setCardOpen]=useState(false);
+  const [cardOpen, setCardOpen] = useState(false);
   const [rides, setdata] = useState([]);
   const toggle = () => setOpen(!dropdownOpen);
   useEffect(() => {
     axios
-      .get("https://server.prioritypulse.co.in/police/ActiveRides", {
+      .get("https://server.prioritypulse.co.in/police/pastRides", {
         headers: { Authorization: localStorage.getItem("token") },
       })
       .then((res) => {
         const data = res.data;
         console.log(data);
         const arr = data.map((data) => {
+          let k = new Date(data.createdAt);
           return {
-            name: data.name,
+            name: data["pickedBy"].name,
             age: data.age,
+            caseprior: data.casePrior,
+            pname: data.name,
+            driverno: data["pickedBy"].mobileNo,
             pcase: data.pcase,
-            casePrior: data.casePrior,
-            guardianNo: data.guardianNo,
-            patientNo:data.patientNo,
+            date: k.getDate() + "/" + k.getMonth() + "/" + k.getFullYear(),
             rideid: data.RideId,
-            _id: data.pickedBy,
-            hospital:data.hospital,
-            ispicked:data.isPicked,
+            _id: data["pickedBy"]._id,
+            guardianNo: data.guardianNo,
+            patientNo: data.patientNo,
             polyline: data.patientPolyline,
-            pickupcoordinates:data["pickUplocation"].coordinates,
+            pickupcoordinates: data["pickUplocation"].coordinates,
+            hospitalcoordinates:
+              data["hospital"]["hospitalLocation"].coordinates,
           };
         });
         setdata(arr);
       });
   }, []);
 
-  
   const [hospital, setHospital] = useState({
     name: "",
-    age:"",
-    pcase: "",
-    casePrior:"",
-    rideid: "",
+    age: "",
+    date: "",
+    caseprior: "",
     guardianNo: "",
-    patientNo:"",
+    patientNo: "",
+    pname: "",
+    pcase: "",
+    rideid: "",
+    driverno: "",
     _id: "",
     polyline: "",
-    ispicked:"",
-    hospital:"",
-    pickupcoordinates:[]
+    pickupcoordinates: [],
+    hospitalcoordinates: [],
   });
 
   return (
@@ -118,16 +119,18 @@ const HospitalList = (props) => {
                         setHospital({
                           name: val.name,
                           age: val.age,
-                          pcase: val.pcase,
-                          rideid: val.rideid,
-                          casePrior: val.casePrior,
                           guardianNo: val.guardianNo,
                           patientNo: val.patientNo,
+                          caseprior: val.caseprior,
+                          pcase: val.pcase,
+                          pname: val.pname,
+                          rideid: val.rideid,
+                          driverno: val.driverno,
+                          date: val.date,
                           _id: val._id,
                           polyline: val.polyline,
-                          ispicked: val.ispicked,
-                          hospital: val.hospital,
                           pickupcoordinates: val.pickupcoordinates,
+                          hospitalcoordinates: val.hospitalcoordinates,
                         });
                       }}
                     >
@@ -140,7 +143,7 @@ const HospitalList = (props) => {
                       >
                         <h6>{val.name}</h6>
                         <h6>{val.pcase}</h6>
-                        <h6>{val.guardianNo}</h6>
+                        <h6>{val.date}</h6>
                       </div>
                     </DropdownItem>
                   </div>
@@ -156,6 +159,7 @@ const HospitalList = (props) => {
         rideid={hospital.rideid}
         polyline={hospital.polyline}
         pickupcoordinates={hospital.pickupcoordinates}
+        hospitalcoordinates={hospital.hospitalcoordinates}
       />
       {hospital.name !== "" && cardOpen ? (
         <div className="carddetails">
@@ -167,11 +171,7 @@ const HospitalList = (props) => {
                 style={{ position: "absolute", right: "40px", color: "white" }}
                 onClick={() => setCardOpen(false)}
               >
-                
-                  
-                  <Icon glyph="view-close-small" size={38} />
-              
-
+                <Icon glyph="view-close-small" size={38} />
                 {/* <HighlightOffSharpIcon fontSize="medium" /> */}
               </span>
             </h1>
@@ -205,7 +205,7 @@ const HospitalList = (props) => {
                 <Col md={{ size: "auto", offset: 0 }}>
                   <div className="shadow">
                     <h6 className="hospital-detail" style={{ padding: "10px" }}>
-                      Case priority: {hospital.casePrior}
+                      Case priority: {hospital.caseprior}
                     </h6>
                   </div>
                 </Col>
@@ -255,10 +255,3 @@ const HospitalList = (props) => {
 };
 
 export default HospitalList;
-
-
-
-
-
-
-
