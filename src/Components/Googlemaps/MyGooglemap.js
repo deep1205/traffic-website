@@ -16,9 +16,13 @@ var map,
   poly,
   usermarker,
   hospitalmarker,
-  driverPath;
+  driverPath
+  ;
 
 const HomePageSideMap = (props) => {
+  console.log(props.ispicked);
+  console.log(props.polyline);
+  console.log(props.hospitalpolyline);
   useEffect(() => {
     if (
       map &&
@@ -40,8 +44,9 @@ const HomePageSideMap = (props) => {
       hospitalmarker.setMap(map);
     }
 
-    if (props.polyline !== undefined && map) {
-      poly = decodePolyline(props.polyline);
+    if ((props.polyline !== undefined && map) || (props.hospitalpolyline!==undefined && map)) {
+      const visibilepolyline=props.ispicked ? props.hospitalpolyline :props.polyline;
+      poly = decodePolyline(visibilepolyline);
       // console.log(poly);
       // const hospitallocation = [poly[0].lat, poly[0].lng];
       // const patientlocation = [
@@ -60,7 +65,7 @@ const HomePageSideMap = (props) => {
     } else if (map) {
       driverPath.setMap(null);
     }
-  }, [props.pickupcoordinates && props.polyline]);
+  }, [(props.pickupcoordinates)]);
 
   const userendpoi = "https://server.prioritypulse.co.in/usertrack";
   const driverendpoi = "https://server.prioritypulse.co.in/drivertrack";

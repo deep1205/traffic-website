@@ -45,6 +45,8 @@ const HospitalList = (props) => {
             _id: data["pickedBy"]._id,
             guardianNo: data.guardianNo,
             patientNo: data.patientNo,
+            ispicked:data.isPicked,
+            hospitalpolyline:data.hospitalPolyline,
             polyline: data.patientPolyline,
             pickupcoordinates: data["pickUplocation"].coordinates,
             hospitalcoordinates:
@@ -71,6 +73,8 @@ const HospitalList = (props) => {
     pickupcoordinates: [],
     hospitalcoordinates: [],
     rideobjectid:"",
+    ispicked:false,
+    hospitalpolyline:"",
   });
 
   return (
@@ -134,6 +138,8 @@ const HospitalList = (props) => {
                           pickupcoordinates: val.pickupcoordinates,
                           hospitalcoordinates: val.hospitalcoordinates,
                           rideobjectid:val.rideobjectid,
+                          ispicked:val.ispicked,
+                          hospitalpolyline:val.hospitalpolyline,
                         });
                       }}
                     >
@@ -163,6 +169,8 @@ const HospitalList = (props) => {
         polyline={hospital.polyline}
         pickupcoordinates={hospital.pickupcoordinates}
         hospitalcoordinates={hospital.hospitalcoordinates}
+        hospitalpolyline={hospital.hospitalpolyline}
+        ispicked={hospital.ispicked}
       />
       {hospital.name !== "" && cardOpen ? (
         <div className="carddetails">
