@@ -19,9 +19,15 @@ var map,
   driverPath;
 
 const HomePageSideMap = (props) => {
+  console.log(`Ispicked value is ${props.ispicked}`);
+  console.log(
+    `red color polyline is patient poline and value is ${props.polyline}`
+  );
+  console.log(
+    `green color polyline is hospital poline and value is ${props.hospitalpolyline}`
+  );
   useEffect(() => {
     if (map && props.pickupcoordinates.length > 0) {
-      console.log(`PickupCoordinates:[${props.pickupcoordinates}]`);
       map.setCenter({
         lat: props.pickupcoordinates[0],
         lng: props.pickupcoordinates[1],
@@ -38,8 +44,23 @@ const HomePageSideMap = (props) => {
       hospitalmarker.setMap(map);
     }
 
-    if (props.polyline !== undefined && map) {
-      poly = decodePolyline(props.polyline);
+    if (
+      (props.polyline !== undefined && map) ||
+      (props.hospitalpolyline !== undefined && map)
+    ) {
+      const visibilepolyline = props.ispicked
+        ? props.hospitalpolyline
+        : props.polyline;
+      poly = decodePolyline(visibilepolyline);
+      if (props.ispicked === true) {
+        driverPath.setOptions({
+          strokeColor: "green",
+        });
+      } else {
+        driverPath.setOptions({
+          strokeColor: "red",
+        });
+      }
       // console.log(poly);
       // const hospitallocation = [poly[0].lat, poly[0].lng];
       // const patientlocation = [
@@ -58,7 +79,7 @@ const HomePageSideMap = (props) => {
     } else if (map) {
       driverPath.setMap(null);
     }
-  }, [props.pickupcoordinates && props.polyline]);
+  }, [props.pickupcoordinates]);
 
   const userendpoi = "https://server.prioritypulse.co.in/usertrack";
   const driverendpoi = "https://server.prioritypulse.co.in/drivertrack";
@@ -70,18 +91,18 @@ const HomePageSideMap = (props) => {
   driversocket = io(driverendpoi);
 
   // useEffect(() => {
-  //   if (props.rideid !== "") {
-  //     usersocket.emit("join", { roomid: props.rideid });
+  //   if (props.rideobjectid !== "") {
+  //     usersocket.emit("join", { roomid: props.rideobjectid });
   //     usersocket.on("message", (res) => {
   //       console.log("user", res);
   //     });
   //     // usersocket.emit("sendUserLocation", { coordinates: userLocation });
-  //     usersocket.on("userlocation", (coordinates) => {
+  //     usersocket.on("userlocation", ({ coordinates }) => {
   //       console.log("user", coordinates);
   //       setUserLocation(coordinates);
   //     });
   //   }
-  // }, [props.rideid]);
+  // }, [props.rideobjectid]);
 
   // useEffect(() => {
   //   if (props._id !== "") {
@@ -89,7 +110,7 @@ const HomePageSideMap = (props) => {
   //     driversocket.on("message", (res) => {
   //       console.log("driver", res);
   //     });
-  //     driversocket.on("driverlocation", (coordinates) => {
+  //     driversocket.on("driverlocation", ({ coordinates }) => {
   //       console.log("driver", coordinates);
   //       setDriverLocation(coordinates);
   //     });
@@ -224,7 +245,7 @@ const HomePageSideMap = (props) => {
     driverPath = new window.google.maps.Polyline({
       path: poly,
       geodesic: true,
-      strokeColor: "#FF0000",
+
       strokeOpacity: 2.0,
       strokeWeight: 3,
     });

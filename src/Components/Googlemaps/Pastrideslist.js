@@ -48,6 +48,8 @@ const HospitalList = (props) => {
             pickupcoordinates: data["pickUplocation"].coordinates,
             hospitalcoordinates:
               data["hospital"]["hospitalLocation"].coordinates,
+            ispicked: data.isPicked,
+            hospitalpolyline: data.hospitalPolyline,
           };
         });
         console.log(arr)
@@ -70,6 +72,8 @@ const HospitalList = (props) => {
     polyline: "",
     pickupcoordinates: [],
     hospitalcoordinates: [],
+    ispicked: false,
+    hospitalpolyline: "",
   });
 
   return (
@@ -132,6 +136,8 @@ const HospitalList = (props) => {
                           polyline: val.polyline,
                           pickupcoordinates: val.pickupcoordinates,
                           hospitalcoordinates: val.hospitalcoordinates,
+                          ispicked: val.ispicked,
+                          hospitalpolyline: val.hospitalpolyline,
                         });
                       }}
                     >
@@ -161,6 +167,8 @@ const HospitalList = (props) => {
         polyline={hospital.polyline}
         pickupcoordinates={hospital.pickupcoordinates}
         hospitalcoordinates={hospital.hospitalcoordinates}
+        hospitalpolyline={hospital.hospitalpolyline}
+        ispicked={hospital.ispicked}
       />
       {hospital.name !== "" && cardOpen ? (
         <div className="carddetails">
