@@ -2,19 +2,15 @@
 .navbar{
   background-image: linear-gradient(to right, #a116ef, #390999);
   position: relative;
-  padding: 3px;
+  padding: 5px;
   z-index: 999;
   border-radius: 0 0 30px 30px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-  
-  
-  
 }
 
 .navbar_logo{
-  /* max-width: 300px;
-  width: 30vw;
-  min-width: 150px; */
+   max-width: 300px;
+   
   height: auto;
   line-height: 60px;
   padding: 0 20px;
@@ -23,16 +19,16 @@
 }
 
 nav{
-
  
-  margin-left:auto !important;
+  float: right;
   position: relative;
-  
-  
+  width:604px;
+ 
   display: flex;
   margin: 40px;
   /* height: 50px; */
   font-size:20px;
+   margin-left: auto;
 }
 
 .clearfix{
@@ -62,7 +58,7 @@ nav a:hover{
 nav .animation{
   position: absolute;
   height: 5px;
-  bottom: 18px;
+  bottom: 16px;
   z-index: 0;
   background: gold;
   border-radius: 8px;
@@ -70,39 +66,39 @@ nav .animation{
 }
 
 a:nth-child(1){
-  width: 100px;
+  width: 130px;
 }
 nav .start-home,a:nth-child(1):hover~.animation{
-  width: 91px;
-  left: 28px;
+  width: 85px;
+  left: 10px;
 }
 a:nth-child(2){
-  width: 30px;
+  width: 130px;
 }
 nav .start-user,a:nth-child(2):hover~.animation{
-  width: 108px;
-  left: 134px;
+  width: 99px;
+  left: 120px;
 }
 a:nth-child(3){
-  width: 100px;
+  width: 130px;
 }
 nav .start-hospital,a:nth-child(3):hover~.animation{
-  width: 100px;
-  left: 259px;
+  width: 115px;
+  left: 235px;
 }
 a:nth-child(4){
-  width: 100px;
+  width: 130px;
 }
 nav .start-aboutus,a:nth-child(4):hover~.animation{
-  width: 30px;
-  left: 425px;
+  width: 104px;
+  left: 376px;
 }
 a:nth-child(5){
-  width: 140px;
+  width: 130px;
 }
 nav .start-collaborate,a:nth-child(5):hover~.animation{
-  width: 90px;
-  left: 410px;
+  width:110px;
+  left: 490px;
 }
 
 
@@ -155,20 +151,20 @@ nav .start-collaborate,a:nth-child(5):hover~.animation{
 
 
 @media screen and (max-width: 1062px){
-  
   .menu-toggle{
-    display:block;
+    display: block;
     width: 40px;
     height: 40px;
     margin: 40px 20px;
-    float: right ;
-    
+    float: right;
     cursor: pointer;
     text-align: center;
     font-size: 30px;
     transition: all 1s ease;
+   
+    
   }
-   nav.active{
+     nav.active{
     
     display: block;
     width: 100%;
@@ -178,7 +174,6 @@ nav .start-collaborate,a:nth-child(5):hover~.animation{
     text-align: center;
     animation: fadeInAnimation 1s;
   }
-  
   nav{
     display: none;
   }
@@ -201,7 +196,14 @@ nav .start-collaborate,a:nth-child(5):hover~.animation{
   nav.active div{
     display: none;
   }
-  
+  nav.active{
+    display: block;
+    width: 100%;
+    margin: 0;
+    align-items: center;
+    text-align: center;
+    animation: fadeInAnimation 1s;
+  }
   nav.active a, nav.mid a{
     padding: 10px 0;
     margin: 0 auto;
@@ -210,9 +212,9 @@ nav .start-collaborate,a:nth-child(5):hover~.animation{
     border-bottom: solid gold 5px;
     border-radius: 5px;
     transition: all 0.5s ease;
+    width:150px;
   }
 }
-
 
 
 
@@ -220,7 +222,7 @@ nav .start-collaborate,a:nth-child(5):hover~.animation{
 @media  screen and (max-width:4000px) {
  
   nav a{
-    font-size: 1.42rem;
+    font-size: 1.38rem;
   }
   .navbar_logo{
     width:25rem;
@@ -281,62 +283,3 @@ nav .start-collaborate,a:nth-child(5):hover~.animation{
     right:15px;
   }
 }
-/* 
-@media screen and(max-width:860px) {
-   
-  .menu-toggle{
-    display:block;
-    width: 40px;
-    height: 40px;
-    margin: 40px 20px;
-    float: right ;
-    cursor: pointer;
-    text-align: center;
-    font-size: 30px;
-    transition: all 1s ease;
-  }
-   nav.active{
-    
-    display: block;
-    width: 80%;
-    margin-right:117px;
-    align-items: center;
-    text-align: center;
-    animation: fadeInAnimation 1s;
-  }
-  
-  nav{
-    display: none;
-  }
-  .navbar_logo{
-    min-width: 250px;
-    width: 70vw;
-    max-width: 300px;
-  }
-  nav.mid{
-    display: block;
-    width: 100%;
-    margin: 0;
-    align-items: center;
-    text-align: center;
-    animation: fadeOutAnimation 1s;
-  }
-  nav.mid div{
-    display: none;
-  }
-  nav.active div{
-    display: none;
-  }
-  
-  nav.active a, nav.mid a{
-    padding: 10px 0;
-    margin: 0 auto;
-  }
-  nav.active a:hover{
-    border-bottom: solid gold 5px;
-    border-radius: 5px;
-    transition: all 0.5s ease;
-  }
-  
-  
-} */

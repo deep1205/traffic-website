@@ -171,7 +171,7 @@ const HospitalList = (props) => {
         ispicked={hospital.ispicked}
       />
       {hospital.name !== "" && cardOpen ? (
-        <div className="carddetails">
+        <div className="carddetails">e
           <div className="hospital-details">
             <h1 className="hospital-title" style={{ fontSize: "2rem" }}>
               Ride details :

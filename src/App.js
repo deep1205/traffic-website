@@ -4,7 +4,8 @@ import Homepage from "./Screens/Homepage";
 import Login from "./Screens/Login.js";
 import Pastride from "./Screens/Pastride.js";
 import Footer from "./Components/Footer/Footer"
-
+import Profilepage from "./Screens/Profilepage";
+import Requestpage  from "./Screens/Requestpage";
 import { GuardProvider, GuardedRoute } from "react-router-guards";
 
 const requireLogin = (to, from, next) => {
@@ -34,6 +35,13 @@ const App = () => {
             component={Pastride}
             meta={{ auth: true }}
           />
+          <GuardedRoute
+            path="/request"
+            exact
+            component={Requestpage}
+            meta={{ auth: true }}
+          />
+        
           <Route exact path="/login">
             <Login />
           </Route>

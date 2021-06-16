@@ -6,7 +6,7 @@ import PastrideList from "../Components/Googlemaps/Pastrideslist"
 const Pastride = () => {
     return (
       <>
-        <Header location="pastride" />
+        <Header location="track" />
         <PastrideList />
       </>
     );

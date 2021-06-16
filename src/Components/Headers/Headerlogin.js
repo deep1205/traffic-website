@@ -84,10 +84,10 @@ function Header({ location }) {
           {/* <NavLink to="/signup">Signup</NavLink> */}
           {location === "home" && <div className="animation start-home" />}
           {location === "pastride" && <div className="animation start-user" />}
-          {location === "login" && <div className="animation start-hospital" />}
-          {/* {location === "profile" && (
+          {location === "profiledd" && <div className="animation start-hospital" />}
+          {location === "profile" && (
             <div className="animation start-aboutus" />
-          )} */}
+          )}
           {/* {location === "login" && (
           <div className="animation start-collaborate" />
         )} */}
