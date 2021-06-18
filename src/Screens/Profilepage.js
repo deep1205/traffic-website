@@ -3,7 +3,7 @@ import Header  from '../Components/Headers/Header'
 const Profilepage = () => {
     return (
         <div>
-        <Header location="profile"/>
+        <Header location="profilgghjbhe"/>
              I AM Profile pAge
         </div>
     )

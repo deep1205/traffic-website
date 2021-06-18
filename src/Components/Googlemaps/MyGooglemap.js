@@ -20,11 +20,7 @@ var map,
   ;
 
 const HomePageSideMap = (props) => {
-  console.log(`Ispicked value is ${props.ispicked}`);
-   console.log(
-     `red color polyline is patient poline and value is ${props.polyline}`
-   );
-  console.log(`green color polyline is hospital poline and value is ${props.hospitalpolyline}`);
+
   useEffect(() => {
     if (
       map &&
@@ -61,18 +57,7 @@ const HomePageSideMap = (props) => {
        strokeColor: "red",
      });
       }
-      // console.log(poly);
-      // const hospitallocation = [poly[0].lat, poly[0].lng];
-      // const patientlocation = [
-      //   poly[poly.length - 1].lat,
-      //   poly[poly.length - 1].lng,
-      // ];
-      // console.log(
-      //   `Hospital location getting from polyline: [${hospitallocation}]`
-      // );
-      // console.log(
-      //   `Patient location getting from polyline : [${patientlocation}]`
-      // );
+    
 
       driverPath.setPath(poly);
       driverPath.setMap(map);
@@ -105,8 +90,8 @@ const HomePageSideMap = (props) => {
   }, [props.rideobjectid]);
 
   useEffect(() => {
-    if (props._id !== "") {
-      driversocket.emit("join", { roomid: props._id });
+    if (props.driverid !== "") {
+      driversocket.emit("join", { roomid: props.driverid });
       driversocket.on("message", (res) => {
         console.log("driver", res);
       });
@@ -115,7 +100,7 @@ const HomePageSideMap = (props) => {
         setDriverLocation(coordinates);
       });
     }
-  }, [props._id]);
+  }, [props.driverid]);
 
   // useEffect(() => {
   //   var options = {

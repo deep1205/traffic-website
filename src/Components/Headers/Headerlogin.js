@@ -66,31 +66,40 @@ function Header({ location }) {
             Home
           </NavLink>
 
-          <NavLink style={{ visibility: "hidden" }}  to="/pastride">
+          <NavLink style={{ visibility: "hidden" }} to="/pastride">
+            Pastride
+          </NavLink>
+          <NavLink style={{ visibility: "hidden" }} to="/pastride">
+            Pastride
+          </NavLink>
+          <NavLink style={{ visibility: "hidden" }} to="/pastride">
             Pastride
           </NavLink>
 
           <NavLink
             to="/login"
-            style={{ visibility: "hidden" }}
             onClick={() => {
               localStorage.removeItem("token");
               window.location.reload();
             }}
-            style={{ cursor: "pointer" }}
+            style={{ border: "fixed" }}
           >
             Login
           </NavLink>
           {/* <NavLink to="/signup">Signup</NavLink> */}
-          {location === "home" && <div className="animation start-home" />}
-          {location === "pastride" && <div className="animation start-user" />}
-          {location === "profiledd" && <div className="animation start-hospital" />}
-          {location === "profile" && (
+          {location === "home" && <div className="animation start-user" />}
+          {location === "pastride" && (
+            <div className="animation start-hospital" />
+          )}
+          {location === "profileff" && (
             <div className="animation start-aboutus" />
           )}
-          {/* {location === "login" && (
-          <div className="animation start-collaborate" />
-        )} */}
+          {location === "profile" && (
+            <div className="animation start-collaborate" />
+          )}
+          {/* {location === "profile" && (
+            <div className="animation start-collaborate" />
+          )} */}
           {/* {location === "login" && (
             <div className="animation start-collaborate" />
           )} */}

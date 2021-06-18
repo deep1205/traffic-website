@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import io from "socket.io-client";
-import "../../Css/Map.css";
+import "../../Css/RequestsMap.css";
 import hospitalicon from "../../images/hospitalicon.png";
 import drivericon from "../../images/drivericon.png";
 import usericon from "../../images/usericon.png";
@@ -19,7 +19,6 @@ var map,
   driverPath;
 
 const HomePageSideMap = (props) => {
-
   useEffect(() => {
     if (map && props.pickupcoordinates.length > 0) {
       map.setCenter({
@@ -55,7 +54,7 @@ const HomePageSideMap = (props) => {
           strokeColor: "red",
         });
       }
-     
+    
 
       driverPath.setPath(poly);
       driverPath.setMap(map);
@@ -73,7 +72,52 @@ const HomePageSideMap = (props) => {
   usersocket = io(userendpoi);
   driversocket = io(driverendpoi);
 
-  
+  useEffect(() => {
+    if (props.rideobjectid !== "") {
+      usersocket.emit("join", { roomid: props.rideobjectid });
+      usersocket.on("message", (res) => {
+        console.log("user", res);
+      });
+      // usersocket.emit("sendUserLocation", { coordinates: userLocation });
+      usersocket.on("userlocation", ({ coordinates }) => {
+        console.log("user", coordinates);
+        setUserLocation(coordinates);
+      });
+    }
+  }, [props.rideobjectid]);
+
+  useEffect(() => {
+    if (props._id !== "") {
+      driversocket.emit("join", { roomid: props._id });
+      driversocket.on("message", (res) => {
+        console.log("driver", res);
+      });
+      driversocket.on("driverlocation", ({ coordinates }) => {
+        console.log("driver", coordinates);
+        setDriverLocation(coordinates);
+      });
+    }
+  }, [props._id]);
+
+  // useEffect(() => {
+  //   var options = {
+  //     maximumAge: 10000,
+  //     timeout: 10000,
+  //     enableHighAccuracy: true,
+  //   };
+  //   var watchID = navigator.geolocation.watchPosition(
+  //     onSuccess,
+  //     onError,
+  //     options
+  //   );
+  // }, []);
+  // function onSuccess(pos) {
+  //   setUserLocation([pos.coords.latitude, pos.coords.longitude]);
+  // }
+  // function onError(error) {
+  //   alert("code: " + error.code + "\n" + "message" + error.message + "\n");
+  // }
+
   /*----------------------------current user location initially when page loads -------------------*/
   const myLocation = () => {
     const handleLocationError = (browserHasGeolocation, infoWindow, pos) => {
@@ -297,19 +341,7 @@ const HomePageSideMap = (props) => {
   // };
   //geolocation end
 
-  return (
-    <main>
-      <div id="searchbartrackpage">
-        <input
-          placeholder="Search the Location              🍳"
-          className="input"
-          id="mapsearch"
-        />
-      </div>
-
-      <div className="indexMaptrackpage" id="map"></div>
-    </main>
-  );
+  return <div className="indexReqMaptrackpage" id="map"></div>;
 };
 
 function loadScript(url) {

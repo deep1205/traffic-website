@@ -1,0 +1,25 @@
+.indexReqMaptrackpage {
+    height: 500px;
+    width:750px ;
+    margin-top: 10px;
+  }
+  
+  #searchbartrackpage{
+    display: none;
+  }
+  
+  @media only screen and (max-width: 1080px) {
+    .indexReqMaptrackpage {
+      height: 500px;
+      width:100% ;
+      margin-top: 10px;
+    }  
+  }
+
+  @media only screen and (min-width: 1800px) {
+    .indexReqMaptrackpage {
+      height: 500px;
+      width:1000px ;
+      margin-top: 10px;
+    }  
+  }

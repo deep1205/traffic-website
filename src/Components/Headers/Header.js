@@ -85,9 +85,9 @@ function Navbar({ location }) {
           {location === "profile" && (
             <div className="animation start-collaborate" />
           )}
-          {location === "login" && (
+          {/* {location === "login" && (
             <div className="animation start-collaborate" />
-          )}
+          )} */}
         </nav>
         <div className="clearfix"></div>
       </div>

@@ -67,7 +67,7 @@ const Login = () => {
 
   return (
     <>
-      <Header location="profilerr" />
+      <Header location="profile" />
       <div class=" fadeInDown">
         <div className="login-page" style={{ position: "relative" }}>
           <div className="form">

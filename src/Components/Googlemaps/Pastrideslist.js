@@ -1,4 +1,21 @@
 import React, { useState, useEffect } from "react";
+import Paper from "@material-ui/core/Paper";
+import Fab from "@material-ui/core/Fab";
+import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
+import FirstPageIcon from "@material-ui/icons/FirstPage";
+import LastPageIcon from "@material-ui/icons/LastPage";
+import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
+import MenuIcon from "@material-ui/icons/Menu";
+import Modal from "@material-ui/core/Modal";
+import PastRideMap from "./Mapforpastride";
+import Drawer from "@material-ui/core/Drawer";
+import axios from "axios";
+import moment from "moment";
+import MaterialTable from "material-table";
+import FilterListIcon from "@material-ui/icons/FilterList";
+import CloseIcon from "@material-ui/icons/Close";
 import {
   ButtonDropdown,
   DropdownToggle,
@@ -8,259 +25,191 @@ import {
   Row,
   Col,
 } from "reactstrap";
-import Icon from "supercons";
-import ListIcon from "@material-ui/icons/List";
-import axios from "axios";
-import HighlightOffSharpIcon from "@material-ui/icons/HighlightOffSharp";
-import decodePolyline from "decode-google-map-polyline";
 import "./Ridesdetail.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Map from "./Mapforpastride";
 
-const HospitalList = (props) => {
-  const [dropdownOpen, setOpen] = useState(false);
+const PastRides = () => {
   const [cardOpen, setCardOpen] = useState(false);
-  const [rides, setdata] = useState([]);
-  const toggle = () => setOpen(!dropdownOpen);
+  const [rides, setRides] = useState([]);
+  const [rideDetail, setRideDetail] = useState({});
+  const [tableOpen, setTableOpen] = useState(false);
+
+  const handleDrawerToggle = () => {
+    setTableOpen(!tableOpen);
+  };
+
   useEffect(() => {
     axios
       .get("https://server.prioritypulse.co.in/police/pastRides", {
-        headers: { Authorization: localStorage.getItem("token") },
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       })
       .then((res) => {
         const data = res.data;
         console.log(data);
         const arr = data.map((data) => {
-          let k = new Date(data.createdAt);
           return {
-            name: data["pickedBy"].name,
+            name: data["name"],
             age: data.age,
             caseprior: data.casePrior,
-            pname: data.name,
-            driverno: data["pickedBy"].mobileNo,
+            driverNo: data["pickedBy"].mobileNo,
+            driverName: data["pickedBy"].name,
             pcase: data.pcase,
-            date: k.getDate() + "/" + k.getMonth() + "/" + k.getFullYear(),
+            date: moment(data["createdAt"]).format("D/MM/YYYY"),
             rideid: data.RideId,
-            _id: data["pickedBy"]._id,
+            driverid: data["pickedBy"]._id,
             guardianNo: data.guardianNo,
             patientNo: data.patientNo,
-            polyline: data.patientPolyline,
+            polyline: data["patientPolyline"],
             pickupcoordinates: data["pickUplocation"].coordinates,
             hospitalcoordinates:
               data["hospital"]["hospitalLocation"].coordinates,
             ispicked: data.isPicked,
-            hospitalpolyline: data.hospitalPolyline,
+            hospitalpolyline: data["hospitalPolyline"],
+            rideobjectid: data["_id"],
           };
         });
-        console.log(arr)
-        setdata(arr);
+        setRides(arr);
       });
   }, []);
 
-  const [hospital, setHospital] = useState({
-    name: "",
-    age: "",
-    date: "",
-    caseprior: "",
-    guardianNo: "",
-    patientNo: "",
-    pname: "",
-    pcase: "",
-    rideid: "",
-    driverno: "",
-    _id: "",
-    polyline: "",
-    pickupcoordinates: [],
-    hospitalcoordinates: [],
-    ispicked: false,
-    hospitalpolyline: "",
+  const columns = [
+    { field: "id", title: "Id", hidden: true },
+    { field: "name", title: "Name" },
+    { field: "case", title: "Case" },
+    { field: "date", title: "Date" },
+    { field: "age", title: "Age", hidden: true, type: "numeric" },
+    { field: "casePrior", title: "Case Prior", hidden: true },
+    { field: "isPicked", title: "is Picked", hidden: true },
+    { field: "driverNo", title: "Driver Number", hidden: true },
+    { field: "driverName", title: "Driver Name", hidden: true },
+    { field: "guardianNo", title: "Guardian Number", hidden: true },
+    { field: "patientNo", title: "Patient Number", hidden: true },
+    { field: "patientPolyline", title: "Patient Polyline", hidden: true },
+    { field: "hospitalPolyline", title: "Hospital Polyline", hidden: true },
+    { field: "hospitalCoords", title: "Hospital Coordinates", hidden: true },
+  ];
+  const rows = rides.map((ride) => {
+    return {
+      name: ride["name"],
+      case: ride["pcase"],
+      date: ride["date"],
+      age: ride["age"],
+      rideid: ride["rideid"],
+      casePrior: ride["caseprior"],
+      driverNo: ride["driverNo"],
+      driverName: ride["driverName"],
+      guardianNo: ride["guardianNo"],
+      patientNo: ride["patientNo"],
+      ispicked: ride["ispicked"],
+      pickupcoordinates: ride["pickupcoordinates"],
+      hospitalcoordinates: ride["hospitalcoordinates"],
+      polyline: ride["polyline"],
+      hospitalpolyline: ride["hospitalpolyline"],
+      rideobjectid: ride["rideobjectid"],
+      driverid: ride["driverid"],
+    };
   });
 
-  return (
-    <div>
-      <ButtonDropdown
-        direction="right"
-        isOpen={dropdownOpen}
-        toggle={toggle}
-        style={{ zIndex: 10 }}
-      >
-        <DropdownToggle
-          style={{
-            background: "black",
-            color: "white",
-            top: "57px",
-            position: "absolute",
-            zIndex: "34",
-            left: "10px",
-            padding: "4px",
-            outline: "none",
-          }}
-        >
-          <Icon glyph="list" size={38} />
-          {/* <ListIcon fontSize="large" color="red" /> */}
-        </DropdownToggle>
-        <DropdownMenu className="dropdown-menu" positionFixed={true}>
-          <div>
-            <div style={{ textAlign: "center", color: "blue" }}>
-              <h4>
-                Past Rides
-                <span
-                  className="dropdown-span"
-                  style={{ marginLeft: "39px", color: "black" }}
-                  onClick={() => setOpen(!dropdownOpen)}
-                >
-                  <Icon glyph="view-close-small" size={28} />
-                </span>
-              </h4>
-              <hr />
-            </div>
-            {rides.map((val, id) => {
-              return (
-                <div>
-                  <div key={id}>
-                    <DropdownItem
-                      onClick={() => {
-                        setCardOpen(true);
-                        setHospital({
-                          name: val.name,
-                          age: val.age,
-                          guardianNo: val.guardianNo,
-                          patientNo: val.patientNo,
-                          caseprior: val.caseprior,
-                          pcase: val.pcase,
-                          pname: val.pname,
-                          rideid: val.rideid,
-                          driverno: val.driverno,
-                          date: val.date,
-                          _id: val._id,
-                          polyline: val.polyline,
-                          pickupcoordinates: val.pickupcoordinates,
-                          hospitalcoordinates: val.hospitalcoordinates,
-                          ispicked: val.ispicked,
-                          hospitalpolyline: val.hospitalpolyline,
-                        });
-                      }}
-                    >
-                      <div
-                        style={{
-                          diplay: "flex",
-                          color: "black",
-                          flexDirection: "row",
-                        }}
-                      >
-                        <h6>{val.name}</h6>
-                        <h6>{val.pcase}</h6>
-                        <h6>{val.date}</h6>
-                      </div>
-                    </DropdownItem>
-                  </div>
-                  <hr />
-                </div>
-              );
-            })}
-          </div>
-        </DropdownMenu>
-      </ButtonDropdown>
-      <Map
-        _id={hospital._id}
-        rideid={hospital.rideid}
-        polyline={hospital.polyline}
-        pickupcoordinates={hospital.pickupcoordinates}
-        hospitalcoordinates={hospital.hospitalcoordinates}
-        hospitalpolyline={hospital.hospitalpolyline}
-        ispicked={hospital.ispicked}
-      />
-      {hospital.name !== "" && cardOpen ? (
-        <div className="carddetails">e
-          <div className="hospital-details">
-            <h1 className="hospital-title" style={{ fontSize: "2rem" }}>
-              Ride details :
-              <span
-                className="cardCross"
-                style={{ position: "absolute", right: "40px", color: "white" }}
-                onClick={() => setCardOpen(false)}
-              >
-                <Icon glyph="view-close-small" size={38} />
-                {/* <HighlightOffSharpIcon fontSize="medium" /> */}
-              </span>
-            </h1>
-          </div>
-          <div className="card-body">
-            <Container>
-              <Row style={{ margin: "0 50px" }}>
-                {/* </Row>
-              <Row xs="2" className="row"> */}
-                <Col md={{ size: "auto", offset: 0 }}>
-                  <div className="shadow">
-                    <h6 className="hospital-detail" style={{ padding: "10px" }}>
-                      Name: {hospital.name}
-                    </h6>
-                  </div>
-                </Col>{" "}
-                <Col md={{ size: "auto", offset: 0 }}>
-                  <div className="shadow">
-                    <h6 className="hospital-detail" style={{ padding: "10px" }}>
-                      Age: {hospital.age}
-                    </h6>
-                  </div>
-                </Col>{" "}
-                <Col md={{ size: "auto", offset: 0 }}>
-                  <div className="shadow">
-                    <h6 className="hospital-detail" style={{ padding: "10px" }}>
-                      Case: {hospital.pcase}
-                    </h6>
-                  </div>
-                </Col>
-                <Col md={{ size: "auto", offset: 0 }}>
-                  <div className="shadow">
-                    <h6 className="hospital-detail" style={{ padding: "10px" }}>
-                      Case priority: {hospital.caseprior}
-                    </h6>
-                  </div>
-                </Col>
-                <Col md={{ size: "auto", offset: 0 }}>
-                  <div className="shadow">
-                    <h6 className="hospital-detail" style={{ padding: "10px" }}>
-                      Guardian No: {hospital.guardianNo}
-                    </h6>
-                  </div>
-                </Col>
-                <Col md={{ size: "auto", offset: 0 }}>
-                  <div className="shadow">
-                    <h6 className="hospital-detail" style={{ padding: "10px" }}>
-                      Patient No : {hospital.patientNo}
-                    </h6>
-                  </div>
-                </Col>
-                {/* </Row> */}
-                {/* <Row xs="2" className="row"> */}
-                <Col md={{ size: "auto", offset: 0 }}>
-                  <div className="shadow">
-                    <h6 className="hospital-detail" style={{ padding: "10px" }}>
-                      <span style={{ fontSize: "15px" }}>
-                        {" "}
-                        Id:{hospital._id}
-                      </span>
-                    </h6>
-                  </div>
-                </Col>
-                <Col md={{ size: "auto", offset: 0 }}>
-                  <div className="shadow">
-                    <h6
-                      className="hospital-detail"
-                      style={{ padding: "10px", fontSize: "15px" }}
-                    >
-                      RideId: {hospital.rideid}
-                    </h6>
-                  </div>
-                </Col>
-              </Row>
-            </Container>
-          </div>
-        </div>
-      ) : null}
+  const showRideDetail = (event, rowData) => {
+    setRideDetail(rowData);
+    setCardOpen(true);
+  };
+  console.log(rideDetail);
+
+  const hideRideDetail = () => {
+    setCardOpen(false);
+  };
+  const rideDetailBox = (
+    <div className="carddetails">
+      <div className="card-header">
+        Ride details :
+        <CloseIcon
+          style={{ cursor: "pointer", fontSize: "2rem" }}
+          onClick={hideRideDetail}
+        />
+      </div>
+      <div className="card-body">
+        <Container>
+          <Row>
+            <Col>
+              <div className="card-box">Name:{rideDetail.name}</div>
+            </Col>
+            <Col>
+              <div className="card-box">Case:{rideDetail.case}</div>
+            </Col>
+            <Col>
+              <div className="card-box">Age:{rideDetail.age}</div>
+            </Col>
+            <Col>
+              <div className="card-box">Guardian {rideDetail.guardianNo}</div>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <div className="card-box">
+                Driver Name:{rideDetail.driverName}
+              </div>
+            </Col>
+            <Col>
+              <div className="card-box">
+                Case Priority:{rideDetail.casePrior}
+              </div>
+            </Col>
+            <Col>
+              <div className="card-box">
+                Driver Number:{rideDetail.driverNo}
+              </div>
+            </Col>
+          </Row>
+        </Container>
+      </div>
     </div>
   );
-};
 
-export default HospitalList;
+  return (
+    <main>
+      <ButtonDropdown
+        direction="right"
+        isOpen={tableOpen}
+        toggle={handleDrawerToggle}
+        style={{ zIndex: "10", backgroundColor: "white" }}
+      >
+        <DropdownToggle style={{ border: "none", backgroundColor: "white" }}>
+          <MenuIcon color="primary" size="large" />
+        </DropdownToggle>
+        <DropdownMenu style={{ maxWidth: "99vw", padding: "0" }}>
+          <MaterialTable
+            columns={columns}
+            data={rows}
+            icons={{
+              Filter: FilterListIcon,
+              FirstPage: FirstPageIcon,
+              LastPage: LastPageIcon,
+              PreviousPage: ArrowBackIcon,
+              NextPage: ArrowForwardIcon,
+            }}
+            onRowClick={showRideDetail}
+            options={{
+              filtering: true,
+              search: false,
+              toolbar: false,
+            }}
+          />
+        </DropdownMenu>
+      </ButtonDropdown>
+
+      <PastRideMap
+        rideid={rideDetail.rideid}
+        rideobjectid={rideDetail.rideobjectid}
+        driverid={rideDetail.driverid}
+        polyline={rideDetail.polyline} //patient polyline
+        pickupcoordinates={rideDetail.pickupcoordinates}
+        hospitalcoordinates={rideDetail.hospitalcoordinates}
+        hospitalpolyline={rideDetail.hospitalpolyline}
+        ispicked={rideDetail.ispicked}
+      />
+      {cardOpen && rideDetailBox}
+    </main>
+  );
+};
+export default PastRides;
