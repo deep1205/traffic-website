@@ -157,13 +157,13 @@ const Requests = () => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
   return (
     <>
       <Header location="pastride" />
       <div className={styles.side}>
         <div className={styles.screen}>
           {details._id !== "" ? (
+            
             <Map
               _id={details["pickedBy"]._id}
               rideobjectid={details._id}

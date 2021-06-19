@@ -9,13 +9,15 @@ import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import MenuIcon from "@material-ui/icons/Menu";
 import Modal from "@material-ui/core/Modal";
-import PastRideMap from "./MyGooglemap";
+import PastRideMap from "./MyGooglemap.js";
 import Drawer from "@material-ui/core/Drawer";
 import axios from "axios";
 import moment from "moment";
 import MaterialTable from "material-table";
 import FilterListIcon from "@material-ui/icons/FilterList";
 import CloseIcon from "@material-ui/icons/Close";
+import Icon from "supercons";
+import "./Ridesdetail.css";
 import {
   ButtonDropdown,
   DropdownToggle,
@@ -25,7 +27,6 @@ import {
   Row,
   Col,
 } from "reactstrap";
-import "./Ridesdetail.css"
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const PastRides = () => {
@@ -48,26 +49,35 @@ const PastRides = () => {
         console.log(data);
         const arr = data.map((data) => {
           return {
-            name: data["name"],
-            age: data.age,
-            caseprior: data.casePrior,
-            driverNo: data["pickedBy"].mobileNo,
-            driverName: data["pickedBy"].name,
-            pcase: data.pcase,
-            date: moment(data["createdAt"]).format("D/MM/YYYY"),
-            rideid: data.RideId,
-            driverid: data["pickedBy"]._id,
-            guardianNo: data.guardianNo,
-            patientNo: data.patientNo,
-            polyline: data["patientPolyline"],
-            pickupcoordinates: data["pickUplocation"].coordinates,
-            hospitalcoordinates:
-              data["hospital"]["hospitalLocation"].coordinates,
-            ispicked: data.isPicked,
-            hospitalpolyline: data["hospitalPolyline"],
-            rideobjectid: data["_id"],
+            name: data ? data["name"] : "Not Available",
+            age: data ? data.age : "Not Available",
+            caseprior: data ? data.casePrior : "Not Available",
+            driverNo: data.pickedBy
+              ? data["pickedBy"].mobileNo
+              : "Not Available",
+            driverName: data.pickedBy ? data["pickedBy"].name : "Not Available",
+            pcase: data ? data.pcase : "Not Available",
+            date: data
+              ? moment(data["createdAt"]).format("D/MM/YYYY")
+              : "Not Available",
+            rideid: data ? data.RideId : "Not Available",
+            driverid: data.pickedBy ? data["pickedBy"]._id : "Not Available",
+            guardianNo: data ? data.guardianNo : "Not Available",
+            patientNo: data ? data.patientNo : "Not Available",
+            polyline: data ? data["patientPolyline"] : "NOt Available",
+            pickupcoordinates: data
+              ? data["pickUplocation"].coordinates
+              : "Not Available",
+            hospitalcoordinates: data["hospital"]
+              ? data["hospital"]["hospitalLocation"].coordinates
+              : "Not Available",
+            ispicked: data ? data.isPicked : "Not Available",
+            hospitalpolyline: data ? data["hospitalPolyline"] : "Not Available",
+            rideobjectid: data ? data["_id"] : "Not Available",
+            activestatus: data ? data["activeStatus"] : "Not Available",
           };
         });
+
         setRides(arr);
       });
   }, []);
@@ -107,12 +117,14 @@ const PastRides = () => {
       hospitalpolyline: ride["hospitalpolyline"],
       rideobjectid: ride["rideobjectid"],
       driverid: ride["driverid"],
+      activestatus: ride["activestatus"],
     };
   });
 
   const showRideDetail = (event, rowData) => {
     setRideDetail(rowData);
     setCardOpen(true);
+    setTableOpen(false);
   };
   console.log(rideDetail);
 
@@ -121,43 +133,86 @@ const PastRides = () => {
   };
   const rideDetailBox = (
     <div className="carddetails">
-      <div className="card-header">
-        Ride details :
-        <CloseIcon
-          style={{ cursor: "pointer", fontSize: "2rem" }}
-          onClick={hideRideDetail}
-        />
+      <div className="hospital-details">
+        <h1 className="hospital-title" style={{ fontSize: "2rem" }}>
+          Ride details :
+          <span
+            className="cardCross"
+            style={{ position: "absolute", right: "40px", color: "white" }}
+            onClick={() => setCardOpen(false)}
+          >
+            <Icon glyph="view-close-small" size={38} />
+            {/* <HighlightOffSharpIcon fontSize="medium" /> */}
+          </span>
+        </h1>
       </div>
       <div className="card-body">
         <Container>
-          <Row>
-            <Col>
-              <div className="card-box">Name:{rideDetail.name}</div>
-            </Col>
-            <Col>
-              <div className="card-box">Case:{rideDetail.case}</div>
-            </Col>
-            <Col>
-              <div className="card-box">Age:{rideDetail.age}</div>
-            </Col>
-            <Col>
-              <div className="card-box">Guardian {rideDetail.guardianNo}</div>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <div className="card-box">
-                Driver Name:{rideDetail.driverName}
+          <Row style={{ margin: "0 50px" }}>
+            {/* </Row>
+              <Row xs="2" className="row"> */}
+            <Col md={{ size: "auto", offset: 0 }}>
+              <div className="shadow">
+                <h6 className="hospital-detail" style={{ padding: "10px" }}>
+                  Patient Name: {rideDetail.name}
+                </h6>
+              </div>
+            </Col>{" "}
+            <Col md={{ size: "auto", offset: 0 }}>
+              <div className="shadow">
+                <h6 className="hospital-detail" style={{ padding: "10px" }}>
+                  Age: {rideDetail.age}
+                </h6>
+              </div>
+            </Col>{" "}
+            <Col md={{ size: "auto", offset: 0 }}>
+              <div className="shadow">
+                <h6 className="hospital-detail" style={{ padding: "10px" }}>
+                  Case: {rideDetail.case}
+                </h6>
               </div>
             </Col>
-            <Col>
-              <div className="card-box">
-                Case Priority:{rideDetail.casePrior}
+            <Col md={{ size: "auto", offset: 0 }}>
+              <div className="shadow">
+                <h6 className="hospital-detail" style={{ padding: "10px" }}>
+                  Case priority: {rideDetail.casePrior}
+                </h6>
               </div>
             </Col>
-            <Col>
-              <div className="card-box">
-                Driver Number:{rideDetail.driverNo}
+            <Col md={{ size: "auto", offset: 0 }}>
+              <div className="shadow">
+                <h6 className="hospital-detail" style={{ padding: "10px" }}>
+                  Guardian No: {rideDetail.guardianNo}
+                </h6>
+              </div>
+            </Col>
+            <Col md={{ size: "auto", offset: 0 }}>
+              <div className="shadow">
+                <h6 className="hospital-detail" style={{ padding: "10px" }}>
+                  Patient No : {rideDetail.patientNo}
+                </h6>
+              </div>
+            </Col>
+            {/* </Row> */}
+            {/* <Row xs="2" className="row"> */}
+            <Col md={{ size: "auto", offset: 0 }}>
+              <div className="shadow">
+                <h6 className="hospital-detail" style={{ padding: "10px" }}>
+                  <span style={{ fontSize: "15px" }}>
+                    {" "}
+                    Date:{rideDetail.date}
+                  </span>
+                </h6>
+              </div>
+            </Col>
+            <Col md={{ size: "auto", offset: 0 }}>
+              <div className="shadow">
+                <h6
+                  className="hospital-detail"
+                  style={{ padding: "10px", fontSize: "15px" }}
+                >
+                  Driver No: {rideDetail.driverNo}
+                </h6>
               </div>
             </Col>
           </Row>
@@ -177,7 +232,9 @@ const PastRides = () => {
         <DropdownToggle style={{ border: "none", backgroundColor: "white" }}>
           <MenuIcon color="primary" size="large" />
         </DropdownToggle>
-        <DropdownMenu style={{ maxWidth: "99vw", padding: "0" }}>
+        <DropdownMenu
+          style={{ maxWidth: "100vw", width: "400px", padding: "0px" }}
+        >
           <MaterialTable
             columns={columns}
             data={rows}

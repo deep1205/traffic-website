@@ -19,6 +19,8 @@ var map,
   driverPath;
 
 const HomePageSideMap = (props) => {
+  console.log(props._id);
+  console.log(props.rideobjectid);
   useEffect(() => {
     if (map && props.pickupcoordinates.length > 0) {
       map.setCenter({
