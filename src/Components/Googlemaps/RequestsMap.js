@@ -19,19 +19,19 @@ var map,
   driverPath;
 
 const HomePageSideMap = (props) => {
-  console.log(props._id);
-  console.log(props.rideobjectid);
+  console.log(`Ispicked value is ${props.ispicked}`);
+  console.log(
+    `red color polyline is patient poline and value is ${props.polyline}`
+  );
+  console.log(
+    `green color polyline is hospital poline and value is ${props.hospitalpolyline}`
+  );
   useEffect(() => {
     if (map && props.pickupcoordinates.length > 0) {
       map.setCenter({
         lat: props.pickupcoordinates[0],
         lng: props.pickupcoordinates[1],
       });
-      usermarker.setPosition({
-        lat: props.pickupcoordinates[0],
-        lng: props.pickupcoordinates[1],
-      });
-      usermarker.setMap(map);
       hospitalmarker.setPosition({
         lat: props.hospitalcoordinates[0],
         lng: props.hospitalcoordinates[1],
@@ -47,6 +47,25 @@ const HomePageSideMap = (props) => {
         ? props.hospitalpolyline
         : props.polyline;
       poly = decodePolyline(visibilepolyline);
+      let idx = poly.length - 1;
+      console.log(poly, idx);
+      if (idx !== -1) {
+        let cen = {
+          lat: (poly[0].lat + poly[idx].lat) / 2,
+          lng: (poly[0].lng + poly[idx].lng) / 2,
+        };
+        map.setCenter(cen);
+      } else {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition((pos) => {
+            let cen = {
+              lat: pos.coords.latitude,
+              lng: pos.coords.longitude,
+            };
+            map.setCenter(cen);
+          });
+        }
+      }
       if (props.ispicked === true) {
         driverPath.setOptions({
           strokeColor: "green",
@@ -56,37 +75,20 @@ const HomePageSideMap = (props) => {
           strokeColor: "red",
         });
       }
-    
 
       driverPath.setPath(poly);
+      console.log(poly);
       driverPath.setMap(map);
     } else if (map) {
       driverPath.setMap(null);
     }
   }, [props.pickupcoordinates]);
 
-  const userendpoi = "https://server.prioritypulse.co.in/usertrack";
   const driverendpoi = "https://server.prioritypulse.co.in/drivertrack";
 
-  const [userLocation, setUserLocation] = useState([]);
   const [driverLocation, setDriverLocation] = useState([]);
 
-  usersocket = io(userendpoi);
   driversocket = io(driverendpoi);
-
-  useEffect(() => {
-    if (props.rideobjectid !== "") {
-      usersocket.emit("join", { roomid: props.rideobjectid });
-      usersocket.on("message", (res) => {
-        console.log("user", res);
-      });
-      // usersocket.emit("sendUserLocation", { coordinates: userLocation });
-      usersocket.on("userlocation", ({ coordinates }) => {
-        console.log("user", coordinates);
-        setUserLocation(coordinates);
-      });
-    }
-  }, [props.rideobjectid]);
 
   useEffect(() => {
     if (props._id !== "") {
@@ -101,26 +103,6 @@ const HomePageSideMap = (props) => {
     }
   }, [props._id]);
 
-  // useEffect(() => {
-  //   var options = {
-  //     maximumAge: 10000,
-  //     timeout: 10000,
-  //     enableHighAccuracy: true,
-  //   };
-  //   var watchID = navigator.geolocation.watchPosition(
-  //     onSuccess,
-  //     onError,
-  //     options
-  //   );
-  // }, []);
-  // function onSuccess(pos) {
-  //   setUserLocation([pos.coords.latitude, pos.coords.longitude]);
-  // }
-  // function onError(error) {
-  //   alert("code: " + error.code + "\n" + "message" + error.message + "\n");
-  // }
-
-  /*----------------------------current user location initially when page loads -------------------*/
   const myLocation = () => {
     const handleLocationError = (browserHasGeolocation, infoWindow, pos) => {
       infoWindow.setPosition(pos);
@@ -162,26 +144,6 @@ const HomePageSideMap = (props) => {
     );
     window.initMap = initMap;
   };
-  useEffect(() => {
-    if (map && userLocation.length > 0) {
-      // infoWindow = new window.google.maps.InfoWindow();
-      // infoWindow.setPosition({ lat: userLocation[0], lng: userLocation[1] });
-      // infoWindow.setContent("You are here");
-      // infoWindow.open(map);
-      map.setCenter({
-        lat: userLocation[0],
-        lng: userLocation[1],
-      });
-
-      usermarker.setPosition({
-        lat: userLocation[0],
-        lng: userLocation[1],
-      });
-
-      // usermarker.setPosition({ lat:props.pickupcoordinates[0], lng:props.pickupcoordinates[1] });
-      usermarker.setMap(map);
-    }
-  }, [userLocation]);
 
   useEffect(() => {
     if (map && driverLocation.length > 0) {
@@ -199,7 +161,7 @@ const HomePageSideMap = (props) => {
   var initMap = () => {
     map = new window.google.maps.Map(document.getElementById("map"), {
       // center: { lat: 26.2258858, lng: 78.2173995 },
-      zoom: 14,
+      zoom: 17,
       streetViewControl: true,
       mapTypeControl: false,
       zoomControlOptions: true,
@@ -211,13 +173,7 @@ const HomePageSideMap = (props) => {
     });
 
     /*--------------user and driver icon -------------*/
-    usermarker = new window.google.maps.Marker({
-      icon: {
-        url: usericon,
-        scaledSize: new window.google.maps.Size(60, 60),
-      },
-      animation: window.google.maps.Animation.DROP,
-    });
+
     drivermarker = new window.google.maps.Marker({
       icon: {
         url: drivericon,
@@ -304,44 +260,6 @@ const HomePageSideMap = (props) => {
       }
     );
   };
-
-  //geolocation start
-  // const myLocation = (e) => {
-  //   const handleLocationError = (browserHasGeolocation, infoWindow, pos) => {
-  //     infoWindow.setPosition(pos);
-  //     infoWindow.setContent(
-  //       browserHasGeolocation
-  //         ? "Error: The Geolocation service failed."
-  //         : "Error: Your browser doesn't support geolocation."
-  //     );
-  //     infoWindow.open(map);
-  //   };
-  //   if (navigator.geolocation) {
-  //     navigator.geolocation.getCurrentPosition(
-  //       (position) => {
-  //         const pos = {
-  //           lat: position.coords.latitude,
-  //           lng: position.coords.longitude,
-  //         };
-  //         infoWindow.setPosition(pos);
-
-  //         infoWindow.setContent("Location found.");
-  //         infoWindow.open(map);
-  //         markers.setPosition(pos);
-  //         map.panTo(pos);
-  //         map.setCenter(pos);
-  //         map.setZoom(16);
-  //       },
-  //       () => {
-  //         handleLocationError(true, infoWindow, map.getCenter());
-  //       }
-  //     );
-  //   } else {
-  //     // Browser doesn't support Geolocation
-  //     handleLocationError(false, infoWindow, map.getCenter());
-  //   }
-  // };
-  //geolocation end
 
   return <div className="indexReqMaptrackpage" id="map"></div>;
 };
