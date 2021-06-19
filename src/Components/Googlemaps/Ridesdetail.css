@@ -11,9 +11,6 @@
 	margin:0 130px;
 	top: 530px;
 	animation: fadeIn ease-in-out 2s  1  forwards;
-
-	
-	
 }
 @keyframes fadeIn {
 	0%{
