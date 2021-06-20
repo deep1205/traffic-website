@@ -1,7 +1,7 @@
 import { React, useEffect, useState, Fragment } from "react";
 
 import styles from "../Css/Request.module.css";
-
+import moment from "moment";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
@@ -85,6 +85,7 @@ const Requests = () => {
     rideid: "",
     driverno: "",
     _id: "",
+
     polyline: "",
     pickupcoordinates: [],
     hospitalcoordinates: [],
@@ -105,7 +106,9 @@ const Requests = () => {
         setAcc(res.data.accepted);
         setRej(res.data.rejected);
         setSaved(res.data.saved);
-        console.log(req, rej, acc);
+        console.log(req);
+        console.log(rej);
+        console.log(req);
       });
   }, []);
   const fromSaved = (data) => {
@@ -295,7 +298,34 @@ const Requests = () => {
             <TabPanel value={value} index={0}>
               <MaterialTable
                 onRowClick={(event, rowData) => {
-                  setDetails(rowData);
+                  console.log(rowData);
+                  setDetails({
+                    name: rowData ? rowData.name : "NOt available",
+                    age: rowData ? rowData.age : "NOt avaialable",
+                    date: rowData
+                      ? moment(rowData["createdAt"]).format("D/MM/YYYY")
+                      : "Not Available",
+                    caseprior: rowData ? rowData.casePrior : "Not Available",
+                    guardianNo: rowData ? rowData.guardianNo : "NOtt Available",
+                    patientNo: rowData ? rowData.patientNo : "Not available",
+                    pname: rowData ? rowData.pname : "NOt Available",
+                    pcase: rowData ? rowData.pcase : "Not Available",
+                    rideid: rowData ? rowData.RideId : "NOt Available",
+                    driverno: rowData ? rowData.driverNo : "Not Available",
+                    _id: rowData.pickedBy
+                      ? rowData["pickedBy"]._id
+                      : "Not Available",
+
+                    polyline: rowData
+                      ? rowData.patientPolyline
+                      : "Not Available",
+                    pickupcoordinates: rowData.pickUplocation
+                      ? rowData["pickUplocation"].coordinates
+                      : "Not Available",
+                    hospitalcoordinates: rowData["hospital"]
+                      ? rowData["hospital"]["hospitalLocation"].coordinates
+                      : "Not Available",
+                  });
                 }}
                 columns={[
                   { title: "Name", field: "name" },
@@ -349,7 +379,33 @@ const Requests = () => {
             <TabPanel value={value} index={1}>
               <MaterialTable
                 onRowClick={(event, rowData) => {
-                  setDetails(rowData);
+                  setDetails({
+                    name: rowData ? rowData.name : "NOt available",
+                    age: rowData ? rowData.age : "NOt avaialable",
+                    date: rowData
+                      ? moment(rowData["createdAt"]).format("D/MM/YYYY")
+                      : "Not Available",
+                    caseprior: rowData ? rowData.casePrior : "Not Available",
+                    guardianNo: rowData ? rowData.guardianNo : "NOtt Available",
+                    patientNo: rowData ? rowData.patientNo : "Not available",
+                    pname: rowData ? rowData.pname : "NOt Available",
+                    pcase: rowData ? rowData.pcase : "Not Available",
+                    rideid: rowData ? rowData.RideId : "NOt Available",
+                    driverno: rowData ? rowData.driverNo : "Not Available",
+                    _id: rowData.pickedBy
+                      ? rowData["pickedBy"]._id
+                      : "Not Available",
+
+                    polyline: rowData
+                      ? rowData.patientPolyline
+                      : "Not Available",
+                    pickupcoordinates: rowData.pickUplocation
+                      ? rowData["pickUplocation"].coordinates
+                      : "Not Available",
+                    hospitalcoordinates: rowData["hospital"]
+                      ? rowData["hospital"]["hospitalLocation"].coordinates
+                      : "Not Available",
+                  });
                 }}
                 columns={[
                   { title: "Name", field: "name" },
@@ -403,7 +459,33 @@ const Requests = () => {
             <TabPanel value={value} index={2}>
               <MaterialTable
                 onRowClick={(event, rowData) => {
-                  setDetails(rowData);
+                 setDetails({
+                   name: rowData ? rowData.name : "NOt available",
+                   age: rowData ? rowData.age : "NOt avaialable",
+                   date: rowData
+                     ? moment(rowData["createdAt"]).format("D/MM/YYYY")
+                     : "Not Available",
+                   caseprior: rowData ? rowData.casePrior : "Not Available",
+                   guardianNo: rowData ? rowData.guardianNo : "NOtt Available",
+                   patientNo: rowData ? rowData.patientNo : "Not available",
+                   pname: rowData ? rowData.pname : "NOt Available",
+                   pcase: rowData ? rowData.pcase : "Not Available",
+                   rideid: rowData ? rowData.RideId : "NOt Available",
+                   driverno: rowData ? rowData.driverNo : "Not Available",
+                   _id: rowData.pickedBy
+                     ? rowData["pickedBy"]._id
+                     : "Not Available",
+
+                   polyline: rowData
+                     ? rowData.patientPolyline
+                     : "Not Available",
+                   pickupcoordinates: rowData.pickUplocation
+                     ? rowData["pickUplocation"].coordinates
+                     : "Not Available",
+                   hospitalcoordinates: rowData["hospital"]
+                     ? rowData["hospital"]["hospitalLocation"].coordinates
+                     : "Not Available",
+                 });
                 }}
                 columns={[
                   { title: "Name", field: "name" },
@@ -457,7 +539,33 @@ const Requests = () => {
             <TabPanel value={value} index={3}>
               <MaterialTable
                 onRowClick={(event, rowData) => {
-                  setDetails(rowData);
+                 setDetails({
+                   name: rowData ? rowData.name : "NOt available",
+                   age: rowData ? rowData.age : "NOt avaialable",
+                   date: rowData
+                     ? moment(rowData["createdAt"]).format("D/MM/YYYY")
+                     : "Not Available",
+                   caseprior: rowData ? rowData.casePrior : "Not Available",
+                   guardianNo: rowData ? rowData.guardianNo : "NOtt Available",
+                   patientNo: rowData ? rowData.patientNo : "Not available",
+                   pname: rowData ? rowData.pname : "NOt Available",
+                   pcase: rowData ? rowData.pcase : "Not Available",
+                   rideid: rowData ? rowData.RideId : "NOt Available",
+                   driverno: rowData ? rowData.driverNo : "Not Available",
+                   _id: rowData.pickedBy
+                     ? rowData["pickedBy"]._id
+                     : "Not Available",
+
+                   polyline: rowData
+                     ? rowData.patientPolyline
+                     : "Not Available",
+                   pickupcoordinates: rowData.pickUplocation
+                     ? rowData["pickUplocation"].coordinates
+                     : "Not Available",
+                   hospitalcoordinates: rowData["hospital"]
+                     ? rowData["hospital"]["hospitalLocation"].coordinates
+                     : "Not Available",
+                 });
                 }}
                 columns={[
                   { title: "Name", field: "name" },

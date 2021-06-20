@@ -19,13 +19,8 @@ var map,
   driverPath;
 
 const HomePageSideMap = (props) => {
-  console.log(`Ispicked value is ${props.ispicked}`);
-  console.log(
-    `red color polyline is patient poline and value is ${props.polyline}`
-  );
-  console.log(
-    `green color polyline is hospital poline and value is ${props.hospitalpolyline}`
-  );
+  console.log(props._id);
+  console.log(props.rideobjectid);
   useEffect(() => {
     if (map && props.pickupcoordinates.length > 0) {
       map.setCenter({

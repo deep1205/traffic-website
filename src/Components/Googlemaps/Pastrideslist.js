@@ -39,7 +39,7 @@ const PastRides = () => {
   const [tableOpen, setTableOpen] = useState(false);
 
   const handleDrawerToggle = () => {
-    setTableOpen(!tableOpen);
+    setTableOpen(true);
   };
 
   useEffect(() => {
