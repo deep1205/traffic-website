@@ -7,6 +7,7 @@ import LastPageIcon from "@material-ui/icons/LastPage";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
+import ArrowDownward from "@material-ui/icons/ArrowDownward";
 import MenuIcon from "@material-ui/icons/Menu";
 import Modal from "@material-ui/core/Modal";
 import PastRideMap from "./MyGooglemap";
@@ -29,7 +30,7 @@ import {
 } from "reactstrap";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-
+import CustomDatePicker from "./CustomDatePicker";
 import $ from "jquery";
 import onClickOutside from "react-onclickoutside";
 const PastRides = () => {
@@ -89,7 +90,12 @@ const PastRides = () => {
     { field: "id", title: "Id", hidden: true },
     { field: "name", title: "Name" },
     { field: "case", title: "Case" },
-    { field: "date", title: "Date", type: "date" },
+    {
+      field: "date",
+      title: "Date",
+      type: "date",
+      filterComponent: (props) => <CustomDatePicker {...props} />,
+    },
     { field: "age", title: "Age", hidden: true, type: "numeric" },
     { field: "casePrior", title: "Case Prior", hidden: true },
     { field: "isPicked", title: "is Picked", hidden: true },
@@ -240,6 +246,7 @@ const PastRides = () => {
             columns={columns}
             data={rows}
             icons={{
+              SortArrow: ArrowDownward,
               Filter: FilterListIcon,
               FirstPage: FirstPageIcon,
               LastPage: LastPageIcon,
