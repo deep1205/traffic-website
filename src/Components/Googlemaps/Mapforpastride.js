@@ -153,7 +153,7 @@ const HomePageSideMap = (props) => {
   var initMap = () => {
     map = new window.google.maps.Map(document.getElementById("map"), {
       // center: { lat: 26.2258858, lng: 78.2173995 },
-      zoom: 14,
+      zoom: 12,
       streetViewControl: true,
       mapTypeControl: false,
       zoomControlOptions: true,

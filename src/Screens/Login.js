@@ -73,10 +73,10 @@ const Login = () => {
           <div className="form">
             <div className="login">
               <div className="login-header">
-                <h1 style={{ margin: "-10px" }} id="myformheadertextl">
+                <h1 style={{ margin: "-10px",fontWeight:"bolder"}} id="myformheadertextl">
                   Sign in
                 </h1>
-                <div style={{ marginTop: "28px" }} id="myformheadertext1l">
+                <div style={{ marginTop: "28px",fontWeight:"bold" }} id="myformheadertext1l">
                   <p>Welcome to Priority Pulse</p>
                   <p style={{ marginTop: "-14px" }}>Your Pulse,Our Priority</p>
                 </div>

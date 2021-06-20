@@ -137,6 +137,21 @@ header a img {
   border-radius: 20px;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
+
+@media  screen and (min-width:1600px) {
+  .form {
+  position: relative;
+  z-index: 1;
+  background: #ffffff;
+  max-width: 450px;
+  margin: 0 auto 125px;
+  padding: 40px;
+  text-align: center;
+  border-radius: 20px;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+  
+}
 .form input {
   font-family: "Roboto", sans-serif;
   outline: 0;
@@ -149,6 +164,10 @@ header a img {
   font-size: 1rem;
   border-radius: 20px;
   text-align: center;
+}
+.form input:focus{
+     border: 2px solid rgba(0, 0, 0, 0.18) !important;
+
 }
 .form button {
   font-family: "Roboto", sans-serif;
@@ -183,6 +202,7 @@ header a img {
 @media (min-width:1600px ){
   
 .login-page{
+
   position: relative;
   margin-left: auto;
   margin-right:230px;
@@ -223,6 +243,7 @@ header a img {
 .login-header{
   margin:0 2px 0 0;
 }
+
   
 }
 

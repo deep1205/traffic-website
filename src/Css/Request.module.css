@@ -18,7 +18,7 @@
 
 .side{
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     overflow-y: hidden;
 }
 
@@ -73,7 +73,7 @@
 .root{
     flex-grow: 1;
     background-color: white;
-    width: 750px;
+    width: 860px;
     max-width: 100vw;
     min-height: 500px;
 }
@@ -90,7 +90,7 @@
     display: flex;
     justify-content: center;
 }
-@media only screen and (max-width: 1080px) {
+@media only screen and (max-width: 1100px) {
     .root{
         flex-grow: 1;
         background-color: white;

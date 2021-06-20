@@ -1,7 +1,11 @@
+html{
+  width:100vw;
+  overflow-x: hidden;
+}
 .footer{
   background-image: linear-gradient(to right, #a116ef, #390999);
-   margin-top: 40px;
-  height: 265px;
+  width: 100vw;
+  height: 294px;
   padding-top: 20px;
   position: relative;
   display: flex;
@@ -87,12 +91,12 @@
 
 @media screen and (max-width:2300px)
 {  .footer_logo{
-  width:34rem;
+  width:40rem;
   
 }
   .footer_logos{
     right:98px;
-    top:8px;
+    top:11px;
   }
   .footer_logos img{
     width:64px;

@@ -1,5 +1,5 @@
 import React from "react";
-import "./Footer.css"
+import "./Footer.css";
 import fb from "../../images/fb@2x.png";
 import linkin from "../../images/linked_in@2x.png";
 import insta from "../../images/insta@2x.png";
@@ -14,9 +14,19 @@ function Footer() {
       <img className="footer_logo" src={logo} alt="logo" />
       <div className="footer_dialog">
         <div className="footer_logos">
-          <img src={fb} alt="facebook" />
-          <img src={linkin} alt="linked in" />
-          <img src={insta} alt="instagram" />
+          <a href="https://www.facebook.com/PriorityPulse/">
+            <img src={fb} alt="facebook" />
+          </a>
+          <a href="https://www.linkedin.com/company/priority-pulse-pvt">
+            <img src={linkin} alt="linked in" />
+          </a>
+          <a href="https://www.instagram.com/priority_pulse/">
+            <img
+              href="https://www.instagram.com/priority_pulse/"
+              src={insta}
+              alt="instagram"
+            />
+          </a>
         </div>
         <div className="footer_foottextcontainer">
           <div className="footer_foottext">

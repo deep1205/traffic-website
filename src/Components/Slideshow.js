@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
       maxWidth: 499,
     },
     [theme.breakpoints.up(1600)]: {
-      maxWidth: 650,
+      maxWidth: 600,
     },
   },
   header: {

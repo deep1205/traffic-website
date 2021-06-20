@@ -9,7 +9,7 @@ import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import MenuIcon from "@material-ui/icons/Menu";
 import Modal from "@material-ui/core/Modal";
-import PastRideMap from "./Mapforpastride.js";
+import PastRideMap from "./MyGooglemap";
 import Drawer from "@material-ui/core/Drawer";
 import axios from "axios";
 import moment from "moment";
@@ -27,8 +27,11 @@ import {
   Row,
   Col,
 } from "reactstrap";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 
+import $ from "jquery";
+import onClickOutside from "react-onclickoutside";
 const PastRides = () => {
   const [cardOpen, setCardOpen] = useState(false);
   const [rides, setRides] = useState([]);
@@ -86,7 +89,7 @@ const PastRides = () => {
     { field: "id", title: "Id", hidden: true },
     { field: "name", title: "Name" },
     { field: "case", title: "Case" },
-    { field: "date", title: "Date" },
+    { field: "date", title: "Date", type: "date" },
     { field: "age", title: "Age", hidden: true, type: "numeric" },
     { field: "casePrior", title: "Case Prior", hidden: true },
     { field: "isPicked", title: "is Picked", hidden: true },
@@ -152,42 +155,42 @@ const PastRides = () => {
             {/* </Row>
               <Row xs="2" className="row"> */}
             <Col md={{ size: "auto", offset: 0 }}>
-              <div className="shadow">
+              <div className="shadow" style={{ width: "280px" }}>
                 <h6 className="hospital-detail" style={{ padding: "10px" }}>
                   Patient Name: {rideDetail.name}
                 </h6>
               </div>
             </Col>{" "}
             <Col md={{ size: "auto", offset: 0 }}>
-              <div className="shadow">
+              <div className="shadow" style={{ width: "280px" }}>
                 <h6 className="hospital-detail" style={{ padding: "10px" }}>
                   Age: {rideDetail.age}
                 </h6>
               </div>
             </Col>{" "}
             <Col md={{ size: "auto", offset: 0 }}>
-              <div className="shadow">
+              <div className="shadow" style={{ width: "280px" }}>
                 <h6 className="hospital-detail" style={{ padding: "10px" }}>
                   Case: {rideDetail.case}
                 </h6>
               </div>
             </Col>
             <Col md={{ size: "auto", offset: 0 }}>
-              <div className="shadow">
+              <div className="shadow" style={{ width: "280px" }}>
                 <h6 className="hospital-detail" style={{ padding: "10px" }}>
                   Case priority: {rideDetail.casePrior}
                 </h6>
               </div>
             </Col>
             <Col md={{ size: "auto", offset: 0 }}>
-              <div className="shadow">
+              <div className="shadow" style={{ width: "280px" }}>
                 <h6 className="hospital-detail" style={{ padding: "10px" }}>
                   Guardian No: {rideDetail.guardianNo}
                 </h6>
               </div>
             </Col>
             <Col md={{ size: "auto", offset: 0 }}>
-              <div className="shadow">
+              <div className="shadow" style={{ width: "280px" }}>
                 <h6 className="hospital-detail" style={{ padding: "10px" }}>
                   Patient No : {rideDetail.patientNo}
                 </h6>
@@ -195,8 +198,8 @@ const PastRides = () => {
             </Col>
             {/* </Row> */}
             {/* <Row xs="2" className="row"> */}
-            <Col md={{ size: "auto", offset: 0 }}>
-              <div className="shadow">
+            {/* <Col md={{ size: "auto", offset: 0 }}>
+              <div className="shadow" style={{ width: "280px" }}>
                 <h6 className="hospital-detail" style={{ padding: "10px" }}>
                   <span style={{ fontSize: "15px" }}>
                     {" "}
@@ -204,9 +207,9 @@ const PastRides = () => {
                   </span>
                 </h6>
               </div>
-            </Col>
-            <Col md={{ size: "auto", offset: 0 }}>
-              <div className="shadow">
+            </Col> */}
+            {/* <Col md={{ size: "auto", offset: 0 }}>
+              <div className="shadow" style={{ width: "280px" }}>
                 <h6
                   className="hospital-detail"
                   style={{ padding: "10px", fontSize: "15px" }}
@@ -214,7 +217,7 @@ const PastRides = () => {
                   Driver No: {rideDetail.driverNo}
                 </h6>
               </div>
-            </Col>
+            </Col> */}
           </Row>
         </Container>
       </div>
@@ -232,9 +235,7 @@ const PastRides = () => {
         <DropdownToggle style={{ border: "none", backgroundColor: "white" }}>
           <MenuIcon color="primary" size="large" />
         </DropdownToggle>
-        <DropdownMenu
-          style={{ maxWidth: "100vw", width: "400px", padding: "0px" }}
-        >
+        <DropdownMenu>
           <MaterialTable
             columns={columns}
             data={rows}
@@ -250,6 +251,9 @@ const PastRides = () => {
               filtering: true,
               search: false,
               toolbar: false,
+              pageSizeOptions: false,
+              paginationType: "stepped",
+              pageSize: 5,
             }}
           />
         </DropdownMenu>

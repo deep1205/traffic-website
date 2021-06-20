@@ -11,6 +11,9 @@
 	margin:0 130px;
 	top: 530px;
 	animation: fadeIn ease-in-out 2s  1  forwards;
+
+	
+	
 }
 @keyframes fadeIn {
 	0%{
@@ -35,12 +38,22 @@
     cursor: pointer;
 }
 .dropdown-menu {
-    height: 400px;
-    width:300px;
+	
+    height: 300px;
+    width:500px;
 	position: absolute;
 	top:57px;
     
 } 
+@media screen and (max-width:600px)
+{
+	.dropdown-menu{
+		width:300px;
+	
+
+	}
+}
+
 hr {
     margin: 0.1em auto;
 }
@@ -60,15 +73,15 @@ hr {
 
 
 
-@media screen and (max-width: 2000px) {
+@media screen and (max-width: 2500px) {
     .carddetails {
-      top: 500px;
+      top: 590px;
 	  
 	  margin:0 170px;
 	  width:1500px;
     }
 	.card-body{
-		margin:0 120px;
+		margin:0 190px;
 	}
 	.shadow {
 		box-shadow: 0 8px 6px -6px black;
@@ -89,36 +102,53 @@ hr {
 
   @media screen and (max-width: 1800px) {
     .carddetails {
-      top: 530px;
+      top: 590px;
 	  
 	  margin:0 140px;
-	  width:85vw;
+	  width:1390px;
     }
 	.card-body{
-		margin:0 10px 0 90px;
+		margin:0 140px;
+	}
+		.shadow {
+		box-shadow: 0 8px 6px -6px black;
+		background-color: rgb(248, 244, 244);
+		color:black;
+		border-radius: 25px;
+		width:300px;
+
 	}
 	
 }
 @media screen and (max-width: 1600px) {
     .carddetails {
-      top: 560px;
+      top: 640px;
 	  
-	  margin:0 150px;
-	  width:79vw;
+	  margin:0 130px;
+	  width:1250px;
     }
 	.card-body{
-		margin:0 -40px;
+		margin:0 10px;
+	}
+	
+		.shadow {
+		box-shadow: 0 8px 6px -6px black;
+		background-color: rgb(248, 244, 244);
+		color:black;
+		border-radius: 25px;
+		width:300px;
+
 	}
 	
 }
   @media screen and (max-width: 1490px) {
     .carddetails {
-      top: 490px;
-	  margin:0 110px;
-	  width:84vw;
+      top: 630px;
+	  margin:0 120px;
+	  width:1200px;
     }
 	.card-body{
-		margin:0 150px;
+		margin:0 10px;
 	}
 	.shadow {
 		box-shadow: 0 8px 6px -6px black;
@@ -130,12 +160,12 @@ hr {
 }
 @media screen and (max-width: 1365px) {
      .carddetails {
-      top: 510px;
-	  margin:0 90px;
-	  width:87vw;
+      top: 630px;
+	  margin:0 200px;
+	  width:900px;
     }
 	.card-body{
-		margin:0 110px;
+		margin:0 10px;
 	}
 	.shadow {
 		box-shadow: 0 8px 6px -6px black;
@@ -147,9 +177,9 @@ hr {
 }
 @media screen and (max-width: 1240px) {
     .carddetails {
-      top: 500px;
+      top: 625px;
 	  margin:0 120px;
-	  width:81vw;
+	  width:900px;
     }
 	.card-body{
 		margin:0 30px;
@@ -163,10 +193,10 @@ hr {
 	}
 }
   @media screen and (max-width: 1120px) {
-    .carddetails{
-      top: 530px;
-	  margin:0 100px;
-	  
+	   .carddetails {
+      top: 630px;
+	  margin:0 120px;
+	  width:900px;
     }
 	.shadow {
 		box-shadow: 0 8px 6px -6px black;
@@ -184,10 +214,10 @@ hr {
 	}
   }
    @media screen and (max-width: 1075px) {
-    .carddetails {
-      top: 510px;
-	  margin:0 130px;
-	  width:80vw;
+      .carddetails {
+      top: 630px;
+	  margin:0 70px;
+	  width:900px;
     }
 	.shadow {
 		box-shadow: 0 8px 6px -6px black;
@@ -208,7 +238,7 @@ hr {
 
     @media screen and (max-width: 1020px) {
     .carddetails{
-      top: 300px;
+      top: 480px;
 	  margin:0 250px;
 	  width:50vw;
     }
@@ -232,7 +262,7 @@ hr {
   }
     @media screen and (max-width: 895px) {
     .carddetails{
-      top: 340px;
+      top: 480px;
 	  width:60vw;
 	  margin: 0 160px;
     }
@@ -256,7 +286,7 @@ hr {
   }
   @media screen and (max-width: 860px) {
     .carddetails{
-      top: 310px;
+      top: 480px;
     }
 	.shadow {
 		box-shadow: 0 8px 6px -6px black;
@@ -276,7 +306,7 @@ hr {
 
     @media screen and (max-width: 740px) {
     .carddetails {
-      top: 290px;
+      top: 480px;
 	  width:490px;
 	  margin:0 100px;
     }
@@ -297,12 +327,15 @@ hr {
   }
 
 
-     @media screen and (max-width: 615px) {
+     @media screen and (max-width: 620px) {
     .carddetails {
-      top: 290px;
-	  width:480px;
-	  margin:0 60px;
+      top: 480px;
+	  width:440px;
+	  margin:0 70px;
     }
+	.card-body{
+		margin: 0 -40px;
+	}
 	.shadow {
 		box-shadow: 0 8px 6px -6px black;
 		background-color: rgb(248, 244, 244);
@@ -320,6 +353,11 @@ hr {
   }
 
 @media screen and (max-width: 550px) {
+	  .carddetails {
+      top: 100px;
+	  width:480px;
+	  margin:0 60px;
+    }
    
 	.shadow {
 		box-shadow: 0 8px 6px -6px black;
@@ -334,7 +372,7 @@ hr {
 	     font-size: 1.1rem;
 	}
 	.carddetails {
-		top: 290px;
+		top: 502px;
 		margin:0 30px;
 		width:90vw;
         
@@ -349,19 +387,21 @@ hr {
   }
      @media screen and (max-width: 460px) {
     .carddetails {
-      top: 290px;
-	  width:348px;
-	  margin:0 30px;
+      top: 490px;
+	  width:400px;
+	  margin:0 10px;
+	  
     }
 	.card-body{
-		margin:0 -50px;
+		margin:0 -40px;
+		
 	}
 	.shadow {
 		box-shadow: 0 8px 6px -6px black;
 		background-color: rgb(248, 244, 244);
 		color:black;
 		
-		width: 240px;
+		width: 300px;
 		
 	}
 	.hospital-title{
@@ -375,11 +415,11 @@ hr {
 
 
   
-     @media screen and (max-width: 400px) {
+     @media screen and (max-width: 420px) {
     .carddetails {
-      top: 290px;
-	  width:100vw;
-	  margin:0 0px;
+      top: 490px;
+	  width:95vw;
+	  margin:0 10px;
     }
 	.card-body{
 		margin:0 0 0 -70px;
