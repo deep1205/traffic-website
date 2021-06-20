@@ -9,7 +9,7 @@ import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import MenuIcon from "@material-ui/icons/Menu";
 import Modal from "@material-ui/core/Modal";
-import PastRideMap from "./MyGooglemap";
+import PastRideMap from "./Mapforpastride";
 import Drawer from "@material-ui/core/Drawer";
 import axios from "axios";
 import moment from "moment";
