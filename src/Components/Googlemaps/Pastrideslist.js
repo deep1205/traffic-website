@@ -231,6 +231,9 @@ const PastRides = () => {
     </div>
   );
 
+  const tablebandkro = () => {
+    setTableOpen(false);
+  };
   return (
     <main>
       <ButtonDropdown
@@ -243,6 +246,19 @@ const PastRides = () => {
           <MenuIcon color="primary" size="large" />
         </DropdownToggle>
         <DropdownMenu>
+          <Icon
+            glyph="view-close-small"
+            size={28}
+            style={{
+              cursor: "pointer",
+              color: "red",
+              position: "absolute",
+              top: "4px",
+              right: "4px",
+              zIndex: "1000000",
+            }}
+            onClick={tablebandkro}
+          />
           <MaterialTable
             columns={columns}
             data={rows}
