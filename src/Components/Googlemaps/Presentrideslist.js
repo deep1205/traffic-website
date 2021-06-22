@@ -62,7 +62,7 @@ const PastRides = () => {
             driverName: data.pickedBy ? data["pickedBy"].name : "Not Available",
             pcase: data ? data.pcase : "Not Available",
             date: data
-              ? moment(data["createdAt"]).format("D/MM/YYYY")
+              ? new Date(data['createdAt'])
               : "Not Available",
             rideid: data ? data.RideId : "Not Available",
             driverid: data.pickedBy ? data["pickedBy"]._id : "Not Available",

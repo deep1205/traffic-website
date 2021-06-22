@@ -14,7 +14,7 @@ const CustomDatePicker = (props) => {
       <KeyboardDatePicker
         margin="0"
         id="date-picker-dialog"
-        format="dd/MM/yyyy"
+        format="MM/dd/yyyy"
         clearable
         value={date}
         onChange={(event) => {
