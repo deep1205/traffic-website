@@ -1,39 +1,26 @@
 import React, { useState, useEffect } from "react";
-import Paper from "@material-ui/core/Paper";
-import Fab from "@material-ui/core/Fab";
+import Icon from "supercons";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import FirstPageIcon from "@material-ui/icons/FirstPage";
 import LastPageIcon from "@material-ui/icons/LastPage";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
-import ArrowDownward from "@material-ui/icons/ArrowDownward";
-import MenuIcon from "@material-ui/icons/Menu";
-import Modal from "@material-ui/core/Modal";
-import PastRideMap from "./MyGooglemap";
-import Drawer from "@material-ui/core/Drawer";
+import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
+import PastRideMap from "./GoogleMap";
 import axios from "axios";
-import moment from "moment";
 import MaterialTable from "material-table";
 import FilterListIcon from "@material-ui/icons/FilterList";
-import CloseIcon from "@material-ui/icons/Close";
-import Icon from "supercons";
+import { Container, Row, Col } from "reactstrap";
+import useWindowDimensions from "./getWindowDimensions";
 import "./Ridesdetail.css";
-import {
-  ButtonDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  Container,
-  Row,
-  Col,
-} from "reactstrap";
-
 import "bootstrap/dist/css/bootstrap.min.css";
 import CustomDatePicker from "./CustomDatePicker";
-import $ from "jquery";
-import onClickOutside from "react-onclickoutside";
-const PastRides = () => {
+import Fab from "@material-ui/core/Fab";
+import ListIcon from "@material-ui/icons/List";
+
+const Activerideslist = () => {
+  const { height, width } = useWindowDimensions();
   const [cardOpen, setCardOpen] = useState(false);
   const [rides, setRides] = useState([]);
   const [rideDetail, setRideDetail] = useState({});
@@ -50,7 +37,6 @@ const PastRides = () => {
       })
       .then((res) => {
         const data = res.data;
-        console.log(data);
         const arr = data.map((data) => {
           return {
             name: data ? data["name"] : "Not Available",
@@ -61,9 +47,7 @@ const PastRides = () => {
               : "Not Available",
             driverName: data.pickedBy ? data["pickedBy"].name : "Not Available",
             pcase: data ? data.pcase : "Not Available",
-            date: data
-              ? new Date(data['createdAt'])
-              : "Not Available",
+            date: data ? new Date(data["createdAt"]) : "Not Available",
             rideid: data ? data.RideId : "Not Available",
             driverid: data.pickedBy ? data["pickedBy"]._id : "Not Available",
             guardianNo: data ? data.guardianNo : "Not Available",
@@ -79,15 +63,20 @@ const PastRides = () => {
             hospitalpolyline: data ? data["hospitalPolyline"] : "Not Available",
             rideobjectid: data ? data["_id"] : "Not Available",
             activestatus: data ? data["activeStatus"] : "Not Available",
+            isVerified: data.pickedBy
+              ? data["pickedBy"].isVerified
+              : "Not Available",
           };
         });
 
         setRides(arr);
+      })
+      .catch((err) => {
+        console.log(err);
       });
   }, []);
 
   const columns = [
-    { field: "id", title: "Id", hidden: true },
     { field: "name", title: "Name" },
     { field: "case", title: "Case" },
     {
@@ -96,16 +85,6 @@ const PastRides = () => {
       type: "date",
       filterComponent: (props) => <CustomDatePicker {...props} />,
     },
-    { field: "age", title: "Age", hidden: true, type: "numeric" },
-    { field: "casePrior", title: "Case Prior", hidden: true },
-    { field: "isPicked", title: "is Picked", hidden: true },
-    { field: "driverNo", title: "Driver Number", hidden: true },
-    { field: "driverName", title: "Driver Name", hidden: true },
-    { field: "guardianNo", title: "Guardian Number", hidden: true },
-    { field: "patientNo", title: "Patient Number", hidden: true },
-    { field: "patientPolyline", title: "Patient Polyline", hidden: true },
-    { field: "hospitalPolyline", title: "Hospital Polyline", hidden: true },
-    { field: "hospitalCoords", title: "Hospital Coordinates", hidden: true },
   ];
   const rows = rides.map((ride) => {
     return {
@@ -127,6 +106,7 @@ const PastRides = () => {
       rideobjectid: ride["rideobjectid"],
       driverid: ride["driverid"],
       activestatus: ride["activestatus"],
+      isVerified: ride["isVerified"],
     };
   });
 
@@ -135,154 +115,133 @@ const PastRides = () => {
     setCardOpen(true);
     setTableOpen(false);
   };
-  console.log(rideDetail);
-
   const hideRideDetail = () => {
     setCardOpen(false);
   };
-  const rideDetailBox = (
-    <div className="carddetails">
-      <div className="hospital-details">
-        <h1 className="hospital-title" style={{ fontSize: "2rem" }}>
-          Ride details :
-          <span
-            className="cardCross"
-            style={{ position: "absolute", right: "40px", color: "white" }}
-            onClick={() => setCardOpen(false)}
-          >
-            <Icon glyph="view-close-small" size={38} />
-            {/* <HighlightOffSharpIcon fontSize="medium" /> */}
-          </span>
-        </h1>
+  const rideDetailBox =
+    width > 0 ? (
+      <div className="carddetails">
+        <div className="card-header">
+          <h2> Ride details :</h2>
+          <Icon glyph="view-close-small" size={38} onClick={hideRideDetail} />
+        </div>
+        <div className="card-body">
+          <Container>
+            <Row>
+              <Col xs="12" sm="6" lg="3">
+                <div className="card-box">Name:{rideDetail.name}</div>
+              </Col>
+              <Col xs="12" sm="6" lg="3">
+                <div className="card-box">Case:{rideDetail.case}</div>
+              </Col>
+              <Col xs="12" sm="6" lg="3">
+                <div className="card-box">Age:{rideDetail.age}</div>
+              </Col>
+              <Col xs="12" sm="6" lg="3">
+                <div className="card-box">Guardian {rideDetail.guardianNo}</div>
+              </Col>
+            </Row>
+            <Row>
+              <Col xs="12" sm="6" lg="3">
+                <div className="card-box">
+                  Driver Name:{rideDetail.driverName}
+                </div>
+              </Col>
+              <Col xs="12" sm="6" lg="3">
+                <div className="card-box">
+                  Case Priority:{rideDetail.casePrior}
+                </div>
+              </Col>
+              <Col xs="12" sm="6" lg="3">
+                <div className="card-box">
+                  Driver Number:{rideDetail.driverNo}
+                </div>
+              </Col>
+              <Col xs="12" sm="6" lg="3">
+                <div className="card-box">
+                  {rideDetail.isVerified
+                    ? "Verified Driver"
+                    : "Not Verified Driver"}
+                </div>
+              </Col>
+            </Row>
+          </Container>
+        </div>
       </div>
-      <div className="card-body">
-        <Container>
-          <Row style={{ margin: "0 50px" }}>
-            {/* </Row>
-              <Row xs="2" className="row"> */}
-            <Col md={{ size: "auto", offset: 0 }}>
-              <div className="shadow" style={{ width: "280px" }}>
-                <h6 className="hospital-detail" style={{ padding: "10px" }}>
-                  Patient Name: {rideDetail.name}
-                </h6>
-              </div>
-            </Col>{" "}
-            <Col md={{ size: "auto", offset: 0 }}>
-              <div className="shadow" style={{ width: "280px" }}>
-                <h6 className="hospital-detail" style={{ padding: "10px" }}>
-                  Age: {rideDetail.age}
-                </h6>
-              </div>
-            </Col>{" "}
-            <Col md={{ size: "auto", offset: 0 }}>
-              <div className="shadow" style={{ width: "280px" }}>
-                <h6 className="hospital-detail" style={{ padding: "10px" }}>
-                  Case: {rideDetail.case}
-                </h6>
-              </div>
-            </Col>
-            <Col md={{ size: "auto", offset: 0 }}>
-              <div className="shadow" style={{ width: "280px" }}>
-                <h6 className="hospital-detail" style={{ padding: "10px" }}>
-                  Case priority: {rideDetail.casePrior}
-                </h6>
-              </div>
-            </Col>
-            <Col md={{ size: "auto", offset: 0 }}>
-              <div className="shadow" style={{ width: "280px" }}>
-                <h6 className="hospital-detail" style={{ padding: "10px" }}>
-                  Guardian No: {rideDetail.guardianNo}
-                </h6>
-              </div>
-            </Col>
-            <Col md={{ size: "auto", offset: 0 }}>
-              <div className="shadow" style={{ width: "280px" }}>
-                <h6 className="hospital-detail" style={{ padding: "10px" }}>
-                  Patient No : {rideDetail.patientNo}
-                </h6>
-              </div>
-            </Col>
-            {/* </Row> */}
-            {/* <Row xs="2" className="row"> */}
-            {/* <Col md={{ size: "auto", offset: 0 }}>
-              <div className="shadow" style={{ width: "280px" }}>
-                <h6 className="hospital-detail" style={{ padding: "10px" }}>
-                  <span style={{ fontSize: "15px" }}>
-                    {" "}
-                    Date:{rideDetail.date}
-                  </span>
-                </h6>
-              </div>
-            </Col> */}
-            {/* <Col md={{ size: "auto", offset: 0 }}>
-              <div className="shadow" style={{ width: "280px" }}>
-                <h6
-                  className="hospital-detail"
-                  style={{ padding: "10px", fontSize: "15px" }}
-                >
-                  Driver No: {rideDetail.driverNo}
-                </h6>
-              </div>
-            </Col> */}
-          </Row>
-        </Container>
-      </div>
-    </div>
-  );
-
-
-  const tablebandkro = () => {
-    setTableOpen(false);
+    ) : null;
+  let tableStyle = {
+    transform: "translateX(-444px)",
   };
+  if (tableOpen) {
+    tableStyle = {
+      transition: "transform 0.2s cubic-bezier(0, 0, 0.8, 1) 0ms",
+    };
+  }
   return (
     <main>
-      <ButtonDropdown
-        direction="right"
-        isOpen={tableOpen}
-        toggle={handleDrawerToggle}
-        style={{ zIndex: "10", backgroundColor: "white" }}
+      <Fab
+        style={{
+          zIndex: 10,
+          position: "absolute",
+          borderRadius: "0px 30px 30px 0px",
+          color: "white",
+          backgroundColor: "black",
+        }}
+        variant="extended"
+        color="primary"
+        aria-label="list"
+        onClick={() => setTableOpen(!tableOpen)}
       >
-        <DropdownToggle style={{ border: "none", backgroundColor: "white" }}>
-          <MenuIcon color="primary" size="large" />
-        </DropdownToggle>
-        <DropdownMenu>
-          <Icon
-            glyph="view-close-small"
-            size={28}
-            style={{
-              cursor: "pointer",
-              color: "red",
-              position: "absolute",
-              top: "4px",
-              right: "4px",
-              zIndex: "1000000",
-            }}
-            onClick={tablebandkro}
-          />
-          <MaterialTable
-            columns={columns}
-            data={rows}
-            icons={{
-              SortArrow: ArrowDownward,
-              Filter: FilterListIcon,
-              FirstPage: FirstPageIcon,
-              LastPage: LastPageIcon,
-              PreviousPage: ArrowBackIcon,
-              NextPage: ArrowForwardIcon,
-            }}
-            onRowClick={showRideDetail}
-            options={{
-              filtering: true,
-              search: false,
-              toolbar: false,
-              pageSizeOptions: false,
-              paginationType: "stepped",
-              pageSize: 5,
-            }}
-          />
-        </DropdownMenu>
-      </ButtonDropdown>
+        <ListIcon />
+        Active Rides
+      </Fab>
 
+      <div style={tableStyle}>
+        <MaterialTable
+          className="ridedetailbox"
+          columns={columns}
+          data={rows}
+          icons={{
+            Filter: FilterListIcon,
+            FirstPage: FirstPageIcon,
+            LastPage: LastPageIcon,
+            PreviousPage: ArrowBackIcon,
+            NextPage: ArrowForwardIcon,
+            SortArrow: ArrowUpwardIcon,
+          }}
+          style={{
+            width: window.screen.width > 800 ? "460px" : "330px",
+            position: "absolute",
+            zIndex: 10,
+            marginLeft: "7px",
+            tableStyle,
+          }}
+          onRowClick={showRideDetail}
+          options={{
+            filtering: true,
+            sorting: true,
+            search: false,
+            toolbar: false,
+            pageSizeOptions: false,
+            paginationType: "stepped",
+            pageSize: 5,
+          }}
+        />
+
+        <Icon
+          style={{
+            borderRadius: "0",
+            position: "absolute",
+            left: window.screen.width > 800 ? "430px" : "300px",
+            color: "red",
+            zIndex: "10",
+            tableStyle,
+          }}
+          glyph="view-close-small"
+          size={32}
+          onClick={() => setTableOpen(false)}
+        />
+      </div>
       <PastRideMap
         rideid={rideDetail.rideid}
         rideobjectid={rideDetail.rideobjectid}
@@ -297,4 +256,4 @@ const PastRides = () => {
     </main>
   );
 };
-export default PastRides;
+export default Activerideslist;

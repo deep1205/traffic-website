@@ -7,6 +7,7 @@ import Footer from "./Components/Footer/Footer"
 import Profilepage from "./Screens/Profilepage";
 import Requestpage  from "./Screens/Requestpage";
 import { GuardProvider, GuardedRoute } from "react-router-guards";
+import "./App.css"
 
 const requireLogin = (to, from, next) => {
   if (to.meta.auth) {

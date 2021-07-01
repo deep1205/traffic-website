@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../../Css/Header.css";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 // import { useHistory } from 'react-router'
 import logo from "../../images/PP_logo_yellow.png";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -11,13 +11,13 @@ import Headerlogin from"./Headerlogin"
 function Navbar({ location }) {
   const [icons, seticons] = useState(false);
   const [classna, setclassna] = useState("slider");
-    // if (localStorage.getItem("token") == null) {
-    //   return (
-    //     <>
-    //       <Headerlogin location="login" />
-    //     </>
-    //   );
-    // }
+    if (localStorage.getItem("token") == null) {
+      return (
+        <>
+          <Headerlogin location="login" />
+        </>
+      );
+    }
   return (
     <>
       <ToastContainer
@@ -59,16 +59,16 @@ function Navbar({ location }) {
           )}
         </div>
         <nav className={classna}>
-          <a style={{ visibility: "hidden" }} href="/home">
+          <Link style={{ visibility: "hidden" }} to="/home">
             Home
-          </a>
-          <a href="/home">Home</a>
-          <a href="/pastride">PastRide</a>
-          <a href="/request">Request</a>
+          </Link>
+          <Link to="/home">Home</Link>
+          <Link to="/pastride">PastRide</Link>
+          <Link to="/request">Request</Link>
           
 
-          <a
-            href="/login"
+          <Link
+            to="/login"
             onClick={() => {
               localStorage.removeItem("token");
               window.location.reload();
@@ -76,7 +76,7 @@ function Navbar({ location }) {
             style={{ cursor: "pointer", color: "white" }}
           >
             Logout
-          </a>
+          </Link>
           {location === "home" && <div className="animation start-user" />}
           {location === "track" && <div className="animation start-hospital" />}
           {location === "pastride" && (

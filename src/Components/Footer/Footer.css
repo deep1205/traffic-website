@@ -4,8 +4,9 @@ html{
 }
 .footer{
   background-image: linear-gradient(to right, #a116ef, #390999);
+margin-top:30px;
   width: 100vw;
-  height: 294px;
+  height: 296px;
   padding-top: 20px;
   position: relative;
   display: flex;
@@ -91,7 +92,7 @@ html{
 
 @media screen and (max-width:2300px)
 {  .footer_logo{
-  width:40rem;
+  width:36rem;
   
 }
   .footer_logos{
@@ -108,7 +109,7 @@ html{
 }
 @media screen and (max-width:1700px)
 {   .footer_logo{
-  width:30rem;
+  width:34rem;
   
 }
   .footer_logos{
@@ -124,7 +125,7 @@ html{
 @media screen and (max-width:1400px)
 {  
     .footer_logo{
-  width:29rem;
+  width:31rem;
   
 }
   .footer_logos{
@@ -140,7 +141,7 @@ html{
 @media screen and (max-width:869px)
 {  
   .footer_logo{
-  width:23rem;
+  width:29rem;
   
 }
   .footer_logos{

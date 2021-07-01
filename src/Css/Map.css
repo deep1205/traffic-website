@@ -1,179 +1,28 @@
-html{
-  width:100vw;
-}
-.indexMaptrackpage {
- 
-  height: 550px;
-  width:95vw ;
-  margin: 20px auto;
-  
-}
-
-#searchbartrackpage{
-  display: none;
-  /* position: relative;
-  align-items: center;
-  justify-content: center;
-  width: 40%;
-
-  padding: 20px 0;
-  text-align: center;
-  color: "blue"; */
-}
-
-/* .dropdowntoggle{
-            color: white;
-            margin-bottom: 5px;
-            margin-left:93vw;
-            position:absolute;
-            top:-20px;
-            background:black;
-             transform: rotate(90deg);
-            
-} */
-@media (max-width: 860px) {
-  .indexMaptrackpage {
-    position: relative !important;
-    margin: 30px auto;
-    width: 90vw;
+.map {
+    position: relative;
+    width:100vw;
+    height: 82vh;
     
+    margin:30px  auto 30px auto;
   }
-}
-/* 
- #searchbartrackpage{
-   display: none;
-  position: relative;
-  align-items: center;
-  justify-content: center;
-  width: 40%;
-top:80px;
-left:40px;
-  padding: 20px 0;
-  text-align: center;
-  color: "blue";
- }
-  .input {
-  font-size: 0.99em;
-  width: 270px;
-  padding: 3.4% 4%;
-  margin: 0 0 0 40px !important;
-  border-radius: 4px;
-  box-shadow: 17px solid red;
-  color: black;
-  font-family: "Times New Roman", Times, serif, "FontAwesome";
-  border: 400px;
-  background-color: whitesmoke;
-}
-}
-  
-.input {
-  font-size: 0.99em;
-  width: 270px;
-  padding: 1.4% 4%;
-  border-radius: 4px;
-  box-shadow: 17px solid red;
-  color: black;
-  font-family: "Times New Roman", Times, serif, "FontAwesome";
-  border: 400px;
-  background-color: whitesmoke;
-}
-.button {
-  margin-right: 15px;
-}
-.myLocationBtn:hover {
-  background-color: white;
-  color: white;
-}
-.myLocationBtn {
-  border-radius: 10px;
-  display: hidden;
-  visibility: hidden !important;
-}
-.searchHospital {
-  border: none;
-  width: 200px;
-  margin-left: 1rem;
-}
-.searchHospital:focus {
-  outline: none;
-}
-.myLocationBtn:focus {
-  outline: none;
-} */
-@media screen and (max-width:2500px) {
-  .indexMaptrackpage {
- 
-  height: 570px;
-
-}
-  
-}
-
-  
-@media screen and (max-width:1800px) {
-  .indexMaptrackpage {
- 
-  height: 580px;
-
-}
-  
-}@media screen and (max-width:1600px) {
-  .indexMaptrackpage {
- 
-  height: 620px;
-
-}
-  
-}@media screen and (max-width:1400px) {
-  .indexMaptrackpage {
- 
-  height: 650px;
-
-}
-  
-}@media screen and (max-width:1200px) {
-  .indexMaptrackpage {
- 
-  height: 700px;
-
-}
-  
-}@media screen and (max-width:1000px) {
-  .indexMaptrackpage {
- 
-  height: 690px;
-
-}
-  
-}@media screen and (max-width:800px) {
-  .indexMaptrackpage {
- 
-  height: 690px;
-
-}
-  
-}@media screen and (max-width:600px) {
-  .indexMaptrackpage {
- 
-  height: 700px;
-
-}
-  
-}@media screen and (max-width:476px) {
-  .indexMaptrackpage {
-   width:100vw;
-  height: 730px;
-
-}
-
-  
-}
-@media screen and (max-width:200px) {
-  .indexMaptrackpage {
- 
-  height: 750px;
-
-}
-
-  
-}
+  .mapbutton {
+    position:absolute;
+    z-index:3;
+    right:0;
+    margin-right: 0px !important
+  }
+  @media screen and (min-width:1200px){
+    .map{
+      top: 0px;
+      
+    }
+    .mapbutton{
+      top: 200px;
+    }
+  }
+  @media screen and (min-width:1400px){
+    .mapbutton{
+      top: 200px;
+      height: 82vh;
+    }
+  }

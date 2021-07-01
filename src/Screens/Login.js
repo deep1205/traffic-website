@@ -82,7 +82,7 @@ const Login = () => {
                 </div>
               </div>
             </div>
-            <form className="login-form" method="PUT">
+            <form className="login-form" method="PUT" onSubmit={handleSubmit}>
               <input
                 name="hemail"
                 type="text"
@@ -96,7 +96,7 @@ const Login = () => {
                 placeholder="password"
                 onChange={handleInputs}
               />
-              <Button name="signin" variant="contained" onClick={handleSubmit}>
+              <Button name="signin" variant="contained" type="submit">
                 Sign in
               </Button>
               {/* <p className="message" id="myformheadertext1l">

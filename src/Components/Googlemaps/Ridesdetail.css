@@ -1,445 +1,98 @@
 
 
+
 .carddetails{
     background-image: linear-gradient(to right, #C504B6, #4B038E);
     opacity: 0.89;
-    border-radius: 30px;
-    z-index: 2;
-    margin-bottom: 40px;
-	position: absolute;
-	padding:20px;
-	margin:0 130px;
-	top: 530px;
+    border-radius: 15px;
+    z-index: 0;
+	width:75vw;
+    left:10%;
+	position: relative;
+	padding:5px;
+    margin-top: -200px;
 	animation: fadeIn ease-in-out 2s  1  forwards;
+    scroll-behavior: smooth ;
+    
 
-	
-	
 }
+
 @keyframes fadeIn {
 	0%{
 		opacity:0;
 	}
 	100%{
-		opacity: 0.80;
+		opacity: 0.8;
 	}
-	
 }
-.hospital-details{
-	display: flex;
-	color:white;
-	margin-left: 20px;
+
+
+.card-header{
+    color:white;
+    font-size: 1.5rem;
+    display:flex;
+    justify-content: space-between;
 }
-.card-body {
-    color: black;
+
+.card-box{
+    background-color: white;
+    margin:5px;
     text-align: center;
-	
-}
- .dropdown-span {
-    cursor: pointer;
-}
-.dropdown-menu {
-	
-    height: 300px;
-    width:500px;
-	position: absolute;
-	top:57px;
-    
-} 
-@media screen and (max-width:600px)
-{
-	.dropdown-menu{
-		width:300px;
-	
-
-	}
+    border-radius: 25px;
+    height: 60px;
 }
 
-hr {
-    margin: 0.1em auto;
-}
-.shadow {
-	box-shadow: 0 8px 6px -6px black;
-	background-color: rgb(248, 244, 244);
-	color:black;
-	border-radius: 25px;
-	font-size: 5px;
-	width: 230px;
-}
-.cardCross{
-	cursor: pointer;
-}
-
-
-
-
-
-@media screen and (max-width: 2500px) {
-    .carddetails {
-      top: 590px;
-	  
-	  margin:0 170px;
-	  width:1500px;
-    }
-	.card-body{
-		margin:0 190px;
-	}
-	.shadow {
-		box-shadow: 0 8px 6px -6px black;
-		background-color: rgb(248, 244, 244);
-		color:black;
-		border-radius: 25px;
-		width: 240px;
-	}
-	.hospital-title{
-		font-size: 20px;
-		color:white;
-	}
-	.cardCross{
-		cursor: pointer;
-	}  
-  }
-
-
-  @media screen and (max-width: 1800px) {
-    .carddetails {
-      top: 590px;
-	  
-	  margin:0 140px;
-	  width:1390px;
-    }
-	.card-body{
-		margin:0 140px;
-	}
-		.shadow {
-		box-shadow: 0 8px 6px -6px black;
-		background-color: rgb(248, 244, 244);
-		color:black;
-		border-radius: 25px;
-		width:300px;
-
-	}
-	
-}
-@media screen and (max-width: 1600px) {
-    .carddetails {
-      top: 640px;
-	  
-	  margin:0 130px;
-	  width:1250px;
-    }
-	.card-body{
-		margin:0 10px;
-	}
-	
-		.shadow {
-		box-shadow: 0 8px 6px -6px black;
-		background-color: rgb(248, 244, 244);
-		color:black;
-		border-radius: 25px;
-		width:300px;
-
-	}
-	
-}
-  @media screen and (max-width: 1490px) {
-    .carddetails {
-      top: 630px;
-	  margin:0 120px;
-	  width:1200px;
-    }
-	.card-body{
-		margin:0 10px;
-	}
-	.shadow {
-		box-shadow: 0 8px 6px -6px black;
-		background-color: rgb(248, 244, 244);
-		color:black;
-		border-radius: 25px;
-		width: 300px;
-	}
-}
-@media screen and (max-width: 1365px) {
-     .carddetails {
-      top: 630px;
-	  margin:0 200px;
-	  width:900px;
-    }
-	.card-body{
-		margin:0 10px;
-	}
-	.shadow {
-		box-shadow: 0 8px 6px -6px black;
-		background-color: rgb(248, 244, 244);
-		color:black;
-		border-radius: 25px;
-		width: 300px;
-	}
-}
-@media screen and (max-width: 1240px) {
-    .carddetails {
-      top: 625px;
-	  margin:0 120px;
-	  width:900px;
-    }
-	.card-body{
-		margin:0 30px;
-	}
-	.shadow {
-		box-shadow: 0 8px 6px -6px black;
-		background-color: rgb(248, 244, 244);
-		color:black;
-		border-radius: 25px;
-		width:300px;
-	}
-}
-  @media screen and (max-width: 1120px) {
-	   .carddetails {
-      top: 630px;
-	  margin:0 120px;
-	  width:900px;
-    }
-	.shadow {
-		box-shadow: 0 8px 6px -6px black;
-		background-color: rgb(248, 244, 244);
-		color: black;
-		border-radius: 25px;
-		width: 280px;
-	}
-	.hospital-title{
-		font-size: 20px;
-		color:white;
-	}
-	.cardCross{
-		cursor: pointer;
-	}
-  }
-   @media screen and (max-width: 1075px) {
-      .carddetails {
-      top: 630px;
-	  margin:0 70px;
-	  width:900px;
-    }
-	.shadow {
-		box-shadow: 0 8px 6px -6px black;
-		background-color: rgb(248, 244, 244);
-		color: black;
-		border-radius: 25px;
-		width: 250px;
-	}
-	.hospital-title{
-		font-size: 20px;
-		color:white;
-	}
-	.cardCross{
-		cursor: pointer;
-	}
-  }
-
-
-    @media screen and (max-width: 1020px) {
+@media screen and (min-width:1400px){
     .carddetails{
-      top: 480px;
-	  margin:0 250px;
-	  width:50vw;
+        margin-top: -16rem;
     }
-	.card-body{
-		margin: 0 -20px;
-	}
-	.shadow {
-		box-shadow: 0 8px 6px -6px black;
-		background-color: rgb(248, 244, 244);
-		color: black;
-		border-radius: 25px;
-		width: 290px;
-	}
-	.hospital-title{
-		font-size: 20px;
-		color:white;
-	}
-	.cardCross{
-		cursor: pointer;
-	}
-  }
-    @media screen and (max-width: 895px) {
-    .carddetails{
-      top: 480px;
-	  width:60vw;
-	  margin: 0 160px;
-    }
-	.card-body{
-		margin:0 -10px;
-	}
-	.shadow {
-		box-shadow: 0 8px 6px -6px black;
-		background-color: rgb(248, 244, 244);
-		color:black;
-		border-radius: 25px;
-		width: 300px;
-	}
-	.hospital-title{
-		font-size: 20px;
-		color:white;
-	}
-	.cardCross{
-		cursor: pointer;
-	}
-  }
-  @media screen and (max-width: 860px) {
-    .carddetails{
-      top: 480px;
-    }
-	.shadow {
-		box-shadow: 0 8px 6px -6px black;
-		background-color: rgb(248, 244, 244);
-		color:black;
-		border-radius: 25px;
-		width: 290px;
-	}
-	.hospital-title{
-		font-size: 20px;
-		color:white;
-	}
-	.cardCross{
-		cursor: pointer;
-	}
-  }
-
-    @media screen and (max-width: 740px) {
-    .carddetails {
-      top: 480px;
-	  width:490px;
-	  margin:0 100px;
-    }
-	.shadow {
-		box-shadow: 0 8px 6px -6px black;
-		background-color: rgb(248, 244, 244);
-		color:black;
-		border-radius: 25px;
-		width: 300px;
-	}
-	.hospital-title{
-		font-size: 20px;
-		color:white;
-	}
-	.cardCross{
-		cursor: pointer;
-	}
-  }
-
-
-     @media screen and (max-width: 620px) {
-    .carddetails {
-      top: 480px;
-	  width:440px;
-	  margin:0 70px;
-    }
-	.card-body{
-		margin: 0 -40px;
-	}
-	.shadow {
-		box-shadow: 0 8px 6px -6px black;
-		background-color: rgb(248, 244, 244);
-		color:black;
-		border-radius: 25px;
-		width: 300px;
-	}
-	.hospital-title{
-		font-size: 20px;
-		color:white;
-	}
-	.cardCross{
-		cursor: pointer;
-	}
-  }
-
-@media screen and (max-width: 550px) {
-	  .carddetails {
-      top: 100px;
-	  width:480px;
-	  margin:0 60px;
-    }
-   
-	.shadow {
-		box-shadow: 0 8px 6px -6px black;
-		background-color: rgb(248, 244, 244);
-		color:black;
-		border-radius: 25px;
-		width: 300px;
-	}
-	.hospital-title{
-		font-size: 20px;
-		color:white;
-	     font-size: 1.1rem;
-	}
-	.carddetails {
-		top: 502px;
-		margin:0 30px;
-		width:90vw;
+    .card-box{
+        padding:1rem 0;
+        font-size: 1rem;
+        font-weight: 600;
+        height: 3rem;
         
-        
-	}
-	.card-body{
-		margin: 0 -40px;
-	}
-	.cardCross{
-		cursor: pointer;
-	}
-  }
-     @media screen and (max-width: 460px) {
-    .carddetails {
-      top: 490px;
-	  width:400px;
-	  margin:0 10px;
-	  
     }
-	.card-body{
-		margin:0 -40px;
-		
-	}
-	.shadow {
-		box-shadow: 0 8px 6px -6px black;
-		background-color: rgb(248, 244, 244);
-		color:black;
-		
-		width: 300px;
-		
-	}
-	.hospital-title{
-		font-size: 20px;
-		color:white;
-	}
-	.cardCross{
-		cursor: pointer;
-	}
-  }
-
-
-  
-     @media screen and (max-width: 420px) {
-    .carddetails {
-      top: 490px;
-	  width:95vw;
-	  margin:0 10px;
+}
+@media screen and (min-width:1700px){
+    .carddetails{
+        margin-top: -19rem;
     }
-	.card-body{
-		margin:0 0 0 -70px;
-		padding:1rem 0;
-	}
-	.shadow {
-		box-shadow: 0 8px 6px -6px black;
-		background-color: rgb(248, 244, 244);
-		color:black;
-		
-		width: 300px;
-		
-	}
-	.hospital-title{
-		font-size: 20px;
-		color:white;
-	}
-	.cardCross{
-		cursor: pointer;
-	}
-  }
+    .card-box{
+        padding:1rem 0;
+        font-size: 1.2rem;
+        height:3rem;
+        font-weight: 600;
+    }
+}
+@media screen and (max-width:1399px){
+    .carddetails{
+        margin-top: -16rem;
+    }
+    .card-body{
+     
+        font-size:1rem 0;
+        font-weight: 500;
+    }
+     .card-box{
 
-  
+        padding: 0.4em;
+        font-size: 1rem;
+        height:3.4rem;
+        font-weight: 600;
+    }
+}
+@media screen and (max-width:1060px){
+    .carddetails{
+        margin-top: -24rem;
+    }
+}
+@media screen and (max-width:580px){
+.card-box{
+    height:30px;
+    font-size: 0.7rem;
+}
+.carddetails{
+    margin-top: -27rem;
+}
+}

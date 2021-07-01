@@ -12,7 +12,7 @@
 
 import React, { useState } from "react";
 import "../../Css/Header.css";
-import logo from "../../images/logo.png";
+import logo from "../../images/PP_logo_yellow.png";
 import MenuIcon from "@material-ui/icons/Menu";
 import ClearIcon from "@material-ui/icons/Clear";
 import { ToastContainer } from "react-toastify";
