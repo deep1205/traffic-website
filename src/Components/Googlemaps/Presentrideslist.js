@@ -8,10 +8,9 @@ import PastRideMap from "./GoogleMap";
 import axios from "axios";
 import MaterialTable from "material-table";
 import FilterListIcon from "@material-ui/icons/FilterList";
-import { Container, Row, Col } from "reactstrap";
+
 import useWindowDimensions from "./getWindowDimensions";
 import "./Ridesdetail.css";
-import "bootstrap/dist/css/bootstrap.min.css";
 import CustomDatePicker from "./CustomDatePicker";
 import Fab from "@material-ui/core/Fab";
 import ListIcon from "@material-ui/icons/List";
@@ -120,49 +119,32 @@ const Activerideslist = () => {
       <div className="carddetails">
         <div className="card-header">
           <h2> Ride details :</h2>
-          <HighlightOffRoundedIcon  onClick={hideRideDetail} />
+          <HighlightOffRoundedIcon onClick={hideRideDetail} />
         </div>
         <div className="card-body">
-          <Container>
-            <Row>
-              <Col xs="12" sm="6" lg="3">
-                <div className="card-box">Name:{rideDetail.name}</div>
-              </Col>
-              <Col xs="12" sm="6" lg="3">
-                <div className="card-box">Case:{rideDetail.case}</div>
-              </Col>
-              <Col xs="12" sm="6" lg="3">
-                <div className="card-box">Age:{rideDetail.age}</div>
-              </Col>
-              <Col xs="12" sm="6" lg="3">
-                <div className="card-box">Guardian {rideDetail.guardianNo}</div>
-              </Col>
-            </Row>
-            <Row>
-              <Col xs="12" sm="6" lg="3">
-                <div className="card-box">
-                  Driver Name:{rideDetail.driverName}
-                </div>
-              </Col>
-              <Col xs="12" sm="6" lg="3">
-                <div className="card-box">
-                  Case Priority:{rideDetail.casePrior}
-                </div>
-              </Col>
-              <Col xs="12" sm="6" lg="3">
-                <div className="card-box">
-                  Driver Number:{rideDetail.driverNo}
-                </div>
-              </Col>
-              <Col xs="12" sm="6" lg="3">
-                <div className="card-box">
-                  {rideDetail.isVerified
-                    ? "Verified Driver"
-                    : "Not Verified Driver"}
-                </div>
-              </Col>
-            </Row>
-          </Container>
+          <div class="row">
+            <div class="column">
+              <div class="orange-column">{rideDetail.name}</div>
+            </div>
+            <div class="column">
+              <div class="orange-column">{rideDetail.age}</div>
+            </div>
+            <div class="column">
+              <div class="orange-column">{rideDetail.case}</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="column">
+              <div class="orange-column">{rideDetail.guardianNo}</div>
+            </div>
+            <div class="column">
+              <div class="orange-column">{rideDetail.driverName}</div>
+            </div>
+            <div class="column">
+              <div class="orange-column">{rideDetail.driverNo}</div>
+            </div>
+            
+          </div>
         </div>
       </div>
     ) : null;
