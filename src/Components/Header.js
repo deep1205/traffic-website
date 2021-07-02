@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useState} from "react";
 import "../Css/Header.css"
 import { Link } from "react-router-dom";
-// import { useHistory } from 'react-router'
+import { useHistory } from 'react-router'
 import logo from "../images/PP_logo_yellow.png";
 import MenuIcon from "@material-ui/icons/Menu";
 import ClearIcon from "@material-ui/icons/Clear";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 function Navbar({ location }) {
+  const history=useHistory();
   const [icons, seticons] = useState(false);
   const [classna, setclassna] = useState("slider");
    
@@ -85,9 +86,13 @@ function Navbar({ location }) {
 
           {localStorage.getItem("token") != null ? (
             <Link
-              to="/login"
+              
               onClick={() => {
                 localStorage.removeItem("token");
+                window.location.reload();
+                
+
+                
               }}
               style={{ cursor: "pointer", color: "white" }}
             >
