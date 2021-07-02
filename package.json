@@ -12,7 +12,6 @@
     "bootstrap": "^5.0.1",
     "decode-google-map-polyline": "^1.0.1",
     "delay": "^5.0.0",
-    "font-awesome": "^4.7.0",
     "material-table": "^1.69.3",
     "moment": "^2.29.1",
     "react": "^17.0.2",
@@ -26,7 +25,6 @@
     "serve": "^11.3.2",
     "socket.io": "^4.1.2",
     "socket.io-client": "^4.1.2",
-    "supercons": "^0.0.1",
     "web-vitals": "^1.1.2"
   },
   "scripts": {

@@ -18,7 +18,7 @@ import axios from "axios";
 import MaterialTable from "material-table";
 
 import Map from "../Components/Googlemaps/RequestsMap";
-import Header from "../Components/Headers/Header";
+import Header from "../Components/Header.js";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;

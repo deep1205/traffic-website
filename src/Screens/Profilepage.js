@@ -1,5 +1,5 @@
 import React from 'react'
-import Header  from '../Components/Headers/Header'
+import Header from "../Components/Header.js";
 const Profilepage = () => {
     return (
         <div>

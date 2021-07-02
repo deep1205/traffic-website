@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useHistory, NavLink } from "react-router-dom";
 import Whyusnew from "../Components/Whyusnew"
-import Header from "../Components/Headers/Headerlogin"
+import Header from "../Components/Header.js";
 import Button from "@material-ui/core/Button";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -67,7 +67,7 @@ const Login = () => {
 
   return (
     <>
-      <Header location="profile" />
+      <Header location="login" />
       <div class=" fadeInDown">
         <div className="login-page" style={{ position: "relative" }}>
           <div className="form">
