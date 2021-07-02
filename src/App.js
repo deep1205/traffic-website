@@ -42,12 +42,17 @@ const App = () => {
             component={Requestpage}
             meta={{ auth: true }}
           />
-        
-          <Route exact path="/login">
-            <Login />
-          </Route>
+          { localStorage.getItem("token")==null ? (
+            <Route exact path="/login">
+              <Login />
+            </Route>
+          ) : (
+            <Route exact path="/#">
+              <Login />
+            </Route>
+          )}
 
-          <Redirect to="/login" />
+          <Redirect to="/home" />
         </Switch>
       </GuardProvider>
       <Footer />
