@@ -1,13 +1,12 @@
 
 
-
 .carddetails{
     background-image: linear-gradient(to right, #C504B6, #4B038E);
     opacity: 0.89;
     border-radius: 15px;
     z-index: 0;
-	width:80vw;
-    left: 7%;
+	width:75vw;
+    left:10%;
 	position: relative;
 	padding:5px;
     margin-top: -200px;
@@ -34,97 +33,65 @@
     justify-content: space-between;
 }
 
-
+.card-box{
+    background-color: white;
+    margin:5px;
+    text-align: center;
+    border-radius: 25px;
+    height: 60px;
+}
 
 @media screen and (min-width:1400px){
     .carddetails{
         margin-top: -16rem;
     }
-   
+    .card-box{
+        padding:1rem 0;
+        font-size: 1rem;
+        font-weight: 600;
+        height: 3rem;
+        
+    }
 }
 @media screen and (min-width:1700px){
     .carddetails{
         margin-top: -19rem;
     }
-    
+    .card-box{
+        padding:1rem 0;
+        font-size: 1.2rem;
+        height:3rem;
+        font-weight: 600;
+    }
 }
 @media screen and (max-width:1399px){
     .carddetails{
-        margin-top: -22rem;
+        margin-top: -16rem;
     }
-   
-    
+    .card-body{
+     
+        font-size:1rem 0;
+        font-weight: 500;
+    }
+     .card-box{
+
+        padding: 0.4em;
+        font-size: 1rem;
+        height:3.4rem;
+        font-weight: 600;
+    }
 }
 @media screen and (max-width:1060px){
     .carddetails{
         margin-top: -24rem;
     }
 }
-@media screen and (max-width:480px){
+@media screen and (max-width:580px){
 .card-box{
     height:30px;
     font-size: 0.7rem;
 }
-
+.carddetails{
+    margin-top: -27rem;
 }
-@media screen and (max-width:420px){
-.card-box{
-    height:30px;
-    font-size: 0.7rem;
-}
-
-}
-
-
-
-
-
-
-.row {
-  line-height:45px;
-  margin:0 120px;
-  text-align:center;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-
-}
-
-.column {
-  margin:10px;
-  display: flex;
-  flex-direction: column;
-  flex-basis: 100%;
-  
-}
-
-.orange-column {
-  background-color:white;
-  height: 45px;
-  
-    border-radius:50px;
-    min-width:320px;
-  max-width:80%;
-}
-
-
-
-
-@media screen and (min-width: 800px) {
-  .column {
-    flex: 1
-  }
-
-
-}
-
-
-
-@media screen and (max-width: 480px) {
-    .orange-column{
-          min-width:255px;
-  max-width:100%;
-        
-    }
-
 }
