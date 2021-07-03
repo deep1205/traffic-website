@@ -86,6 +86,7 @@ function Navbar({ location }) {
 
           {localStorage.getItem("token") != null ? (
             <Link
+            to="/login"
               
               onClick={() => {
                 localStorage.removeItem("token");
