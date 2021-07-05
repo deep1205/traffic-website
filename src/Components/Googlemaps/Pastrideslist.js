@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Icon from "supercons";
 import FirstPageIcon from "@material-ui/icons/FirstPage";
 import LastPageIcon from "@material-ui/icons/LastPage";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
@@ -11,7 +10,7 @@ import axios from "axios";
 import MaterialTable from "material-table";
 import FilterListIcon from "@material-ui/icons/FilterList";
 import useWindowDimensions from "./getWindowDimensions";
-import "bootstrap/dist/css/bootstrap.min.css";
+//import "bootstrap/dist/css/bootstrap.min.css";
 import CustomDatePicker from "./CustomDatePicker";
 import Fab from "@material-ui/core/Fab";
 import ListIcon from "@material-ui/icons/List";

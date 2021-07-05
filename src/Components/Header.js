@@ -90,7 +90,7 @@ function Navbar({ location }) {
               
               onClick={() => {
                 localStorage.removeItem("token");
-                window.location.reload();
+                
                 
 
                 
