@@ -16,9 +16,10 @@ import IconButton from "@material-ui/core/IconButton";
 
 import axios from "axios";
 import MaterialTable from "material-table";
+import CustomDatePicker from "../Components/Googlemaps/CustomDatePicker"
 
 import Map from "../Components/Googlemaps/RequestsMap";
-import Header from "../Components/Header.js";
+import Header from "../Components/Header";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -261,12 +262,20 @@ const Requests = () => {
         <div className={styles.screen}>
           {details._id !== "" ? (
             <Map
-              _id={details["pickedBy"]._id}
+              _id={
+                details["pickedBy"] ? details["pickedBy"]._id : "Not available"
+              }
               rideobjectid={details.RideId}
               polyline={details.patientPolyline}
-              pickupcoordinates={details["pickUplocation"].coordinates}
+              pickupcoordinates={
+                details["pickUplocation"]
+                  ? details["pickUplocation"].coordinates
+                  : [0, 0]
+              }
               hospitalcoordinates={
-                details["hospital"]["hospitalLocation"].coordinates
+                details["hospital"]
+                  ? details["hospital"]["hospitalLocation"].coordinates
+                  : [0, 0]
               }
               hospitalpolyline={details.hospitalPolyline}
               ispicked={details.isPicked}
@@ -330,7 +339,13 @@ const Requests = () => {
                 columns={[
                   { title: "Name", field: "name" },
                   { title: "Age", field: "age", type: "numeric" },
-                  { title: "Date", field: "createdAt", type: "date" },
+                  {
+                    title: "Date",
+                    field: "createdAt",
+                    type: "date",
+                    dateSetting: { locale: "en-GB" },
+                    filterComponent: (props) => <CustomDatePicker {...props} />,
+                  },
                   { title: "Patient Case", field: "pcase" },
                   { title: "Level", field: "casePrior" },
                   { title: "Driver", field: "pickedBy.name" },
@@ -410,7 +425,13 @@ const Requests = () => {
                 columns={[
                   { title: "Name", field: "name" },
                   { title: "Age", field: "age", type: "numeric" },
-                  { title: "Date", field: "createdAt", type: "date" },
+                  {
+                    title: "Date",
+                    field: "createdAt",
+                    type: "date",
+                    dateSetting: { locale: "en-GB" },
+                    filterComponent: (props) => <CustomDatePicker {...props} />,
+                  },
                   { title: "Patient Case", field: "pcase" },
                   { title: "Level", field: "casePrior" },
                   { title: "Driver", field: "pickedBy.name" },
@@ -459,38 +480,44 @@ const Requests = () => {
             <TabPanel value={value} index={2}>
               <MaterialTable
                 onRowClick={(event, rowData) => {
-                 setDetails({
-                   name: rowData ? rowData.name : "NOt available",
-                   age: rowData ? rowData.age : "NOt avaialable",
-                   date: rowData
-                     ? moment(rowData["createdAt"]).format("D/MM/YYYY")
-                     : "Not Available",
-                   caseprior: rowData ? rowData.casePrior : "Not Available",
-                   guardianNo: rowData ? rowData.guardianNo : "NOtt Available",
-                   patientNo: rowData ? rowData.patientNo : "Not available",
-                   pname: rowData ? rowData.pname : "NOt Available",
-                   pcase: rowData ? rowData.pcase : "Not Available",
-                   rideid: rowData ? rowData.RideId : "NOt Available",
-                   driverno: rowData ? rowData.driverNo : "Not Available",
-                   _id: rowData.pickedBy
-                     ? rowData["pickedBy"]._id
-                     : "Not Available",
+                  setDetails({
+                    name: rowData ? rowData.name : "NOt available",
+                    age: rowData ? rowData.age : "NOt avaialable",
+                    date: rowData
+                      ? moment(rowData["createdAt"]).format("D/MM/YYYY")
+                      : "Not Available",
+                    caseprior: rowData ? rowData.casePrior : "Not Available",
+                    guardianNo: rowData ? rowData.guardianNo : "NOtt Available",
+                    patientNo: rowData ? rowData.patientNo : "Not available",
+                    pname: rowData ? rowData.pname : "NOt Available",
+                    pcase: rowData ? rowData.pcase : "Not Available",
+                    rideid: rowData ? rowData.RideId : "NOt Available",
+                    driverno: rowData ? rowData.driverNo : "Not Available",
+                    _id: rowData.pickedBy
+                      ? rowData["pickedBy"]._id
+                      : "Not Available",
 
-                   polyline: rowData
-                     ? rowData.patientPolyline
-                     : "Not Available",
-                   pickupcoordinates: rowData.pickUplocation
-                     ? rowData["pickUplocation"].coordinates
-                     : "Not Available",
-                   hospitalcoordinates: rowData["hospital"]
-                     ? rowData["hospital"]["hospitalLocation"].coordinates
-                     : "Not Available",
-                 });
+                    polyline: rowData
+                      ? rowData.patientPolyline
+                      : "Not Available",
+                    pickupcoordinates: rowData.pickUplocation
+                      ? rowData["pickUplocation"].coordinates
+                      : "Not Available",
+                    hospitalcoordinates: rowData["hospital"]
+                      ? rowData["hospital"]["hospitalLocation"].coordinates
+                      : "Not Available",
+                  });
                 }}
                 columns={[
                   { title: "Name", field: "name" },
                   { title: "Age", field: "age", type: "numeric" },
-                  { title: "Date", field: "createdAt", type: "date" },
+                  {
+                    title: "Date",
+                    field: "createdAt",
+                    type: "date",
+                    dateSetting: { locale: "en-GB" },
+                    filterComponent: (props) => <CustomDatePicker {...props} />,
+                  },
                   { title: "Patient Case", field: "pcase" },
                   { title: "Level", field: "casePrior" },
                   { title: "Driver", field: "pickedBy.name" },
@@ -539,38 +566,44 @@ const Requests = () => {
             <TabPanel value={value} index={3}>
               <MaterialTable
                 onRowClick={(event, rowData) => {
-                 setDetails({
-                   name: rowData ? rowData.name : "NOt available",
-                   age: rowData ? rowData.age : "NOt avaialable",
-                   date: rowData
-                     ? moment(rowData["createdAt"]).format("D/MM/YYYY")
-                     : "Not Available",
-                   caseprior: rowData ? rowData.casePrior : "Not Available",
-                   guardianNo: rowData ? rowData.guardianNo : "NOtt Available",
-                   patientNo: rowData ? rowData.patientNo : "Not available",
-                   pname: rowData ? rowData.pname : "NOt Available",
-                   pcase: rowData ? rowData.pcase : "Not Available",
-                   rideid: rowData ? rowData.RideId : "NOt Available",
-                   driverno: rowData ? rowData.driverNo : "Not Available",
-                   _id: rowData.pickedBy
-                     ? rowData["pickedBy"]._id
-                     : "Not Available",
+                  setDetails({
+                    name: rowData ? rowData.name : "NOt available",
+                    age: rowData ? rowData.age : "NOt avaialable",
+                    date: rowData
+                      ? moment(rowData["createdAt"]).format("D/MM/YYYY")
+                      : "Not Available",
+                    caseprior: rowData ? rowData.casePrior : "Not Available",
+                    guardianNo: rowData ? rowData.guardianNo : "NOtt Available",
+                    patientNo: rowData ? rowData.patientNo : "Not available",
+                    pname: rowData ? rowData.pname : "NOt Available",
+                    pcase: rowData ? rowData.pcase : "Not Available",
+                    rideid: rowData ? rowData.RideId : "NOt Available",
+                    driverno: rowData ? rowData.driverNo : "Not Available",
+                    _id: rowData.pickedBy
+                      ? rowData["pickedBy"]._id
+                      : "Not Available",
 
-                   polyline: rowData
-                     ? rowData.patientPolyline
-                     : "Not Available",
-                   pickupcoordinates: rowData.pickUplocation
-                     ? rowData["pickUplocation"].coordinates
-                     : "Not Available",
-                   hospitalcoordinates: rowData["hospital"]
-                     ? rowData["hospital"]["hospitalLocation"].coordinates
-                     : "Not Available",
-                 });
+                    polyline: rowData
+                      ? rowData.patientPolyline
+                      : "Not Available",
+                    pickupcoordinates: rowData.pickUplocation
+                      ? rowData["pickUplocation"].coordinates
+                      : "Not Available",
+                    hospitalcoordinates: rowData["hospital"]
+                      ? rowData["hospital"]["hospitalLocation"].coordinates
+                      : "Not Available",
+                  });
                 }}
                 columns={[
                   { title: "Name", field: "name" },
                   { title: "Age", field: "age", type: "numeric" },
-                  { title: "Date", field: "createdAt", type: "date" },
+                  {
+                    title: "Date",
+                    field: "createdAt",
+                    type: "date",
+                    dateSetting: { locale: "en-GB" },
+                    filterComponent: (props) => <CustomDatePicker {...props} />,
+                  },
                   { title: "Patient Case", field: "pcase" },
                   { title: "Level", field: "casePrior" },
                   { title: "Driver", field: "pickedBy.name" },
@@ -615,36 +648,48 @@ const Requests = () => {
           <div className={styles.dis1}>
             <div className={styles.details}>
               <h2>Hospital Details</h2>
-              <p className={styles.names}>{details.hospital.name}</p>
+              <p className={styles.names}>
+                {details.hospital ? details.hospital.name : "Not Available"}
+              </p>
               <p className={styles.address}>
-                {details.hospital.street +
-                  "," +
-                  details.hospital.city +
-                  "," +
-                  details.hospital.district +
-                  "," +
-                  details.hospital.state}
+                {details.hospital
+                  ? details.hospital.street +
+                    "," +
+                    details.hospital.city +
+                    "," +
+                    details.hospital.district +
+                    "," +
+                    details.hospital.state
+                  : "Not Available"}
               </p>
               <p className={styles.tags}>
-                Number:{details.hospital.hospitalNumbers[0]}
+                Number:
+                {details.hospital
+                  ? details.hospital.hospitalNumbers[0]
+                  : "Not Available"}
               </p>
               <p className={styles.tags}>
                 Address:
-                {details.hospital.street +
-                  "," +
-                  details.hospital.city +
-                  "," +
-                  details.hospital.district +
-                  "," +
-                  details.hospital.state +
-                  "," +
-                  details.hospital.landmark}
+                {details.hospital
+                  ? details.hospital.street +
+                    "," +
+                    details.hospital.city +
+                    "," +
+                    details.hospital.district +
+                    "," +
+                    details.hospital.state
+                  : "Not Available"}
               </p>
             </div>
             <div className={styles.details}>
               <h2>Driver Details</h2>
-              <p className={styles.names}>{details.pickedBy.name}</p>
-              <p className={styles.tags}>Contact:{details.pickedBy.mobileNo}</p>
+              <p className={styles.names}>
+                {details.pickedBy ? details.pickedBy.name : "Not Available"}
+              </p>
+              <p className={styles.tags}>
+                Contact:
+                {details.pickedBy ? details.pickedBy.mobileNo : "Not Available"}
+              </p>
             </div>
             <div className={styles.details}>
               <h2>Paitent Details</h2>
@@ -682,37 +727,49 @@ const Requests = () => {
               >
                 <div className={styles.details}>
                   <h2>Hospital Details</h2>
-                  <p className={styles.names}>{details.hospital.name}</p>
+                  <p className={styles.names}>
+                    {details.hospital ? details.hospital.name : "Not Available"}
+                  </p>
                   <p className={styles.address}>
-                    {details.hospital.street +
-                      "," +
-                      details.hospital.city +
-                      "," +
-                      details.hospital.district +
-                      "," +
-                      details.hospital.state}
+                    {details.hospital
+                      ? details.hospital.street +
+                        "," +
+                        details.hospital.city +
+                        "," +
+                        details.hospital.district +
+                        "," +
+                        details.hospital.state
+                      : "Not Available"}
                   </p>
                   <p className={styles.tags}>
-                    Number:{details.hospital.hospitalNumbers[0]}
+                    Number:
+                    {details.hospital
+                      ? details.hospital.hospitalNumbers[0]
+                      : "Not Available"}
                   </p>
                   <p className={styles.tags}>
                     Address:
-                    {details.hospital.street +
-                      "," +
-                      details.hospital.city +
-                      "," +
-                      details.hospital.district +
-                      "," +
-                      details.hospital.state +
-                      "," +
-                      details.hospital.landmark}
+                    {details.hospital
+                      ? details.hospital.street +
+                        "," +
+                        details.hospital.city +
+                        "," +
+                        details.hospital.district +
+                        "," +
+                        details.hospital.state
+                      : "Not Available"}
                   </p>
                 </div>
                 <div className={styles.details}>
                   <h2>Driver Details</h2>
-                  <p className={styles.names}>{details.pickedBy.name}</p>
+                  <p className={styles.names}>
+                    {details.pickedBy ? details.pickedBy.name : "Not Available"}
+                  </p>
                   <p className={styles.tags}>
-                    Contact:{details.pickedBy.mobileNo}
+                    Contact:
+                    {details.pickedBy
+                      ? details.pickedBy.mobileNo
+                      : "Not Available"}
                   </p>
                 </div>
                 <div className={styles.details}>

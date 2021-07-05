@@ -1,27 +1,48 @@
 import React, { useState, useEffect } from "react";
+import Icon from "supercons";
+import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import FirstPageIcon from "@material-ui/icons/FirstPage";
 import LastPageIcon from "@material-ui/icons/LastPage";
+import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
+import DoubleArrowIcon from "@material-ui/icons/DoubleArrow";
 import PastRideMap from "./GoogleMap";
 import axios from "axios";
 import MaterialTable from "material-table";
 import FilterListIcon from "@material-ui/icons/FilterList";
-import { Container, Row, Col } from "reactstrap";
 import useWindowDimensions from "./getWindowDimensions";
-import "./Ridesdetail.css";
+import styles from "../../Css/Request.module.css";
+import CloseIcon from "@material-ui/icons/Close";
 import "bootstrap/dist/css/bootstrap.min.css";
 import CustomDatePicker from "./CustomDatePicker";
 import Fab from "@material-ui/core/Fab";
 import ListIcon from "@material-ui/icons/List";
-import HighlightOffRoundedIcon from "@material-ui/icons/HighlightOffRounded";
+import Drawer from "@material-ui/core/Drawer";
+import Button from "@material-ui/core/Button";
+
 const Activerideslist = () => {
   const { height, width } = useWindowDimensions();
   const [cardOpen, setCardOpen] = useState(false);
   const [rides, setRides] = useState([]);
   const [rideDetail, setRideDetail] = useState({});
+  const [button, setButton] = useState(false);
   const [tableOpen, setTableOpen] = useState(false);
+  const [state, setState] = useState({
+    left: false,
+  });
+
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+
+    setState({ ...state, [anchor]: open });
+  };
 
   const handleDrawerToggle = () => {
     setTableOpen(true);
@@ -56,10 +77,32 @@ const Activerideslist = () => {
             hospitalcoordinates: data["hospital"]
               ? data["hospital"]["hospitalLocation"].coordinates
               : "Not Available",
+            hospitalPhone: data["hospital"]
+              ? data["hospital"].hospitalNumbers[0]
+              : "Not Available",
+            hospitalName: data["hospital"]
+              ? data["hospital"].name
+              : "Not Available",
+            hospitalAddress: data["hospital"]
+              ? data["hospital"].street +
+                ", " +
+                data["hospital"].city +
+                ", " +
+                data["hospital"].district +
+                ", " +
+                data["hospital"].state
+              : "Not Available",
             ispicked: data ? data.isPicked : "Not Available",
             hospitalpolyline: data ? data["hospitalPolyline"] : "Not Available",
             rideobjectid: data ? data["_id"] : "Not Available",
             activestatus: data ? data["activeStatus"] : "Not Available",
+            pickedBy: data
+              ? data.pickedBy
+              : {
+                  hospital: "Not Available",
+                  mobileNo: "Not Available",
+                  name: "Not Available",
+                },
             isVerified: data.pickedBy
               ? data["pickedBy"].isVerified
               : "Not Available",
@@ -104,68 +147,24 @@ const Activerideslist = () => {
       driverid: ride["driverid"],
       activestatus: ride["activestatus"],
       isVerified: ride["isVerified"],
+      hospitalPhone: ride["hospitalPhone"],
+      hospitalName: ride["hospitalName"],
+      hospitalAddress: ride["hospitalAddress"],
+      pickedBy: ride["pickedBy"],
     };
   });
 
   const showRideDetail = (event, rowData) => {
     setRideDetail(rowData);
+    setButton(true);
+    setState({ left: true });
     setCardOpen(true);
     setTableOpen(false);
   };
   const hideRideDetail = () => {
     setCardOpen(false);
   };
-  const rideDetailBox =
-    width > 0 ? (
-      <div className="carddetails">
-        <div className="card-header">
-          <h2> Ride details :</h2>
-          <HighlightOffRoundedIcon onClick={hideRideDetail} />
-        </div>
-        <div className="card-body">
-          <Container>
-            <Row>
-              <Col xs="12" sm="6" lg="3">
-                <div className="card-box">Name:{rideDetail.name}</div>
-              </Col>
-              <Col xs="12" sm="6" lg="3">
-                <div className="card-box">Case:{rideDetail.case}</div>
-              </Col>
-              <Col xs="12" sm="6" lg="3">
-                <div className="card-box">Age:{rideDetail.age}</div>
-              </Col>
-              <Col xs="12" sm="6" lg="3">
-                <div className="card-box">Guardian {rideDetail.guardianNo}</div>
-              </Col>
-            </Row>
-            <Row>
-              <Col xs="12" sm="6" lg="3">
-                <div className="card-box">
-                  Driver Name:{rideDetail.driverName}
-                </div>
-              </Col>
-              <Col xs="12" sm="6" lg="3">
-                <div className="card-box">
-                  Case Priority:{rideDetail.casePrior}
-                </div>
-              </Col>
-              <Col xs="12" sm="6" lg="3">
-                <div className="card-box">
-                  Driver Number:{rideDetail.driverNo}
-                </div>
-              </Col>
-              <Col xs="12" sm="6" lg="3">
-                <div className="card-box">
-                  {rideDetail.isVerified
-                    ? "Verified Driver"
-                    : "Not Verified Driver"}
-                </div>
-              </Col>
-            </Row>
-          </Container>
-        </div>
-      </div>
-    ) : null;
+
   let tableStyle = {
     transform: "translateX(-444px)",
   };
@@ -187,7 +186,10 @@ const Activerideslist = () => {
         variant="extended"
         color="primary"
         aria-label="list"
-        onClick={() => setTableOpen(!tableOpen)}
+        onClick={() => {
+          setTableOpen(!tableOpen);
+          setButton(false);
+        }}
       >
         <ListIcon />
         Active Rides
@@ -225,7 +227,8 @@ const Activerideslist = () => {
           }}
         />
 
-        <HighlightOffRoundedIcon
+        <CloseIcon
+        
           style={{
             borderRadius: "0",
             position: "absolute",
@@ -234,7 +237,11 @@ const Activerideslist = () => {
             zIndex: "10",
             tableStyle,
           }}
-          onClick={() => setTableOpen(false)}
+          
+          onClick={() => {
+            setTableOpen(false);
+            setButton(true);
+          }}
         />
       </div>
       <PastRideMap
@@ -247,7 +254,60 @@ const Activerideslist = () => {
         hospitalpolyline={rideDetail.hospitalpolyline}
         ispicked={rideDetail.ispicked}
       />
-      {cardOpen && rideDetailBox}
+      {button && !state.left ? (
+        <Button
+          variant="contained"
+          color="primary"
+          size="medium"
+          onClick={toggleDrawer("left", true)}
+          style={{
+            position: "fixed",
+            top: "50vh ",
+            left: 0,
+            zIndex: 2000,
+          }}
+        >
+          <DoubleArrowIcon />
+        </Button>
+      ) : null}
+      <React.Fragment key={"left"}>
+        <Drawer
+          anchor={"left"}
+          open={state["left"]}
+          onClose={toggleDrawer("left", false)}
+        >
+          <div className={styles.details}>
+            <h2>Paitent Details</h2>
+            <p className={styles.names}>{rideDetail.name}</p>
+            <p className={styles.tags}>Age:{rideDetail.age}</p>
+            <p className={styles.tags}>Contact:{rideDetail.patientNo}</p>
+            <p className={styles.tags}>Case:{rideDetail.case}</p>
+            <p className={styles.tags}>Priority:{rideDetail.casePrior}</p>
+          </div>
+          <div className={styles.details}>
+            <h2>Hospital Details</h2>
+            <p className={styles.names}>{rideDetail.hospitalName}</p>
+            <p className={styles.address}>{rideDetail.hospitalAddress}</p>
+            <p className={styles.tags}>Number:{rideDetail.hospitalPhone}</p>
+            <p className={styles.tags}>
+              Address:
+              {rideDetail.hospitalAddress}
+            </p>
+          </div>
+          <div className={styles.details}>
+            <h2>Driver Details</h2>
+            <p className={styles.names}>
+              {rideDetail.pickedBy ? rideDetail.pickedBy.name : "Not Available"}
+            </p>
+            <p className={styles.tags}>
+              Contact:
+              {rideDetail.pickedBy
+                ? rideDetail.pickedBy.mobileNo
+                : "Not Available"}
+            </p>
+          </div>
+        </Drawer>
+      </React.Fragment>
     </main>
   );
 };
