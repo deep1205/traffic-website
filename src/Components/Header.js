@@ -6,6 +6,7 @@ import logo from "../images/PP_logo_yellow.png";
 import MenuIcon from "@material-ui/icons/Menu";
 import ClearIcon from "@material-ui/icons/Clear";
 import { ToastContainer } from "react-toastify";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import "react-toastify/dist/ReactToastify.css";
 function Navbar({ location }) {
   const history=useHistory();
@@ -54,51 +55,45 @@ function Navbar({ location }) {
         </div>
         <nav className={classna}>
           {localStorage.getItem("token") != null ? (
-           <a style={{ visibility: "hidden" }} href="/home">
+            <a style={{ visibility: "hidden" }} href="/home">
               Home
-          </a>
+            </a>
           ) : (
-           <a style={{ visibility: "hidden" }} href="/home">
+            <a style={{ visibility: "hidden" }} href="/home">
               Home
-          </a>
+            </a>
           )}
           {localStorage.getItem("token") != null ? (
-           <a href="/home">Home</a>
+            <a href="/home">Home</a>
           ) : (
-           <a style={{ visibility: "hidden" }} href="/home">
+            <a style={{ visibility: "hidden" }} href="/home">
               Home
-          </a>
+            </a>
           )}
           {localStorage.getItem("token") != null ? (
-           <a href="/pastride">PastRide</a>
+            <a href="/pastride">PastRide</a>
           ) : (
-           <a style={{ visibility: "hidden" }} href="/pastride">
+            <a style={{ visibility: "hidden" }} href="/pastride">
               Pastride
-          </a>
+            </a>
           )}
           {localStorage.getItem("token") != null ? (
-           <a href="/request">Request</a>
+            <a href="/request">Request</a>
           ) : (
-           <a style={{ visibility: "hidden" }} href="/request">
+            <a style={{ visibility: "hidden" }} href="/request">
               Request
-          </a>
+            </a>
           )}
 
           {localStorage.getItem("token") != null ? (
             <a
-            href="/login"
-              
+              href="/login"
               onClick={() => {
                 localStorage.removeItem("token");
-                
-                
-                
-
-                
               }}
               style={{ cursor: "pointer", color: "white" }}
             >
-              Logout
+              <ExitToAppIcon/>
             </a>
           ) : (
             <a href="/login">Login</a>
