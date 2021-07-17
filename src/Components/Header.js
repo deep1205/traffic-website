@@ -93,7 +93,7 @@ function Navbar({ location }) {
               }}
               style={{ cursor: "pointer", color: "white" }}
             >
-              <ExitToAppIcon/>
+              <ExitToAppIcon fontSize="large" />
             </a>
           ) : (
             <a href="/login">Login</a>
