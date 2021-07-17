@@ -1,5 +1,4 @@
 import { React, useEffect, useState, Fragment } from "react";
-
 import styles from "../Css/Request.module.css";
 import moment from "moment";
 import PropTypes from "prop-types";
@@ -13,13 +12,11 @@ import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 import Button from "@material-ui/core/Button";
 import DoubleArrowIcon from "@material-ui/icons/DoubleArrow";
 import IconButton from "@material-ui/core/IconButton";
-
 import axios from "axios";
 import MaterialTable from "material-table";
 import CustomDatePicker from "../Components/Googlemaps/CustomDatePicker"
-
 import Map from "../Components/Googlemaps/RequestsMap";
-import Header from "../Components/Header";
+import Header from "../Components/Header"
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -267,11 +264,7 @@ const Requests = () => {
               }
               rideobjectid={details.RideId}
               polyline={details.patientPolyline}
-              pickupcoordinates={
-                details["pickUplocation"]
-                  ? details["pickUplocation"].coordinates
-                  : [0, 0]
-              }
+              pickupcoordinates={details.pickupcoordinates}
               hospitalcoordinates={
                 details["hospital"]
                   ? details["hospital"]["hospitalLocation"].coordinates
@@ -321,16 +314,19 @@ const Requests = () => {
                     pcase: rowData ? rowData.pcase : "Not Available",
                     rideid: rowData ? rowData.RideId : "NOt Available",
                     driverno: rowData ? rowData.driverNo : "Not Available",
+                    hospital: rowData ? rowData.hospital : "Not Available",
                     _id: rowData.pickedBy
                       ? rowData["pickedBy"]._id
                       : "Not Available",
-
+                    pickedBy: rowData.pickedBy
+                      ? rowData["pickedBy"]
+                      : "Not Available",
                     polyline: rowData
                       ? rowData.patientPolyline
                       : "Not Available",
                     pickupcoordinates: rowData.pickUplocation
                       ? rowData["pickUplocation"].coordinates
-                      : "Not Available",
+                      : [0, 0],
                     hospitalcoordinates: rowData["hospital"]
                       ? rowData["hospital"]["hospitalLocation"].coordinates
                       : "Not Available",
@@ -407,10 +403,13 @@ const Requests = () => {
                     pcase: rowData ? rowData.pcase : "Not Available",
                     rideid: rowData ? rowData.RideId : "NOt Available",
                     driverno: rowData ? rowData.driverNo : "Not Available",
+                    hospital: rowData ? rowData.hospital : "Not Available",
                     _id: rowData.pickedBy
                       ? rowData["pickedBy"]._id
                       : "Not Available",
-
+                    pickedBy: rowData.pickedBy
+                      ? rowData["pickedBy"]
+                      : "Not Available",
                     polyline: rowData
                       ? rowData.patientPolyline
                       : "Not Available",
@@ -493,10 +492,13 @@ const Requests = () => {
                     pcase: rowData ? rowData.pcase : "Not Available",
                     rideid: rowData ? rowData.RideId : "NOt Available",
                     driverno: rowData ? rowData.driverNo : "Not Available",
+                    hospital: rowData ? rowData.hospital : "Not Available",
                     _id: rowData.pickedBy
                       ? rowData["pickedBy"]._id
                       : "Not Available",
-
+                    pickedBy: rowData.pickedBy
+                      ? rowData["pickedBy"]
+                      : "Not Available",
                     polyline: rowData
                       ? rowData.patientPolyline
                       : "Not Available",
@@ -565,6 +567,7 @@ const Requests = () => {
             </TabPanel>
             <TabPanel value={value} index={3}>
               <MaterialTable
+            
                 onRowClick={(event, rowData) => {
                   setDetails({
                     name: rowData ? rowData.name : "NOt available",
@@ -579,10 +582,13 @@ const Requests = () => {
                     pcase: rowData ? rowData.pcase : "Not Available",
                     rideid: rowData ? rowData.RideId : "NOt Available",
                     driverno: rowData ? rowData.driverNo : "Not Available",
+                    hospital: rowData ? rowData.hospital : "Not Available",
                     _id: rowData.pickedBy
                       ? rowData["pickedBy"]._id
                       : "Not Available",
-
+                    pickedBy: rowData.pickedBy
+                      ? rowData["pickedBy"]
+                      : "Not Available",
                     polyline: rowData
                       ? rowData.patientPolyline
                       : "Not Available",
@@ -654,11 +660,11 @@ const Requests = () => {
               <p className={styles.address}>
                 {details.hospital
                   ? details.hospital.street +
-                    "," +
+                    ", " +
                     details.hospital.city +
-                    "," +
+                    ", " +
                     details.hospital.district +
-                    "," +
+                    ", " +
                     details.hospital.state
                   : "Not Available"}
               </p>
@@ -672,11 +678,11 @@ const Requests = () => {
                 Address:
                 {details.hospital
                   ? details.hospital.street +
-                    "," +
+                    ", " +
                     details.hospital.city +
-                    "," +
+                    ", " +
                     details.hospital.district +
-                    "," +
+                    ", " +
                     details.hospital.state
                   : "Not Available"}
               </p>
@@ -733,11 +739,11 @@ const Requests = () => {
                   <p className={styles.address}>
                     {details.hospital
                       ? details.hospital.street +
-                        "," +
+                        ", " +
                         details.hospital.city +
-                        "," +
+                        ", " +
                         details.hospital.district +
-                        "," +
+                        ", " +
                         details.hospital.state
                       : "Not Available"}
                   </p>

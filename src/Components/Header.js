@@ -54,34 +54,34 @@ function Navbar({ location }) {
         </div>
         <nav className={classna}>
           {localStorage.getItem("token") != null ? (
-            <Link style={{ visibility: "hidden" }} to="/home">
+           <a style={{ visibility: "hidden" }} href="/home">
               Home
-            </Link>
+          </a>
           ) : (
-            <Link style={{ visibility: "hidden" }} to="/home">
+           <a style={{ visibility: "hidden" }} href="/home">
               Home
-            </Link>
+          </a>
           )}
           {localStorage.getItem("token") != null ? (
-            <Link to="/home">Home</Link>
+           <a href="/home">Home</a>
           ) : (
-            <Link style={{ visibility: "hidden" }} to="/home">
+           <a style={{ visibility: "hidden" }} href="/home">
               Home
-            </Link>
+          </a>
           )}
           {localStorage.getItem("token") != null ? (
-            <Link to="/pastride">PastRide</Link>
+           <a href="/pastride">PastRide</a>
           ) : (
-            <Link style={{ visibility: "hidden" }} to="/pastride">
+           <a style={{ visibility: "hidden" }} href="/pastride">
               Pastride
-            </Link>
+          </a>
           )}
           {localStorage.getItem("token") != null ? (
-            <Link to="/request">Request</Link>
+           <a href="/request">Request</a>
           ) : (
-            <Link style={{ visibility: "hidden" }} to="/request">
+           <a style={{ visibility: "hidden" }} href="/request">
               Request
-            </Link>
+          </a>
           )}
 
           {localStorage.getItem("token") != null ? (

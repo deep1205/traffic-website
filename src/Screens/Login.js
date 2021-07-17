@@ -10,6 +10,8 @@ import Slideshow from "../Components/Slideshow"
 import i2 from "../images/i2.jpg";
 import i3 from "../images/i3.jpg";
 import i5 from "../images/i5.jpg";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import Fade from "@material-ui/core/Fade";
 import "react-toastify/dist/ReactToastify.css";
 const delay = require("delay");
 const tutorialSteps = [
@@ -29,6 +31,7 @@ const tutorialSteps = [
 ];
 
 const Login = () => {
+   const [loading, setLoading] = React.useState(0);
   const history = useHistory();
   const [user, setUser] = useState({
     email: "",
@@ -53,18 +56,28 @@ const Login = () => {
       .then(async (res) => {
         localStorage.setItem("token", res["data"]["token"]);
         toast.success("Login Sucessfully");
-        await delay(1000);
+        await delay(500);
         console.log("Login SuccessFully");
+                setLoading(0);
+                document.getElementById("mybutton").style.display =
+                  "inline-block";
         console.log(res);
         history.push("/home");
       })
-      .catch((err) => {
+      .catch(async (err) => {
+           await delay(500);
+           setLoading(0);
+           document.getElementById("mybutton").style.display = "inline-block";
         console.log(err.error);
         toast.error("Invalid Credentials");
         console.log(`Invalid Details`);
       });
   };
 
+
+   const handleClickbutton = () => {
+     setLoading(1);
+   };
   return (
     <>
       <Header location="login" />
@@ -73,10 +86,16 @@ const Login = () => {
           <div className="form">
             <div className="login">
               <div className="login-header">
-                <h1 style={{ margin: "-10px",fontWeight:"bolder"}} id="myformheadertextl">
+                <h1
+                  style={{ margin: "-10px", fontWeight: "bolder" }}
+                  id="myformheadertextl"
+                >
                   Sign in
                 </h1>
-                <div style={{ marginTop: "28px",fontWeight:"bold" }} id="myformheadertext1l">
+                <div
+                  style={{ marginTop: "28px", fontWeight: "bold" }}
+                  id="myformheadertext1l"
+                >
                   <p>Welcome to Priority Pulse</p>
                   <p style={{ marginTop: "-14px" }}>Your Pulse,Our Priority</p>
                 </div>
@@ -96,8 +115,27 @@ const Login = () => {
                 placeholder="password"
                 onChange={handleInputs}
               />
-              <Button name="signin" variant="contained" type="submit">
-                Sign in
+              <div>
+                <Fade
+                  in={loading}
+                  style={{
+                    transitionDelay: !loading ? "800ms" : "0ms",
+                  }}
+                  unmountOnExit
+                >
+                  <CircularProgress fontSize="small" />
+                </Fade>
+              </div>
+              <Button
+                id="mybutton"
+                name="signin"
+                variant="contained"
+                onClick={handleClickbutton}
+                type="submit"
+              >
+                {loading
+                  ? (document.getElementById("mybutton").style.display = "none")
+                  : "Sign in"}
               </Button>
               {/* <p className="message" id="myformheadertext1l">
                 Not registered?{" "}
