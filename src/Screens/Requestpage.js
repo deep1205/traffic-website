@@ -14,10 +14,10 @@ import DoubleArrowIcon from "@material-ui/icons/DoubleArrow";
 import IconButton from "@material-ui/core/IconButton";
 import axios from "axios";
 import MaterialTable from "material-table";
-import CustomDatePicker from "../Components/Googlemaps/CustomDatePicker"
+import CustomDatePicker from "../Components/Googlemaps/CustomDatePicker";
 import Map from "../Components/Googlemaps/RequestsMap";
-import Header from "../Components/Header"
-
+import Header from "../Components/Header";
+import driver_profile from "../images/driverprofile.png";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -199,6 +199,12 @@ const Requests = () => {
             fromSetter(tmp1);
             toSetter(tmp2);
           }
+          if (data.saved) {
+            let tmp_s = [...saved];
+            let idx_s = tmp_s.indexOf(data);
+            tmp_s[idx_s].permission = status;
+            setSaved(tmp_s);
+          }
         })
         .catch((err) => {
           console.log(err);
@@ -272,6 +278,7 @@ const Requests = () => {
               }
               hospitalpolyline={details.hospitalPolyline}
               ispicked={details.isPicked}
+              hasDetails={true}
             />
           ) : (
             <Map
@@ -282,6 +289,7 @@ const Requests = () => {
               hospitalcoordinates={[]}
               hospitalpolyline={""}
               ispicked={false}
+              hasDetails={false}
             />
           )}
           <div className={styles.root}>
@@ -527,7 +535,7 @@ const Requests = () => {
                 ]}
                 actions={[
                   {
-                    icon: "check",
+                    icon: 'check',
                     tooltip: "Grant Permisson",
                     onClick: (event, rowData) => {
                       fromTo(event, rowData, rej, acc, setRej, setAcc, 1);
@@ -567,7 +575,6 @@ const Requests = () => {
             </TabPanel>
             <TabPanel value={value} index={3}>
               <MaterialTable
-            
                 onRowClick={(event, rowData) => {
                   setDetails({
                     name: rowData ? rowData.name : "NOt available",
@@ -575,9 +582,15 @@ const Requests = () => {
                     date: rowData
                       ? moment(rowData["createdAt"]).format("D/MM/YYYY")
                       : "Not Available",
-                    caseprior: rowData ? rowData.casePrior : "Not Available",
-                    guardianNo: rowData ? rowData.guardianNo : "NOtt Available",
-                    patientNo: rowData ? rowData.patientNo : "Not available",
+                    caseprior: rowData.casePrior
+                      ? rowData.casePrior
+                      : "Not Available",
+                    guardianNo: rowData.guardianNo
+                      ? rowData.guardianNo
+                      : "NOtt Available",
+                    patientNo: rowData.patientNo
+                      ? rowData.patientNo
+                      : "Not available",
                     pname: rowData ? rowData.pname : "NOt Available",
                     pcase: rowData ? rowData.pcase : "Not Available",
                     rideid: rowData ? rowData.RideId : "NOt Available",
@@ -617,6 +630,14 @@ const Requests = () => {
                 ]}
                 actions={[
                   (row) => ({
+                    icon: "help",
+                    tooltip: "Grant Permisson",
+                    onClick: (event, rowData) => {
+                      permissionSaved(rowData, 1);
+                    },
+                    hidden: row.permission === 0,
+                  }),
+                  (row) => ({
                     icon: "check",
                     tooltip: "Grant Permisson",
                     onClick: (event, rowData) => {
@@ -653,6 +674,15 @@ const Requests = () => {
         {details._id !== "" ? (
           <div className={styles.dis1}>
             <div className={styles.details}>
+              <img
+                src={driver_profile}
+                width="200px"
+                height="200px"
+                borderRadius="50%"
+                alt="driver_profile"
+              />
+            </div>
+            <div className={styles.details}>
               <h2>Hospital Details</h2>
               <p className={styles.names}>
                 {details.hospital ? details.hospital.name : "Not Available"}
@@ -669,22 +699,28 @@ const Requests = () => {
                   : "Not Available"}
               </p>
               <p className={styles.tags}>
-                Number:
-                {details.hospital
-                  ? details.hospital.hospitalNumbers[0]
-                  : "Not Available"}
+                <div style={{ width: "50%" }}>Number</div>
+                <div style={{ width: "50%" }}>
+                  {" "}
+                  {details.hospital
+                    ? details.hospital.hospitalNumbers[0]
+                    : "Not Available"}
+                </div>
               </p>
               <p className={styles.tags}>
-                Address:
-                {details.hospital
-                  ? details.hospital.street +
-                    ", " +
-                    details.hospital.city +
-                    ", " +
-                    details.hospital.district +
-                    ", " +
-                    details.hospital.state
-                  : "Not Available"}
+                <div style={{ width: "50%" }}>Address</div>
+                <div style={{ width: "50%" }}>
+                  {" "}
+                  {details.hospital
+                    ? details.hospital.street +
+                      ", " +
+                      details.hospital.city +
+                      ", " +
+                      details.hospital.district +
+                      ", " +
+                      details.hospital.state
+                    : "Not Available"}
+                </div>
               </p>
             </div>
             <div className={styles.details}>
@@ -693,16 +729,29 @@ const Requests = () => {
                 {details.pickedBy ? details.pickedBy.name : "Not Available"}
               </p>
               <p className={styles.tags}>
-                Contact:
-                {details.pickedBy ? details.pickedBy.mobileNo : "Not Available"}
+                <div style={{ width: "50%" }}>Contact:</div>
+                <div style={{ width: "50%" }}>
+                  {details.pickedBy
+                    ? details.pickedBy.mobileNo
+                    : "Not Available"}
+                </div>
               </p>
             </div>
             <div className={styles.details}>
               <h2>Paitent Details</h2>
               <p className={styles.names}>{details.name}</p>
-              <p className={styles.tags}>Age:{details.age}</p>
-              <p className={styles.tags}>Contact:{details.patientNo}</p>
-              <p className={styles.tags}>Case:{details.pcase}</p>
+              <p className={styles.tags}>
+                <div style={{ width: "50%" }}>Age</div>
+                <div style={{ width: "50%" }}>{details.age}</div>
+              </p>
+              <p className={styles.tags}>
+                <div style={{ width: "50%" }}>Contact</div>
+                <div style={{ width: "50%" }}>{details.guardianNo}</div>
+              </p>
+              <p className={styles.tags}>
+                <div style={{ width: "50%" }}>Case</div>
+                <div style={{ width: "50%" }}>{details.pcase}</div>
+              </p>
             </div>
           </div>
         ) : null}
@@ -748,22 +797,28 @@ const Requests = () => {
                       : "Not Available"}
                   </p>
                   <p className={styles.tags}>
-                    Number:
-                    {details.hospital
-                      ? details.hospital.hospitalNumbers[0]
-                      : "Not Available"}
+                    <div style={{ width: "50%" }}>Number</div>
+                    <div style={{ width: "50%" }}>
+                      {" "}
+                      {details.hospital
+                        ? details.hospital.hospitalNumbers[0]
+                        : "Not Available"}
+                    </div>
                   </p>
                   <p className={styles.tags}>
-                    Address:
-                    {details.hospital
-                      ? details.hospital.street +
-                        "," +
-                        details.hospital.city +
-                        "," +
-                        details.hospital.district +
-                        "," +
-                        details.hospital.state
-                      : "Not Available"}
+                    <div style={{ width: "50%" }}>Address</div>
+                    <div style={{ width: "50%" }}>
+                      {" "}
+                      {details.hospital
+                        ? details.hospital.street +
+                          ", " +
+                          details.hospital.city +
+                          ", " +
+                          details.hospital.district +
+                          ", " +
+                          details.hospital.state
+                        : "Not Available"}
+                    </div>
                   </p>
                 </div>
                 <div className={styles.details}>
@@ -772,18 +827,29 @@ const Requests = () => {
                     {details.pickedBy ? details.pickedBy.name : "Not Available"}
                   </p>
                   <p className={styles.tags}>
-                    Contact:
-                    {details.pickedBy
-                      ? details.pickedBy.mobileNo
-                      : "Not Available"}
+                    <div style={{ width: "50%" }}>Contact:</div>
+                    <div style={{ width: "50%" }}>
+                      {details.pickedBy
+                        ? details.pickedBy.mobileNo
+                        : "Not Available"}
+                    </div>
                   </p>
                 </div>
                 <div className={styles.details}>
                   <h2>Paitent Details</h2>
                   <p className={styles.names}>{details.name}</p>
-                  <p className={styles.tags}>Age:{details.age}</p>
-                  <p className={styles.tags}>Contact:{details.patientNo}</p>
-                  <p className={styles.tags}>Case:{details.pcase}</p>
+                  <p className={styles.tags}>
+                    <div style={{ width: "50%" }}>Age</div>
+                    <div style={{ width: "50%" }}>{details.age}</div>
+                  </p>
+                  <p className={styles.tags}>
+                    <div style={{ width: "50%" }}>Contact</div>
+                    <div style={{ width: "50%" }}>{details.guardianNo}</div>
+                  </p>
+                  <p className={styles.tags}>
+                    <div style={{ width: "50%" }}>Case</div>
+                    <div style={{ width: "50%" }}>{details.pcase}</div>
+                  </p>
                 </div>
               </SwipeableDrawer>
             </Fragment>

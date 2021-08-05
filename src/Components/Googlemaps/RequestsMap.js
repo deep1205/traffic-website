@@ -5,6 +5,7 @@ import "../../Css/RequestsMap.css";
 import hospitalicon from "../../images/hospitalicon.png";
 import drivericon from "../../images/drivericon.png";
 import usericon from "../../images/usericon.png";
+
 const decodePolyline = require("decode-google-map-polyline");
 var map,
   infoWindow,

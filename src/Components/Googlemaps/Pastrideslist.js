@@ -19,6 +19,7 @@ import Button from "@material-ui/core/Button";
 import styles from "../../Css/Request.module.css";
 import DoubleArrowIcon from "@material-ui/icons/DoubleArrow";
 import CloseIcon from "@material-ui/icons/Close";
+import driver_profile from "../../images/driverprofile.png";
 const Activerideslist = () => {
   const { height, width } = useWindowDimensions();
   const [cardOpen, setCardOpen] = useState(false);
@@ -178,7 +179,7 @@ const Activerideslist = () => {
           position: "absolute",
           borderRadius: "0px 30px 30px 0px",
           color: "white",
-          backgroundColor: "black",
+          backgroundColor: "#3a68dade",
         }}
         variant="extended"
         color="primary"
@@ -230,11 +231,10 @@ const Activerideslist = () => {
             position: "absolute",
             left: window.screen.width > 800 ? "430px" : "300px",
             color: "red",
-          
+
             zIndex: "10",
             tableStyle,
           }}
-          
           onClick={() => setTableOpen(false)}
         />
       </div>
@@ -267,6 +267,15 @@ const Activerideslist = () => {
           open={state["left"]}
           onClose={toggleDrawer("left", false)}
         >
+          <div className={styles.details}>
+            <img
+              src={driver_profile}
+              width="200px"
+              height="200px"
+              borderRadius="50%"
+              alt="driver_profile"
+            />
+          </div>
           <div className={styles.details}>
             <h2>Paitent Details</h2>
             <p className={styles.names}>{rideDetail.name}</p>
