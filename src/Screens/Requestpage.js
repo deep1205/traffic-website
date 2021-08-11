@@ -17,7 +17,7 @@ import MaterialTable from "material-table";
 import CustomDatePicker from "../Components/Googlemaps/CustomDatePicker";
 import Map from "../Components/Googlemaps/RequestsMap";
 import Header from "../Components/Header";
-import driver_profile from "../images/driverprofile.png";
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -83,6 +83,7 @@ const Requests = () => {
     rideid: "",
     driverno: "",
     _id: "",
+    driverProfile:"",
 
     polyline: "",
     pickupcoordinates: [],
@@ -310,6 +311,7 @@ const Requests = () => {
                 onRowClick={(event, rowData) => {
                   console.log(rowData);
                   setDetails({
+                    driverProfile: rowData ? rowData.driverL : "Not Available",
                     name: rowData ? rowData.name : "NOt available",
                     age: rowData ? rowData.age : "NOt avaialable",
                     date: rowData
@@ -399,6 +401,7 @@ const Requests = () => {
               <MaterialTable
                 onRowClick={(event, rowData) => {
                   setDetails({
+                    driverProfile: rowData ? rowData.driverL : "Not Available",
                     name: rowData ? rowData.name : "NOt available",
                     age: rowData ? rowData.age : "NOt avaialable",
                     date: rowData
@@ -488,6 +491,7 @@ const Requests = () => {
               <MaterialTable
                 onRowClick={(event, rowData) => {
                   setDetails({
+                    driverProfile: rowData ? rowData.driverL : "Not Available",
                     name: rowData ? rowData.name : "NOt available",
                     age: rowData ? rowData.age : "NOt avaialable",
                     date: rowData
@@ -535,7 +539,7 @@ const Requests = () => {
                 ]}
                 actions={[
                   {
-                    icon: 'check',
+                    icon: "check",
                     tooltip: "Grant Permisson",
                     onClick: (event, rowData) => {
                       fromTo(event, rowData, rej, acc, setRej, setAcc, 1);
@@ -577,6 +581,8 @@ const Requests = () => {
               <MaterialTable
                 onRowClick={(event, rowData) => {
                   setDetails({
+                    driverProfile: rowData ? rowData.driverL : "Not Available",
+
                     name: rowData ? rowData.name : "NOt available",
                     age: rowData ? rowData.age : "NOt avaialable",
                     date: rowData
@@ -594,6 +600,7 @@ const Requests = () => {
                     pname: rowData ? rowData.pname : "NOt Available",
                     pcase: rowData ? rowData.pcase : "Not Available",
                     rideid: rowData ? rowData.RideId : "NOt Available",
+
                     driverno: rowData ? rowData.driverNo : "Not Available",
                     hospital: rowData ? rowData.hospital : "Not Available",
                     _id: rowData.pickedBy
@@ -673,11 +680,11 @@ const Requests = () => {
         </div>
         {details._id !== "" ? (
           <div className={styles.dis1}>
-            <div className={styles.details}>
+            <div className={styles.details} style={{ paddingRight: "40px" }}>
               <img
-                src={driver_profile}
-                width="200px"
-                height="200px"
+                src={details.pickedBy ? details.pickedBy.driverL : "Not Available"}
+                width="100%"
+                height="auto"
                 borderRadius="50%"
                 alt="driver_profile"
               />

@@ -19,7 +19,7 @@ import Button from "@material-ui/core/Button";
 import styles from "../../Css/Request.module.css";
 import DoubleArrowIcon from "@material-ui/icons/DoubleArrow";
 import CloseIcon from "@material-ui/icons/Close";
-import driver_profile from "../../images/driverprofile.png";
+
 const Activerideslist = () => {
   const { height, width } = useWindowDimensions();
   const [cardOpen, setCardOpen] = useState(false);
@@ -60,6 +60,9 @@ const Activerideslist = () => {
             caseprior: data ? data.casePrior : "Not Available",
             driverNo: data.pickedBy
               ? data["pickedBy"].mobileNo
+              : "Not Available",
+            driverProfile: data.pickedBy
+              ? data["pickedBy"].driverL
               : "Not Available",
             driverName: data.pickedBy ? data["pickedBy"].name : "Not Available",
             pcase: data ? data.pcase : "Not Available",
@@ -267,11 +270,15 @@ const Activerideslist = () => {
           open={state["left"]}
           onClose={toggleDrawer("left", false)}
         >
-          <div className={styles.details}>
+          <div className={styles.details} style={{ paddingRight: "40px" }}>
             <img
-              src={driver_profile}
-              width="200px"
-              height="200px"
+              src={
+                rideDetail.pickedBy
+                  ? rideDetail.pickedBy.driverL
+                  : "Not Available"
+              }
+              width="100%"
+              height="auto"
               borderRadius="50%"
               alt="driver_profile"
             />
